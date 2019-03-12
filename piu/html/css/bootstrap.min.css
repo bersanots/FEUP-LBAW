@@ -187,7 +187,7 @@ sup {
 }
 
 a {
-    color: #008cba;
+    color: #A22C29;
     text-decoration: none;
     background-color: transparent;
     -webkit-text-decoration-skip: objects;
@@ -2830,8 +2830,8 @@ fieldset:disabled a.btn {
 
 .btn-primary {
     color: #fff;
-    background-color: #008cba;
-    border-color: #008cba;
+    background-color: #A22C29;
+    border-color: #A22C29;
 }
 
 .btn-primary:hover {
@@ -6777,7 +6777,7 @@ button.bg-dark:focus {
 }
 
 .border-primary {
-    border-color: #008cba !important;
+    border-color: #A22C29;
 }
 
 .border-secondary {
@@ -10055,7 +10055,7 @@ a.text-dark:focus {
 }
 
 .btn-primary {
-    border-color: #0079a1;
+    border-color: #A22C29;
 }
 
 .btn-secondary {
