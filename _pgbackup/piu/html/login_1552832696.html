@@ -1,11 +1,11 @@
 <!DOCTYPE html> 
-<html lang="en"> 
+<html lang="en" class="bg-dark"> 
     <head> 
         <meta charset="utf-8"> 
         <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
         <meta name="viewport" content="width=device-width, initial-scale=1"> 
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->         
-        <title>Register</title>         
+        <title>Login</title>         
         <!-- Bootstrap -->         
         <link href="css/bootstrap.min.css" rel="stylesheet"> 
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->         
@@ -15,14 +15,15 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->         
     </head>     
-    <body style="width: 100%;" class="bg-dark"> 
+    <body style="width: 100%;"> 
+        <!-- Yeti Template Starts Here -->         
         <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #A22C29;"> 
             <a class="navbar-brand" href="index.html">LCQ</a> 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation"> 
                 <span class="navbar-toggler-icon"></span> 
             </button>             
             <div class="collapse navbar-collapse" id="navbarColor01"> 
-                <button id="filterBy" type="button" class="btn btn-default dropdown-toggle text-dark" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-left: 100px; color: #ffffff;"> 
+                <button id="filterBy" type="button" class="btn btn-default dropdown-toggle text-light" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background: #000000; margin-left: 100px;"> 
                     <span id="search_concept">Filter by</span> 
                     <span class="caret"></span> 
                 </button>                 
@@ -42,50 +43,42 @@
                     &nbsp;&nbsp;
 </form>                 
             </div>             
-            <button type="button" class="btn text-light btn-link" onclick="event.preventDefault(); location.href = 'login.html';">Login</button>             
+            <button type="button" class="btn text-light btn-link" onclick="event.preventDefault(); location.href = 'register.html';">Register</button>             
         </nav>         
-        <!-- Yeti Template Starts Here -->         
-        <div class="container" style="width: 100%; max-width: 400px; margin: auto; padding-top: 23px;"> 
+        <div class="container" style="width: 100%; max-width: 400px; position: absolute; top: 40%; left: 50%; transform: translate(-50%,-50%);"> 
             <br> 
-            <legend style="padding: 10px; border-bottom-width: 0.2em; border-bottom-style: solid; border-bottom-color: #A22C29; text-align: center; font-weight: bold; font-variant: normal;" class="text-light">Registration</legend>             
-            <form style="padding: 10px; padding-top: 0px; border-width: 0.2em; border-color: #A22C29; border-style: solid;" class="border-primary border text-dark bg-secondary"> 
+            <legend style="padding: 10px; border-width: 0.3em; border-style: solid; border-color: #A22C29; text-align: center; font-weight: bold; font-variant: normal;" class="text-light">Login</legend>             
+            <form style="padding: 10px; background-color: #f8f8f8; padding-top: 0px; border-style: solid; border-width: 0.2em; border-color: #A22C29;" class="border-primary border text-dark"> 
                 <fieldset> 
                     <div class="form-group"> 
-                        <label class="col-form-label" for="inputDefault">Username</label>                         
+                        <label class="col-form-label" for="inputDefault">E-mail</label>                         
                         <input type="text" class="form-control" placeholder="Enter username" id="inputDefault"> 
-                    </div>                     
-                    <div class="form-group"> 
-                        <label for="exampleInputEmail1">Email address</label>                         
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"> 
-                        <small id="emailHelp" class="form-text text-primary">We'll never share your email with anyone else.</small> 
                     </div>                     
                     <div class="form-group"> 
                         <label for="exampleInputPassword1">Password</label>                         
                         <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"> 
                     </div>                     
                 </fieldset>                 
-                <button type="submit" onclick="event.preventDefault(); location.href = 'register2.html';" class="btn btn-primary">Next</button>                 
-            </fieldset>             
+                <button class="btn btn-outline-danger text-dark font-weight-bold" type="button">Login</button>                 
+                <button type="submit" class="btn btn-primary" onclick="event.preventDefault(); location.href = 'register.html';" style="margin-left: 11em;">Register</button>                 
+            </form>             
         </form>         
-        <div class="progress" style="border-style: solid; border-width: 0.2em; border-color: #A22C29;"> 
-            <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100" style="width: 50%"></div>             
-        </div>         
         <footer id="footer" style="margin: 5em 0;"> 
             <div class="row"> 
                 <div class="col-lg-12 border border-primary border-bottom-0 border-left-0 border-right-0" style="align-self: flex-end; border-top-color: #A22C29; border-top-style: solid; border-top-width: 0.1em;"> 
                     <table class="list-unstyled" cellpadding="7" style="font-size: 0.9375rem; margin: -7px;"> 
                         <tr> 
                             <td class="float-lg-right"> 
-                                <a href="#top" class="font-weight-bold text-light">Back to top</a> 
+                                <a href="#top" class="font-weight-bold">Back to top</a> 
                             </td>                             
                             <td> 
-                                <a href="faq.html" class="font-weight-bold text-light">FAQ</a> 
+                                <a href="faq.html" class="font-weight-bold">FAQ</a> 
                             </td>                             
                             <td> 
-                                <a href="about.html" class="font-weight-bold text-light">About</a> 
+                                <a href="about.html" class="font-weight-bold">About</a> 
                             </td>                             
                             <td> 
-                                <a href="contact.html" class="font-weight-bold text-light">Contact</a> 
+                                <a href="contact.html" class="font-weight-bold">Contact</a> 
                             </td>                             
                         </tr>                         
                         <tr> 
