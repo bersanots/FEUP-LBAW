@@ -7,28 +7,28 @@
         <title>Login</title>         
         <!-- Bootstrap -->         
         <link href="css/bootstrap.min.css" rel="stylesheet"> 
-    </head>     
-    <style>div#login-card {
+    </head>
+    <style>div#register-card {
     overflow: auto;
     border: solid 0.2em #a22c29;
 }
 
-#login-side {
+#register-side {
     float: left;
-    width: 50%;
-    height: 20em;
+    width: 45%;
     background-color: #f8f8f8;
+    height: 25em;
 }
 
-div#login-side h2 {
+div#register-side h2 {
     color: black;
 }
 
-form#login-form {
+form#register2-form {
     float: right;
-    width: 50%;
-}</style>     
-    <body style="background-color: #000000;"> 
+    width: 45%;
+}</style>
+    <body style="background-color: #333333;"> 
         <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #A22C29;"> 
             <a class="navbar-brand" href="index.html">LCQ</a> 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation"> 
@@ -57,29 +57,31 @@ form#login-form {
             </div>             
             <button type="button" class="btn text-light btn-link" onclick="event.preventDefault(); location.href = 'register.html';">Register</button>             
         </nav>         
-        <div class="container" style="width: 100%; max-width: 700px; background-color: inherit;"> 
+        <div class="container" style="width: 100%; max-width: 800px; background-color: inherit;"> 
             <br> 
-            <div id="login-card" class="container" style="padding: 1em;"> 
-                <legend style="padding: 10px; border-bottom-width: 0.2em; border-bottom-style: solid; border-bottom-color: #A22C29; text-align: center; font-weight: bold; font-variant: normal;" class="text-light">Login</legend>                 
-                <div id="login-side" class="container"> 
-                    <h2> Welcome back, mah dudeh </h2> 
-                </div>                 
-                <form id="login-form" style="background-color: #f8f8f8; border-color: #A22C29;" class="border-primary border text-dark"> 
+            <div id="register-card" class="container">
+                <legend style="padding: 10px; border-bottom-width: 0.2em; border-bottom-style: solid; border-bottom-color: #A22C29; text-align: center; font-weight: bold; font-variant: normal;" class="text-light">Register</legend>
+                <div id="register-side" class="container">
+                    <h2> Welcome back, mah dudeh </h2>
+                </div>
+                <form id="register2-form" style="background-color: #f8f8f8; padding: 10px; padding-top: 0px; border-style: solid; border-color: #A22C29; border-width: 0.2em;" class="border border-primary text-dark"> 
                     <fieldset> 
                         <div class="form-group"> 
-                            <label class="col-form-label" for="inputDefault">E-mail</label>                             
-                            <input type="text" class="form-control" placeholder="Enter username" id="inputDefault"> 
-                        </div>                         
+</div>                         
                         <div class="form-group"> 
-                            <label for="exampleInputPassword1">Password</label>                             
-                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"> 
-                        </div>                         
+</div>                         
+                        <div class="form-group"> 
+</div>                         
+                        <textarea class="form-control form-control-lg text-dark" rows="3" readonly="readonly" style="height: 326px;">I hereby declare thou shall not write spoilers in thy title, nor shall thou use thine wrong tags. Should thoust commit such atrocities, thou shalt be banished from this plane of existence, as is the will of thy King.Terms and conditions and rules and such</textarea>                         
                     </fieldset>                     
-                    <button class="btn btn-outline-danger text-dark font-weight-bold" type="button">Login</button>                     
-                    <button type="submit" class="btn btn-primary" onclick="event.preventDefault(); location.href = 'register.html';">Register</button>                     
+                    <button type="submit" onclick="event.preventDefault(); location.href = 'register.html';" class="btn btn-primary" style="float: left;">Back</button>                     
+                    <button type="submit" class="btn btn-primary" onclick="event.preventDefault(); location.href = 'index.html';" style="float: right;">Next</button>                     
                 </form>                 
             </div>             
-        </div>         
+            <div class="progress" style="border-style: solid; border-width: 0.2em; border-color: #A22C29;"> 
+                <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+            </div>
+        </div>
         <footer id="footer"> 
             <div class="row"> 
                 <div class="col-lg-12 border border-primary border-bottom-0 border-left-0 border-right-0" style="border-top-color: #A22C29; border-top-style: solid; border-top-width: 0.1em;"> 
@@ -112,5 +114,5 @@ form#login-form {
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>         
         <!-- Include all compiled plugins (below), or include individual files as needed -->         
         <script src="js/bootstrap.min.js"></script>         
-    </body>     
+    </body>
 </html>
