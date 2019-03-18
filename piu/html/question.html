@@ -25,6 +25,32 @@ li.comment {
     border-top-style: dashed;
     border-top-color: #a22c29;
 }
+
+div#question-page.container {
+    width: 100%;
+    max-width: 900px;
+}
+
+div#question-page.container::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+div#question-column.container {
+    float: right;
+    width: 60%;
+}
+
+div#side-column.container {
+    float: left;
+    width: 40%;
+    height: 20em;
+}
+
+h2#side-column-text {
+    float: left;
+    width: 30%;
 }</style>     
     <body class="bg-dark text-light"> 
         <!-- Yeti Template Starts Here -->         
@@ -57,9 +83,12 @@ li.comment {
             <button type="button" class="btn text-light btn-link" onclick="event.preventDefault(); location.href = 'login.html';">Register</button>             
             <button type="button" class="btn text-light btn-link" onclick="event.preventDefault(); location.href = 'login.html';">Login</button>             
         </nav>         
-        <div class="container"> 
+        <div id="question-page" class="container">
+            <div id="side-column" class="container"> 
+                <h2 id="side-column-text">Hello There General Kenobi</h2>
+            </div>
             <div class="bs-docs-section"> 
-                <div class="container " style="padding-bottom: -30px; "> 
+                <div id="question-column" class="container " style="padding-bottom: -30px; "> 
                     <div class="question_content" style="background-color: #f8f8f8; color: #333333; border-radius: 40px; border-color: #a22c29; border-style: solid; margin-top: 2em;"> 
                         <div class="question" style="padding:1em"> 
                             <h2 style="background-color: #f8f8f8; border-bottom-style: solid; border-bottom-color: #a22c29; margin: 0em; padding-left: 0.5em;">What is Tony Stark injecting into himself in Iron Man 3?</h2> 
@@ -174,8 +203,12 @@ li.comment {
                         </div>                         
                     </div>                     
                 </div>                 
-                <div class="col-lg-12 border border-primary border-bottom-0 border-left-0 border-right-0" style="align-self: flex-end; border-top-color: #A22C29; border-top-style: solid; border-top-width: 0.1em;"> 
-                    <table class="list-unstyled" cellpadding="7" style="font-size: 0.9375rem; margin: -7px;"> 
+            </div>             
+        </div>
+        <footer id="footer"> 
+            <div class="row"> 
+                <div class="col-lg-12 border border-primary border-bottom-0 border-left-0 border-right-0" style="border-top-color: #A22C29; border-top-style: solid; border-top-width: 0.1em;"> 
+                    <table class="list-unstyled" cellpadding="7" style="font-size: 0.9375rem;"> 
                         <tr> 
                             <td class="float-lg-right"> 
                                 <a href="#top" class="font-weight-bold text-light">Back to top</a> 
@@ -199,6 +232,6 @@ li.comment {
                     </table>                     
                 </div>                 
             </div>             
-        </div>         
+        </footer>         
     </body>     
 </html>
