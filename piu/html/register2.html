@@ -31,6 +31,16 @@ img#register-img {
 form#register2-form {
     float: right;
     width: 50%;
+    margin-bottom: 1em;
+}
+    
+    @media screen and (max-width: 600px) {
+    div#register-side.container {
+        display: none;
+    }
+    form#register2-form {
+    width:100%;
+    }
 }</style>     
     <body style="background-color: #000000;"> 
         <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #A22C29;"> 
@@ -59,7 +69,7 @@ form#register2-form {
                     &nbsp;&nbsp;
 </form>                 
             </div>             
-            <button type="button" class="btn text-light btn-link" onclick="event.preventDefault(); location.href = 'register.html';">Register</button>             
+            <button type="button" class="btn text-light btn-link" onclick="event.preventDefault(); location.href = 'login.html';">Login</button>             
         </nav>         
         <div class="container" style="width: 100%; max-width: 800px; background-color: inherit;"> 
             <br> 
