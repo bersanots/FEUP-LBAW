@@ -17,8 +17,22 @@
         <link href="https://fonts.googleapis.com/css?family=Salsa" rel="stylesheet"> 
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> 
     </head>     
-    <style>li {
+    <style>div.side-option {
+    margin: 2em auto;
+    text-align: center;
+    width: 10em;
+}
+
+li {
     list-style-type: none;
+}
+
+div.answer_body {
+}
+
+textarea.answer-form {
+    width: 100%;
+    height: 10em;
 }
 
 li.comment {
@@ -29,6 +43,7 @@ li.comment {
 div#question-page.container {
     width: 100%;
     max-width: 900px;
+    margin-top: 1em;
 }
 
 div#question-page.container::after {
@@ -39,20 +54,31 @@ div#question-page.container::after {
 
 div#question-column.container {
     float: right;
-    width: 60%;
+    width: 75%;
 }
 
 div#side-column.container {
     float: left;
-    width: 40%;
-    height: 20em;
+    width: 25%;
+    height: 25em;
 }
+
+background-color: #f8f8f8;
 
 h2#side-column-text {
     float: left;
     width: 30%;
-}</style>     
-    <body class="text-light" style="background: #000000;"> 
+    color: black;
+}
+    @media only screen and (max-width: 650px) {
+div#side-column.container{
+        display:none;}
+        div#question-column.container {
+        width: 100%;        
+}
+}
+    </style>     
+    <body class="text-light" style="background: #123456;"> 
         <!-- Yeti Template Starts Here -->         
         <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #A22C29;"> 
             <a class="navbar-brand" href="index.html">LCQ</a> 
@@ -85,10 +111,30 @@ h2#side-column-text {
         </nav>         
         <div id="question-page" class="container"> 
             <div id="side-column" class="container"> 
-                <h2 id="side-column-text">Hello There General Kenobi</h2> 
+                <div id="movie-icon" class="side-option" style="background-color: #a22c29; border-radius: 10px;">
+                    <div class="icon-container">
+                        <i class="fas fa-film" style="font-size: 5em; color: white;"></i>
+                    </div>
+                    <h4>
+        Movies </h4>
+                </div>
+                <div id="serie-icon" class="side-option">
+                    <div class="icon-container">
+                        <img id="serie-img" src="img/retro-tv.png" style="color: inherit;"> 
+                    </div>
+                    <h4>
+        Series </h4>
+                </div>
+                <div id="anim-icon" class="side-option">
+                    <div class="icon-container">
+                        <img id="anim-img" src="img/mickey.png" style="color: black;"> 
+                    </div>
+                    <h4>
+        Animation </h4>
+                </div>
             </div>             
             <div class="bs-docs-section"> 
-                <div id="question-column" class="container " style="padding-bottom: -30px; background-color: #f8f8f8;"> 
+                <div id="question-column" class="container "> 
                     <div class="question_content" style="background-color: #f8f8f8; color: #333333;"> 
                         <div class="question" style="padding:1em"> 
                             <h2 style="background-color: #f8f8f8; border-bottom-style: solid; border-bottom-color: #a22c29; margin: 0em; padding-left: 0.5em;">What is Tony Stark injecting into himself in Iron Man 3?</h2> 
@@ -96,7 +142,7 @@ h2#side-column-text {
                             <div class="question_info" style="padding: 1em; font-size: 0.75em; width: 100%; display: grid; grid-template-column: auto auto auto; columns: 2; margin: 0em 0em 1em 0em;"> 
                                 <div class="question_user" style="font-style: italic; text-align: left; grid-area: auto / 1 / auto / 1;"> 
                                     by
-                                    <a href="/users/confuseddude" class="comment-user">confuseddude</a> 
+                                    <a href="profile.html" class="comment-user">confuseddude</a> 
                                     <span class="question_date">5 hours ago</span> 
                                 </div>                                 
                                 <div class="question_score" style="font-size: 1.5em; grid-column: 2; text-align: right;"> 
@@ -116,17 +162,20 @@ h2#side-column-text {
                                 <div class="comment-text" style="grid-column: 2;"> 
                                     <span class="comment-body">Maybe Spoiler tag this?.</span> 
                                     -
-                                    <a href="/users/someuser" class="comment-user">someuser</a> 
+                                    <a href="profileVisitor.html" class="comment-user">someuser</a> 
                                     <span class="comment_date">yesterday</span> 
                                 </div>                                 
                             </li>                             
+                            <div>
+                                <input class="form-control mr-sm-3 " type="text" placeholder="Comment" style="margin-left: 1em; width:10em">
+                            </div>
                         </div>                         
                     </div>                     
-                    <div class="accepted_answer text-dark" style="padding: 0.5em; border-left-color: #a22c29; border-left-style: solid; border-left-width: 0.3em; margin-top: 2em;"> 
+                    <div class="accepted_answer text-dark" style="padding: 0.5em; border-left-color: #a22c29; border-left-style: solid; border-left-width: 0.3em; margin-top: 2em; background-color: #f8f8f8;"> 
                         <div class="answer_info" style="padding: 1em; font-size: 1em; width: 100%; display: grid; grid-template-column: auto auto auto; columns: 2; margin: 0em 0em 1em 0em;"> 
                             <div class="question_user" style="font-style: italic; text-align: left; grid-area: auto / 1 / auto / 1;"> 
                                 by
-                                <a href="/users/oscarjudge" class="comment-user">oscarjudge</a> 
+                                <a href="profileVisitor.html" class="comment-user">oscarjudge</a> 
                                 <span class="question_date">5 hours ago</span> 
                             </div>                             
                             <div class="question_score" style="grid-column: 2; text-align: right;"> 
@@ -152,7 +201,7 @@ h2#side-column-text {
                                 <div class="comment-text"> 
                                     <span class="comment-body">This seems the most likely, although I have heard other explainations?.</span> 
                                     -
-                                    <a href="/users/movieaddict" class="comment-user">movieaddict</a> 
+                                    <a href="profileVisitor.html" class="comment-user">movieaddict</a> 
                                     <span class="comment_date">1 minute ago</span> 
                                 </div>                                 
                             </li>                             
@@ -160,54 +209,32 @@ h2#side-column-text {
                                 <div class="comment-text"> 
                                     <span class="comment-body">Wow, never realized that, well explained.</span> 
                                     -
-                                    <a href="/users/confuseddude" class="comment-user">confuseddude</a> 
+                                    <a href="profileVisitor.html" class="comment-user">confuseddude</a> 
                                     <span class="comment_date">10 seconds ago</span> 
                                 </div>                                 
                             </li>                             
                         </div>                         
                     </div>                     
-                    <div class="other_answers text-dark" style="padding: 0.5em; border-left-style: solid; border-left-color: #a22c29; margin-top: 1em;"> 
-                        <div class="answer_info" style="padding: 1em; font-size: 1em; width: 100%; display: grid; grid-template-column: auto auto auto; columns: 2; margin: 0em 0em 1em 0em;"> 
+                    <div class="other_answers text-dark" style="padding: 0.5em; border-left-style: solid; border-left-color: #a22c29; margin-top: 1em; background-color: #f8f8f8;"> 
+                        <div class="answer_info"> 
                             <div class="question_user" style="font-style: italic; text-align: left; grid-area: auto / 1 / auto / 1;"> 
-                                by
-                                <a href="/users/lastlombax" class="comment-user">lastlombax</a> 
-                                <span class="question_date">5 hours ago</span> 
-                            </div>                             
-                            <div class="question_score" style="grid-column: 2; text-align: right;"> 
-                                <i class="fas fa-arrow-up"></i> 
-                                <span class="score">15</span> 
-                                <i class="fas fa-arrow-down" style="color:turquoise"></i> 
+                                <h3>
+            Write your own answer </h3>
                             </div>                             
                         </div>                         
-                        <div class="answer_body" style="padding-left: 1em;">I didn't see the movie since months but from memory he injects the tracking chips that define the anchor points of his mobile armor when he calls it remotely. So, you know, the crotch part doesn't anchor itself on his face by accident.
-                            <br> 
-                            I guess he licks/rubs it because the chip didn't align properly on the first try and he does this to put it in the right place.
-                        </div>                         
-                        <div class="comments"> 
-                            <li class="comment"> 
-                                <div class="comment-text"> 
-                                    <span class="comment-body">What?</span> 
-                                    -
-                                    <a href="/users/movieaddict" class="comment-user">movieaddict</a> 
-                                    <span class="comment_date">1 minute ago</span> 
-                                </div>                                 
-                            </li>                             
-                            <li class="comment"> 
-                                <div class="comment-text"> 
-                                    <span class="comment-body">He "projects" the suit onto Pepper and then later Kilian, so it seems unlikely that anchor points are required on the person. Or at least, it'd be a plothole if it was.</span> 
-                                    - 
-                                    <a href="/users/oscarjudge" class="comment-user">oscarjudge</a> 
-                                    <span class="comment_date">10 seconds ago</span> 
-                                </div>                                 
-                            </li>                             
-                        </div>                         
+                        <div class="answer_body">
+                            <textarea class="answer-form" placeholder="Your answer..." id="inputDefault" maxlength="1023"></textarea>
+                        </div>
+                        <button id="answer-btn" type="submit" onclick="event.preventDefault();" class="btn btn-primary">Send</button>
                     </div>                     
                 </div>                 
             </div>             
+            <div id="write-answer-box" class="container" style="float: right; width: 60%;">
+</div>
         </div>         
         <footer id="footer"> 
             <div class="row"> 
-                <div class="col-lg-12 border border-primary border-bottom-0 border-left-0 border-right-0" style="border-top-color: #A22C29; border-top-style: solid; border-top-width: 0.1em;"> 
+                <div class="col-lg-12 border border-primary border-bottom-0 border-left-0 border-right-0" style="border-top-color: #A22C29; border-top-style: solid; border-top-width: 0.1em; margin-top: 1em;"> 
                     <table class="list-unstyled" cellpadding="7" style="font-size: 0.9375rem;"> 
                         <tr> 
                             <td class="float-lg-right"> 

@@ -10,7 +10,7 @@
     </head>     
     <style>div#register-card {
     overflow: auto;
-    border: solid 0.2em #a22c29;
+    border: solid 0.5em #a22c29;
     background-color: #a7cdc2;
 }
 
@@ -33,16 +33,17 @@ form#register2-form {
     width: 50%;
     margin-bottom: 1em;
 }
-    
-    @media screen and (max-width: 600px) {
+
+@media screen and (max-width: 600px) {
     div#register-side.container {
         display: none;
     }
+
     form#register2-form {
-    width:100%;
+        width: 100%;
     }
 }</style>     
-    <body style="background-color: #000000;"> 
+    <body style="background-color: #123456;"> 
         <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #A22C29;"> 
             <a class="navbar-brand" href="index.html">LCQ</a> 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation"> 
@@ -92,7 +93,7 @@ form#register2-form {
                     <button type="submit" class="btn btn-primary" onclick="event.preventDefault(); location.href = 'index.html';" style="float: right;">Next</button>                     
                 </form>                 
             </div>             
-            <div class="progress" style="border-style: solid; border-width: 0.2em; border-color: #A22C29;"> 
+            <div class="progress" style="border: #a22c29;"> 
                 <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>                 
             </div>             
         </div>         

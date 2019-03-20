@@ -17,17 +17,43 @@
         <link href="https://fonts.googleapis.com/css?family=Salsa" rel="stylesheet"> 
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> 
     </head>     
-    <style>li {
-    list-style-type: none;
+    <style>div#bkgnd.container {
 }
 
-li.comment {
-    border-top-style: dashed;
-    border-top-color: #a22c29;
+div#questions-list.container {
+    background-image: url('img/film_roll.png');
+    background-size: cover;
+    background-repeat: repeat-y;
+    width: 100%;
+    height: auto;
 }
+
+div.bs-docs-section {
+    margin: 0em 10em;
+}
+
+@media only screen and (max-width: 1025px) {
+    div.bs-docs-section {
+        margin: 0em 15%;
+    }
+
+    div#questions-list.container {
+        background-size: contain;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    div#questions-list.container {
+        background-image: none;
+        background-color: #f8f8f8;
+        padding: 0em;
+    }
+
+    div.bs-docs-section {
+        margin: 0em;
+    }
 }</style>     
-    <body class="text-light" style="background: #000000;"> 
-        <!-- Yeti Template Starts Here -->         
+    <body class="text-light" style="background: #123456;"> 
         <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #A22C29;"> 
             <a class="navbar-brand" href="index.html">LCQ</a> 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation"> 
@@ -57,31 +83,39 @@ li.comment {
             <a class="prof_img" href="profile.html"><i class="fas fa-user-circle" style="font-size: 30px; color: black;"></i></a> 
             <button type="button" class="btn text-light btn-link" onclick="event.preventDefault(); location.href = 'index.html';">Logout</button>             
         </nav>         
-        <div class="container"> 
+        <div id="questions-list" class="container"> 
             <div class="bs-docs-section"> 
-                <div class="tags" style="padding: 1em;">                                                                
-</div>                 
-                <div class="container " style="padding-bottom: -30px; "> 
-                    <div class="question_content" style="background-color: #f8f8f8; color: #333333; border-radius: 40px; border-color: #a22c29; border-style: solid; margin-top: 2em;"> 
+                <div class="container "> 
+                    <div class="question_content" style="background-color: #f8f8f8; color: #333333; margin-top: 2em;"> 
                         <div class="question" style="padding:1em"> 
-                            <h2 style="background-color: #f8f8f8; border-bottom-style: solid; border-bottom-color: #a22c29; margin: 0em; padding-left: 0.5em;">Can't find the answer you're looking for?<a href="createQuestion.html"> Write your own...</a></h2> 
+                            <h2 style="background-color: #f8f8f8; margin: 0em; padding-left: 0.5em;">Can't find the answer you're looking for?&nbsp; &nbsp;<button type="submit" class="btn btn-primary" onclick="event.preventDefault(); location.href = 'createQuestion.html';">Ask a Question</button></h2> 
                         </div>                         
                         <div class="question-body" style="background-color: #f5f5f5;"> 
 </div>                         
                     </div>                     
                 </div>                 
                 <div class="container " style="padding-bottom: -30px; "> 
-                    <div class="question_content" style="background-color: #f8f8f8; color: #333333; border-radius: 40px; border-color: #a22c29; border-style: solid; margin-top: 2em;"> 
+                    <div class="question_content" style="background-color: #f8f8f8; color: #333333; border-color: #a22c29; border-style: solid; margin-top: 2em;"> 
+                        <div class="question-body" style="background-color: #f5f5f5;"> 
+</div>                         
+                    </div>                     
+                </div>                 
+                <div id="bkgnd" class="container "> 
+                    <div class="question_content" style="color: #333333; border-color: #a22c29; border-style: solid; margin-top: 2em;"> 
                         <div class="question" style="padding:1em"> 
-                            <h2 style="background-color: #f8f8f8; border-bottom-style: solid; border-bottom-color: #a22c29; margin: 0em; padding-left: 0.5em;"><a href="question.html">What is Tony Stark injecting into himself in Iron Man 3?</a></h2> 
-                            <i class="fas fa-star" style="font-size:1.5em; color:#a22c29"></i> 
-                            <div class="question_info" style="padding: 1em; font-size: 0.75em; width: 100%; display: grid; grid-template-column: auto auto auto; columns: 2; margin: 0em 0em 1em 0em;"> 
+                            <h2 style="background-color: none; border-bottom-style: solid; border-bottom-color: #a22c29; margin: 0em; padding-left: 0.5em;">What is Tony Stark injecting into himself in Iron Man 3?</h2> 
+                            <i class="fas fa-star" style="font-size:1.5em; color:black"></i> 
+                            <div class="question_info" style="padding: 1em; font-size: 0.75em; width: 100%; display: grid; grid-template-column: auto auto auto auto; columns: 3; margin: 0em 0em 1em 0em;"> 
                                 <div class="question_user" style="font-style: italic; text-align: left; grid-area: auto / 1 / auto / 1;"> 
                                     by
-                                    <a href="/users/confuseddude" class="comment-user">confuseddude</a> 
+                                    <a href="profile.html" class="comment-user">confuseddude</a> 
                                     <span class="question_date">5 hours ago</span> 
-                                </div>                                 
-                                <div class="question_score" style="font-size: 1.5em; grid-column: 2; text-align: right;"> 
+                                </div>
+                                <div style="grid-column: 2;">
+                                    <a href=".">#avengers</a> 
+                                    <a href=".">#ironman</a>
+                                </div>
+                                <div class="question_score" style="font-size: 1.5em; grid-column: 3; text-align: right;"> 
                                     <i class="fas fa-arrow-up" style="color:#a22c29"></i> 
                                     <span class="score">30</span> 
                                     <i class="fas fa-arrow-down"></i> 
@@ -92,15 +126,15 @@ li.comment {
 </div>                         
                     </div>                     
                 </div>                 
-                <div class="container " style="padding-bottom: -30px; "> 
-                    <div class="question_content" style="background-color: #f8f8f8; color: #333333; border-radius: 40px; border-color: #a22c29; border-style: solid; margin-top: 2em;"> 
-                        <div class="question" style="padding:1em"> 
+                <div class="container " style="padding-bottom: 1em;"> 
+                    <div class="question_content" style="background-color: #f8f8f8; color: #333333; border-color: #a22c29; border-style: solid; margin-top: 2em;"> 
+                        <div class="question" style="padding: 1em;"> 
                             <h2 style="background-color: #f8f8f8; border-bottom-style: solid; border-bottom-color: #a22c29; margin: 0em; padding-left: 0.5em;">What is Tony Stark injecting into himself in Iron Man 3?</h2> 
                             <i class="fas fa-star" style="font-size:1.5em; color:black"></i> 
                             <div class="question_info" style="padding: 1em; font-size: 0.75em; width: 100%; display: grid; grid-template-column: auto auto auto; columns: 2; margin: 0em 0em 1em 0em;"> 
                                 <div class="question_user" style="font-style: italic; text-align: left; grid-area: auto / 1 / auto / 1;"> 
                                     by
-                                    <a href="/users/confuseddude" class="comment-user">confuseddude</a> 
+                                    <a href="profile.html" class="comment-user">confuseddude</a> 
                                     <span class="question_date">5 hours ago</span> 
                                 </div>                                 
                                 <div class="question_score" style="font-size: 1.5em; grid-column: 2; text-align: right;"> 
@@ -110,19 +144,17 @@ li.comment {
                                 </div>                                 
                             </div>                             
                         </div>                         
-                        <div class="question-body" style="background-color: #f5f5f5;"> 
-</div>                         
                     </div>                     
                 </div>                 
-                <div class="container " style="padding-bottom: -30px; "> 
-                    <div class="question_content" style="background-color: #f8f8f8; color: #333333; border-radius: 40px; border-color: #a22c29; border-style: solid; margin-top: 2em;"> 
-                        <div class="question" style="padding:1em"> 
+                <div class="container " style="padding-bottom: 1em;"> 
+                    <div class="question_content" style="background-color: #f8f8f8; color: #333333; border-color: #a22c29; border-style: solid; margin-top: 2em;"> 
+                        <div class="question" style="padding: 1em;"> 
                             <h2 style="background-color: #f8f8f8; border-bottom-style: solid; border-bottom-color: #a22c29; margin: 0em; padding-left: 0.5em;">What is Tony Stark injecting into himself in Iron Man 3?</h2> 
                             <i class="fas fa-star" style="font-size:1.5em; color:black"></i> 
                             <div class="question_info" style="padding: 1em; font-size: 0.75em; width: 100%; display: grid; grid-template-column: auto auto auto; columns: 2; margin: 0em 0em 1em 0em;"> 
                                 <div class="question_user" style="font-style: italic; text-align: left; grid-area: auto / 1 / auto / 1;"> 
                                     by
-                                    <a href="/users/confuseddude" class="comment-user">confuseddude</a> 
+                                    <a href="profile.html" class="comment-user">confuseddude</a> 
                                     <span class="question_date">5 hours ago</span> 
                                 </div>                                 
                                 <div class="question_score" style="font-size: 1.5em; grid-column: 2; text-align: right;"> 
@@ -132,12 +164,34 @@ li.comment {
                                 </div>                                 
                             </div>                             
                         </div>                         
-                        <div class="question-body" style="background-color: #f5f5f5;"> 
-</div>                         
+                    </div>                     
+                </div>
+                <div class="container " style="padding-bottom: 1em;"> 
+                    <div class="question_content" style="background-color: #f8f8f8; color: #333333; border-color: #a22c29; border-style: solid; margin-top: 2em;"> 
+                        <div class="question" style="padding: 1em;"> 
+                            <h2 style="background-color: #f8f8f8; border-bottom-style: solid; border-bottom-color: #a22c29; margin: 0em; padding-left: 0.5em;">What is Tony Stark injecting into himself in Iron Man 3?</h2> 
+                            <i class="fas fa-star" style="font-size:1.5em; color:black"></i> 
+                            <div class="question_info" style="padding: 1em; font-size: 0.75em; width: 100%; display: grid; grid-template-column: auto auto auto; columns: 2; margin: 0em 0em 1em 0em;"> 
+                                <div class="question_user" style="font-style: italic; text-align: left; grid-area: auto / 1 / auto / 1;"> 
+                                    by
+                                    <a href="profile.html" class="comment-user">confuseddude</a> 
+                                    <span class="question_date">5 hours ago</span> 
+                                </div>                                 
+                                <div class="question_score" style="font-size: 1.5em; grid-column: 2; text-align: right;"> 
+                                    <i class="fas fa-arrow-up" style="color:#a22c29"></i> 
+                                    <span class="score">30</span> 
+                                    <i class="fas fa-arrow-down"></i> 
+                                </div>                                 
+                            </div>                             
+                        </div>                         
                     </div>                     
                 </div>                 
-                <div class="col-lg-12 border border-primary border-bottom-0 border-left-0 border-right-0" style="align-self: flex-end; border-top-color: #A22C29; border-top-style: solid; border-top-width: 0.1em;"> 
-                    <table class="list-unstyled" cellpadding="7" style="font-size: 0.9375rem; margin: -7px;"> 
+            </div>             
+        </div>         
+        <footer id="footer"> 
+            <div class="row"> 
+                <div class="col-lg-12 border border-primary border-bottom-0 border-left-0 border-right-0" style="border-top-color: #A22C29; border-top-style: solid; border-top-width: 0.1em; margin-top: 1em;"> 
+                    <table class="list-unstyled" cellpadding="7" style="font-size: 0.9375rem;"> 
                         <tr> 
                             <td class="float-lg-right"> 
                                 <a href="#top" class="font-weight-bold text-light">Back to top</a> 
@@ -161,6 +215,6 @@ li.comment {
                     </table>                     
                 </div>                 
             </div>             
-        </div>         
+        </footer>
     </body>     
 </html>
