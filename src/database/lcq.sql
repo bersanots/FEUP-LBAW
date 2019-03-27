@@ -28,18 +28,19 @@ CREATE TABLE Question (
     questionId SERIAL PRIMARY KEY,
     title NOT NULL CONSTRAINT question_title_uk UNIQUE,
     description TEXT NOT NULL,
-    creationDate DEFAULT now(), /* TODO maybe change*/ 
+    creationDate DEFAULT now(), 
     score DEFAULT 0,
     category NOT NULL,
-    author INTEGER NOT NULL REFERENCES User
+    author INTEGER NOT NULL REFERENCES User,
+    best INTEGER NOT NULL REFERENCES Answer,
 );
 
 CREATE TABLE Answer (
     questionId SERIAL PRIMARY KEY,
     description TEXT NOT NULL,
-    creationDate DEFAULT now(), /* TODO maybe change on all */ 
+    creationDate DEFAULT now(),
     score DEFAULT 0,
-    possession INTEGER NOT NULL REFERENCES Question,
+    questionId INTEGER NOT NULL REFERENCES Question,
     author INTEGER NOT NULL REFERENCES User
 );
 
@@ -47,7 +48,7 @@ CREATE TABLE CommentQuestion (
     cqId SERIAL PRIMARY KEY,
     description TEXT NOT NULL,
     creationDate DEFAULT now(),
-    possession INTEGER NOT NULL REFERENCES Question, /* TODO maybe score comment*/
+    questionId INTEGER NOT NULL REFERENCES Question,
     author INTEGER NOT NULL REFERENCES User
 );
 
@@ -55,7 +56,7 @@ CREATE TABLE CommentAnswer (
     caId SERIAL PRIMARY KEY,
     description TEXT NOT NULL,
     creationDate DEFAULT now(),
-    possession INTEGER NOT NULL REFERENCES Answer, /* TODO maybe score comment*/
+    answerId INTEGER NOT NULL REFERENCES Answer, 
     author INTEGER NOT NULL REFERENCES User
 );
 
@@ -75,21 +76,13 @@ CREATE TABLE VoteA (
     PRIMARY KEY (userId, answerId)
 );
 
-CREATE TABLE follow (
+CREATE TABLE Follow (
     userId Integer NOT NULL REFERENCES User,
     questionId Integer NOT NULL REFERENCES Question,
     PRIMARY KEY (userId, questionId)
 );
 
-CREATE TABLE Media (
-    mediaId SERIAL PRIMARY KEY,
-    title TEXT NOT NULL CONSTRAINT media_title_uk UNIQUE,
-    release DATE NOT NULL,
-    type TYPE media NOT NULL,
-    picture PATH
-);
-
-CREATE TABLE favourite (
+CREATE TABLE Favourite (
     userId Integer NOT NULL REFERENCES User,
     mediaId Integer NOT NULL REFERENCES Media,
     PRIMARY KEY (userId, mediaId)
@@ -100,7 +93,7 @@ CREATE TABLE Tag (
     name TEXT NOT NULL CONSTRAINT tag_name_uk UNIQUE,
 );
 
-CREATE TABLE tagQuestion (
+CREATE TABLE TagQuestion (
     tagId Integer NOT NULL REFERENCES Tag,
     questionId Integer NOT NULL REFERENCES Question,
     PRIMARY KEY (tagID, questionId)
@@ -112,13 +105,14 @@ CREATE TABLE Medal (
     type TYPE medals NOT NULL CONSTRAINT medals_type_uk UNIQUE
 );
 
-CREATE TABLE medalUser (
+CREATE TABLE Achievement (
     userId Integer NOT NULL REFERENCES User,
     medalId Integer NOT NULL REFERENCES Medal,
+    date DATE DEFAULT today(),
     PRIMARY KEY (userID, medalId)
 );
 
-CREATE TABLE moderator (
+CREATE TABLE Moderator (
     moderatorId INTEGER NOT NULL REFERENCES User
 );
 
@@ -185,4 +179,12 @@ CREATE TABLE NotifCommentQ (
     ncqId SERIAL PRIMARY KEY,
     date DATE DEFAULT now(),
     commentquestionId INTEGER NOT NULL REFERENCES CommentQuestion,
+);
+
+CREATE TABLE Media (
+    mediaId SERIAL PRIMARY KEY,
+    title TEXT NOT NULL CONSTRAINT media_title_uk UNIQUE,
+    release DATE NOT NULL,
+    type TYPE media NOT NULL,
+    picture PATH
 );
