@@ -28,7 +28,7 @@ CREATE TABLE Question (
     questionId SERIAL PRIMARY KEY,
     title NOT NULL CONSTRAINT question_title_uk UNIQUE,
     description TEXT NOT NULL,
-    creationDate DEFAULT today(), /* TODO maybe change*/ 
+    creationDate DEFAULT now(), /* TODO maybe change*/ 
     score DEFAULT 0,
     category NOT NULL,
     author INTEGER NOT NULL REFERENCES User
@@ -37,7 +37,7 @@ CREATE TABLE Question (
 CREATE TABLE Answer (
     questionId SERIAL PRIMARY KEY,
     description TEXT NOT NULL,
-    creationDate DEFAULT today(), /* TODO maybe change on all */ 
+    creationDate DEFAULT now(), /* TODO maybe change on all */ 
     score DEFAULT 0,
     possession INTEGER NOT NULL REFERENCES Question,
     author INTEGER NOT NULL REFERENCES User
@@ -46,7 +46,7 @@ CREATE TABLE Answer (
 CREATE TABLE CommentQuestion (
     cqId SERIAL PRIMARY KEY,
     description TEXT NOT NULL,
-    creationDate DEFAULT today(),
+    creationDate DEFAULT now(),
     possession INTEGER NOT NULL REFERENCES Question, /* TODO maybe score comment*/
     author INTEGER NOT NULL REFERENCES User
 );
@@ -54,7 +54,7 @@ CREATE TABLE CommentQuestion (
 CREATE TABLE CommentAnswer (
     caId SERIAL PRIMARY KEY,
     description TEXT NOT NULL,
-    creationDate DEFAULT today(),
+    creationDate DEFAULT now(),
     possession INTEGER NOT NULL REFERENCES Answer, /* TODO maybe score comment*/
     author INTEGER NOT NULL REFERENCES User
 );
@@ -63,7 +63,7 @@ CREATE TABLE VoteQ (
     userId Integer NOT NULL REFERENCES User,
     questionId Integer NOT NULL REFERENCES Question,
     value INTEGER NOT NULL CONSTRAINT value_ck CHECK ((value = 1 ) OR (value = -1)),
-    date DEFAULT today(),
+    date DEFAULT now(),
     PRIMARY KEY (userId, questionId)
 );
 
@@ -71,7 +71,7 @@ CREATE TABLE VoteA (
     userId Integer NOT NULL REFERENCES User,
     answerId Integer NOT NULL REFERENCES Answer,
     value INTEGER NOT NULL CONSTRAINT value_ck CHECK ((value = 1 ) OR (value = -1)),
-    date DEFAULT today(),
+    date DEFAULT now(),
     PRIMARY KEY (userId, answerId)
 );
 
@@ -146,21 +146,14 @@ CREATE TABLE Message (
     messageId SERIAL PRIMARY KEY,
     title TEXT NOT NULL,
     content TEXT NOT NULL,
-    date DATE DEFAULT today(),
+    date DATE DEFAULT now(),
     author INTEGER NOT NULL REFERENCES User
 );
 
-CREATE TABLE target (
+CREATE TABLE MessageTarget (
     userId INTEGER NOT NULL REFERENCES User,
     messageId INTEGER NOT NULL REFERENCES Message,
     PRIMARY KEY (userId, messageId)
-);
-
-CREATE TABLE Achievement (
-    userId INTEGER NOT NULL REFERENCES User,
-    medalId INTEGER NOT NULL REFERENCES Notification,
-    date DATE DEFAULT today(),
-    PRIMARY KEY (userId, medalId)
 );
 
 CREATE TABLE Notified (
@@ -172,24 +165,24 @@ CREATE TABLE Notified (
 
 CREATE TABLE NotifNewMsg (
     nnmId SERIAL PRIMARY KEY,
-    date DATE DEFAULT today(),
+    date DATE DEFAULT now(),
     messageId INTEGER NOT NULL REFERENCES Message,
 );
 
 CREATE TABLE NotifNewAAns (
     nnaId SERIAL PRIMARY KEY,
-    date DATE DEFAULT today(),
+    date DATE DEFAULT now(),
     answerId INTEGER NOT NULL REFERENCES Answer,
 );
 
 CREATE TABLE NotifCommentAns (
     ncaId SERIAL PRIMARY KEY,
-    date DATE DEFAULT today(),
+    date DATE DEFAULT now(),
     commentanswerId INTEGER NOT NULL REFERENCES CommentAnswer,
 );
 
 CREATE TABLE NotifCommentQ (
     ncqId SERIAL PRIMARY KEY,
-    date DATE DEFAULT today(),
+    date DATE DEFAULT now(),
     commentquestionId INTEGER NOT NULL REFERENCES CommentQuestion,
 );
