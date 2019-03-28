@@ -1,4 +1,33 @@
-CREATE TYPE media AS ENUM
+DROP TYPE IF EXISTS media_type;
+DROP TYPE IF EXISTS medals;
+
+DROP TABLE IF EXISTS users CASCADE;
+DROP TABLE IF EXISTS moderator CASCADE;
+DROP TABLE IF EXISTS administrator CASCADE;
+DROP TABLE IF EXISTS ban CASCADE;
+DROP TABLE IF EXISTS report CASCADE;
+DROP TABLE IF EXISTS question CASCADE;
+DROP TABLE IF EXISTS answer CASCADE;
+DROP TABLE IF EXISTS comment_question CASCADE;
+DROP TABLE IF EXISTS comment_answer CASCADE;
+DROP TABLE IF EXISTS vote_q CASCADE;
+DROP TABLE IF EXISTS vote_a CASCADE;
+DROP TABLE IF EXISTS follow CASCADE;
+DROP TABLE IF EXISTS tag CASCADE;
+DROP TABLE IF EXISTS tag_question CASCADE;
+DROP TABLE IF EXISTS medal CASCADE;
+DROP TABLE IF EXISTS achievement CASCADE;
+DROP TABLE IF EXISTS message CASCADE;
+DROP TABLE IF EXISTS message_target CASCADE;
+DROP TABLE IF EXISTS notified CASCADE;
+DROP TABLE IF EXISTS notif_new_msg CASCADE;
+DROP TABLE IF EXISTS notif_new_ans CASCADE;
+DROP TABLE IF EXISTS notif_comment_ans CASCADE;
+DROP TABLE IF EXISTS notif_comment_q CASCADE;
+DROP TABLE IF EXISTS media CASCADE;
+DROP TABLE IF EXISTS favourite CASCADE;
+
+CREATE TYPE media_type AS ENUM
 (
     'film',
     'series',
@@ -22,8 +51,8 @@ CREATE TABLE users
     password VARCHAR NOT NULL,
     picture PATH NOT NULL,
     description TEXT,
-    joinedDate DATE DEFAULT today(),
-    isDeleted BOOLEAN DEFAULT false,
+    joinedDate DATE DEFAULT now(),
+    isDeleted BOOLEAN DEFAULT false
 );
 
 CREATE TABLE moderator
@@ -33,15 +62,15 @@ CREATE TABLE moderator
 
 CREATE TABLE administrator
 (
-    administratorId INTEGER NOT NULL REFERENCES users
+    administratorId INTEGER PRIMARY KEY NOT NULL REFERENCES users
 );
 
 CREATE TABLE ban
 (
     banId SERIAL PRIMARY KEY,
     description TEXT NOT NULL,
-    date DATE DEFAULT today(),
-    adminId INTEGER NOT NULL REFERENCES Administrator,
+    date DATE DEFAULT now(),
+    adminId INTEGER NOT NULL REFERENCES administrator,
     userId INTEGER NOT NULL REFERENCES users
 );
 
@@ -49,7 +78,7 @@ CREATE TABLE report
 (
     reportId SERIAL PRIMARY KEY,
     description TEXT NOT NULL,
-    date DATE DEFAULT today(),
+    date DATE DEFAULT now(),
     author INTEGER NOT NULL REFERENCES users,
     target INTEGER NOT NULL REFERENCES users
 );
@@ -62,8 +91,7 @@ CREATE TABLE question
     description TEXT NOT NULL,
     creationDate DATETIME DEFAULT now(),
     score INT DEFAULT 0,
-    category TYPE
-    media NOT NULL,
+    category TYPE media_type NOT NULL,
     author INTEGER NOT NULL REFERENCES User,
     best INTEGER NOT NULL REFERENCES answer
 );
@@ -138,15 +166,14 @@ CREATE TABLE question
     (
         medalId SERIAL PRIMARY KEY,
         description TEXT NOT NULL CONSTRAINT medal_description_uk UNIQUE,
-        name TYPE
-        medals NOT NULL CONSTRAINT medals_type_uk UNIQUE
+        name TYPE medals NOT NULL CONSTRAINT medals_type_uk UNIQUE
 );
 
         CREATE TABLE achievement
         (
             userId Integer NOT NULL REFERENCES users,
             medalId Integer NOT NULL REFERENCES Medal,
-            date DATE DEFAULT today(),
+            date DATE DEFAULT now(),
             PRIMARY KEY (userID, medalId)
         );
 
@@ -207,8 +234,7 @@ CREATE TABLE question
             mediaId SERIAL PRIMARY KEY,
             title TEXT NOT NULL CONSTRAINT media_title_uk UNIQUE,
             release DATE NOT NULL,
-            category TYPE
-            media NOT NULL,
+            category TYPE media_type NOT NULL,
             picture PATH
 );
 
