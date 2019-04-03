@@ -27,220 +27,193 @@ DROP TABLE IF EXISTS notif_comment_q CASCADE;
 DROP TABLE IF EXISTS media CASCADE;
 DROP TABLE IF EXISTS favourite CASCADE;
 
-CREATE TYPE media_type AS ENUM
-(
+CREATE TYPE media_types AS ENUM(
     'film',
     'series',
     'animation'
 );
 
-CREATE TYPE medals AS ENUM
-(
-    'BestAnswers',
-    'TopAnswerer',
-    'QuickAnswerer',
-    'QuestionMaster',
-    'RegularQuestioner'
+CREATE TYPE medal_types AS ENUM(
+    'best_answers',
+    'top_answerer',
+    'quick_answerer',
+    'question_master',
+    'regular_questioner'
 );
 
-CREATE TABLE users
-(
-    userId SERIAL PRIMARY KEY,
-    username VARCHAR NOT NULL CONSTRAINT user_username_uk UNIQUE,
-    email TEXT NOT NULL CONSTRAINT user_email_uk UNIQUE,
-    password VARCHAR NOT NULL,
-    picture PATH NOT NULL,
+CREATE TABLE users (
+    user_id SERIAL PRIMARY KEY,
+    username NOT NULL CONSTRAINT user_username_uk UNIQUE,
+    email NOT NULL CONSTRAINT user_email_uk UNIQUE,
+    password TEXT NOT NULL,
+    picture PATH,
     description TEXT,
-    joinedDate DATE DEFAULT now(),
-    isDeleted BOOLEAN DEFAULT false
+    joined_date DATE DEFAULT today(), 
+    is_deleted BOOLEAN DEFAULT false,
 );
 
-CREATE TABLE moderator
-(
-    moderatorId INTEGER NOT NULL REFERENCES users
+CREATE TABLE moderator (
+    moderator_id INTEGER NOT NULL REFERENCES users
 );
 
-CREATE TABLE administrator
-(
-    administratorId INTEGER PRIMARY KEY NOT NULL REFERENCES users
+CREATE TABLE administrator (
+    administrator_id INTEGER NOT NULL REFERENCES users
 );
 
-CREATE TABLE ban
-(
-    banId SERIAL PRIMARY KEY,
-    description TEXT NOT NULL,
-    date DATE DEFAULT now(),
-    adminId INTEGER NOT NULL REFERENCES administrator,
-    userId INTEGER NOT NULL REFERENCES users
+CREATE TABLE ban (
+    ban_id SERIAL PRIMARY KEY,
+    description TEXT NOT NULL, 
+    date DATE DEFAULT today(),
+    admin_id INTEGER NOT NULL REFERENCES administrator,
+    user_id INTEGER NOT NULL REFERENCES users
 );
 
-CREATE TABLE report
-(
-    reportId SERIAL PRIMARY KEY,
-    description TEXT NOT NULL,
-    date DATE DEFAULT now(),
+CREATE TABLE report (
+    report_id SERIAL PRIMARY KEY,
+    description TEXT NOT NULL, 
+    date DATE DEFAULT today(),
     author INTEGER NOT NULL REFERENCES users,
     target INTEGER NOT NULL REFERENCES users
 );
 
-
-CREATE TABLE question
-(
-    questionId SERIAL PRIMARY KEY,
-    title TEXT NOT NULL CONSTRAINT question_title_uk UNIQUE,
+CREATE TABLE question (
+    question_id SERIAL PRIMARY KEY,
+    title NOT NULL CONSTRAINT question_title_uk UNIQUE,
     description TEXT NOT NULL,
-    creationDate DATETIME DEFAULT now(),
-    score INT DEFAULT 0,
-    category TYPE media_type NOT NULL,
-    author INTEGER NOT NULL REFERENCES User,
-    best INTEGER NOT NULL REFERENCES answer
+    creation_date DATE DEFAULT now(), 
+    score INTEGER DEFAULT 0,
+    category TYPE media_types NOT NULL,
+    author INTEGER NOT NULL REFERENCES users,
+    best INTEGER REFERENCES answer,
 );
 
-    CREATE TABLE answer
-    (
-        questionId SERIAL PRIMARY KEY,
-        description TEXT NOT NULL,
-        creationDate DATETIME DEFAULT now(),
-        score INT DEFAULT 0,
-        questionId INTEGER NOT NULL REFERENCES question,
-        author INTEGER NOT NULL REFERENCES users
-    );
-
-    CREATE TABLE comment_question
-    (
-        cqId SERIAL PRIMARY KEY,
-        description TEXT NOT NULL,
-        creationDate DATETIME DEFAULT now(),
-        questionId INTEGER NOT NULL REFERENCES question,
-        author INTEGER NOT NULL REFERENCES users
-    );
-
-    CREATE TABLE comment_answer
-    (
-        caId SERIAL PRIMARY KEY,
-        description TEXT NOT NULL,
-        creationDate DATETIME DEFAULT now(),
-        answerId INTEGER NOT NULL REFERENCES answer,
-        author INTEGER NOT NULL REFERENCES users
-    );
-
-    CREATE TABLE vote_q
-    (
-        userId Integer NOT NULL REFERENCES users,
-        questionId Integer NOT NULL REFERENCES question,
-        value INTEGER NOT NULL CONSTRAINT value_ck CHECK ((value = 1 ) OR (value = -1)),
-        date DATETIME DEFAULT now(),
-        PRIMARY KEY (userId, questionId)
-    );
-
-    CREATE TABLE vote_a
-    (
-        userId Integer NOT NULL REFERENCES users,
-        answerId Integer NOT NULL REFERENCES answer,
-        value INTEGER NOT NULL CONSTRAINT value_ck CHECK ((value = 1 ) OR (value = -1)),
-        date DATETIME DEFAULT now(),
-        PRIMARY KEY (userId, answerId)
-    );
-
-    CREATE TABLE follow
-    (
-        userId Integer NOT NULL REFERENCES users,
-        questionId Integer NOT NULL REFERENCES question,
-        PRIMARY KEY (userId, questionId)
-    );
-
-    CREATE TABLE tag
-    (
-        tagId SERIAL PRIMARY KEY,
-        name TEXT NOT NULL CONSTRAINT tag_name_uk UNIQUE,
-    );
-
-    CREATE TABLE tag_question
-    (
-        tagId Integer NOT NULL REFERENCES Tag,
-        questionId Integer NOT NULL REFERENCES question,
-        PRIMARY KEY (tagID, questionId)
-    );
-
-    CREATE TABLE medal
-    (
-        medalId SERIAL PRIMARY KEY,
-        description TEXT NOT NULL CONSTRAINT medal_description_uk UNIQUE,
-        name TYPE medals NOT NULL CONSTRAINT medals_type_uk UNIQUE
+CREATE TABLE answer (
+    answer_id SERIAL PRIMARY KEY,
+    description TEXT NOT NULL,
+    creation_date DATE DEFAULT now(),
+    score INTEGER DEFAULT 0,
+    question_id INTEGER NOT NULL REFERENCES question,
+    author INTEGER NOT NULL REFERENCES users
 );
 
-        CREATE TABLE achievement
-        (
-            userId Integer NOT NULL REFERENCES users,
-            medalId Integer NOT NULL REFERENCES Medal,
-            date DATE DEFAULT now(),
-            PRIMARY KEY (userID, medalId)
-        );
-
-        CREATE TABLE message
-        (
-            messageId SERIAL PRIMARY KEY,
-            title TEXT NOT NULL,
-            content TEXT NOT NULL,
-            date DATE DEFAULT now(),
-            author INTEGER NOT NULL REFERENCES users
-        );
-
-        CREATE TABLE message_target
-        (
-            userId INTEGER NOT NULL REFERENCES users,
-            messageId INTEGER NOT NULL REFERENCES Message,
-            PRIMARY KEY (userId, messageId)
-        );
-
-        CREATE TABLE notified
-        (
-            userId INTEGER NOT NULL REFERENCES users,
-            notificationId INTEGER NOT NULL REFERENCES Notification,
-            hasSeen boolean DEFAULT false,
-            PRIMARY KEY (userId, notificationId)
-        );
-
-        CREATE TABLE notif_new_msg
-        (
-            nnmId SERIAL PRIMARY KEY,
-            date DATE DEFAULT now(),
-            messageId INTEGER NOT NULL REFERENCES Message,
-        );
-
-        CREATE TABLE notif_new_ans
-        (
-            nnaId SERIAL PRIMARY KEY,
-            date DATE DEFAULT now(),
-            answerId INTEGER NOT NULL REFERENCES answer,
-        );
-
-        CREATE TABLE notif_comment_ans
-        (
-            ncaId SERIAL PRIMARY KEY,
-            date DATE DEFAULT now(),
-            commentanswerId INTEGER NOT NULL REFERENCES CommentAnswer,
-        );
-
-        CREATE TABLE notif_comment_q
-        (
-            ncqId SERIAL PRIMARY KEY,
-            date DATE DEFAULT now(),
-            commentquestionId INTEGER NOT NULL REFERENCES CommentQuestion,
-        );
-
-        CREATE TABLE media
-        (
-            mediaId SERIAL PRIMARY KEY,
-            title TEXT NOT NULL CONSTRAINT media_title_uk UNIQUE,
-            release DATE NOT NULL,
-            category TYPE media_type NOT NULL,
-            picture PATH
+CREATE TABLE comment_question (
+    cq_id SERIAL PRIMARY KEY,
+    description TEXT NOT NULL,
+    creation_date DATE DEFAULT now(),
+    question_id INTEGER NOT NULL REFERENCES question,
+    author INTEGER NOT NULL REFERENCES users
 );
 
-            CREATE TABLE favourite
-            (
-                userId Integer NOT NULL REFERENCES users,
-                mediaId Integer NOT NULL REFERENCES Media,
-                PRIMARY KEY (userId, mediaId)
-            );
+CREATE TABLE comment_answer (
+    ca_id SERIAL PRIMARY KEY,
+    description TEXT NOT NULL,
+    creation_date DATE DEFAULT now(),
+    answer_id INTEGER NOT NULL REFERENCES answer, 
+    author INTEGER NOT NULL REFERENCES users
+);
+
+CREATE TABLE vote_q (
+    user_id INTEGER NOT NULL REFERENCES users,
+    question_id INTEGER NOT NULL REFERENCES question,
+    value INTEGER NOT NULL CONSTRAINT value_ck CHECK ((value = 1 ) OR (value = -1)),
+    date DATE DEFAULT now(),
+    PRIMARY KEY (user_id, question_id)
+);
+
+CREATE TABLE vote_a (
+    user_id INTEGER NOT NULL REFERENCES users,
+    answer_id INTEGER NOT NULL REFERENCES answer,
+    value INTEGER NOT NULL CONSTRAINT value_ck CHECK ((value = 1 ) OR (value = -1)),
+    date DATE DEFAULT now(),
+    PRIMARY KEY (user_id, answer_id)
+);
+
+CREATE TABLE follow (
+    user_id INTEGER NOT NULL REFERENCES users,
+    question_id INTEGER NOT NULL REFERENCES question,
+    PRIMARY KEY (user_id, question_id)
+);
+
+CREATE TABLE tag (
+    tag_id SERIAL PRIMARY KEY,
+    name TEXT NOT NULL CONSTRAINT tag_name_uk UNIQUE,
+);
+
+CREATE TABLE tag_question (
+    tag_id INTEGER NOT NULL REFERENCES tag,
+    question_id INTEGER NOT NULL REFERENCES question,
+    PRIMARY KEY (tag_id, question_id)
+);
+
+CREATE TABLE medal ( 
+    medal_id SERIAL PRIMARY KEY,
+    description NOT NULL CONSTRAINT medal_description_uk UNIQUE,
+    name TYPE medal_types NOT NULL CONSTRAINT medal_name_uk UNIQUE
+);
+
+CREATE TABLE achievement (
+    user_id INTEGER NOT NULL REFERENCES users,
+    medal_id INTEGER NOT NULL REFERENCES medal,
+    date DATE DEFAULT today(),
+    PRIMARY KEY (user_id, medal_id)
+);
+
+CREATE TABLE message ( 
+    message_id SERIAL PRIMARY KEY,
+    title TEXT NOT NULL,
+    content TEXT NOT NULL,
+    date DATE DEFAULT now(),
+    author INTEGER NOT NULL REFERENCES users
+);
+
+CREATE TABLE message_target (
+    user_id INTEGER NOT NULL REFERENCES users,
+    message_id INTEGER NOT NULL REFERENCES message,
+    PRIMARY KEY (user_id, message_id)
+);
+
+CREATE TABLE notified (
+    user_id INTEGER NOT NULL REFERENCES users,
+    notification_id INTEGER NOT NULL REFERENCES notification,
+    has_seen BOOLEAN DEFAULT false,
+    PRIMARY KEY (user_id, notification_id)
+);
+
+CREATE TABLE notif_new_msg (
+    nnm_id SERIAL PRIMARY KEY,
+    date DATE DEFAULT now(),
+    message_id INTEGER NOT NULL REFERENCES message,
+);
+
+CREATE TABLE notif_new_ans (
+    nna_id SERIAL PRIMARY KEY,
+    date DATE DEFAULT now(),
+    answer_id INTEGER NOT NULL REFERENCES answer,
+);
+
+CREATE TABLE notif_comment_ans (
+    nca_id SERIAL PRIMARY KEY,
+    date DATE DEFAULT now(),
+    comment_answer_id INTEGER NOT NULL REFERENCES comment_answer,
+);
+
+CREATE TABLE notif_comment_q (
+    ncq_id SERIAL PRIMARY KEY,
+    date DATE DEFAULT now(),
+    comment_question_id INTEGER NOT NULL REFERENCES comment_question,
+);
+
+CREATE TABLE media (
+    media_id SERIAL PRIMARY KEY,
+    title TEXT NOT NULL CONSTRAINT media_title_uk UNIQUE,
+    category TYPE media_types NOT NULL,
+    release DATE NOT NULL,
+    picture PATH
+);
+
+CREATE TABLE favourite (
+    user_id INTEGER NOT NULL REFERENCES users,
+    media_id INTEGER NOT NULL REFERENCES media,
+    PRIMARY KEY (user_id, media_id)
+);
+
