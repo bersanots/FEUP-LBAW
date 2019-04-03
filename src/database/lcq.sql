@@ -47,7 +47,7 @@ CREATE TABLE users (
     username TEXT NOT NULL UNIQUE,
     email TEXT NOT NULL UNIQUE,
     password TEXT NOT NULL,
-    picture PATH,
+    picture TEXT,
     description TEXT,
     joined_date DATE DEFAULT now(), 
     is_deleted BOOLEAN DEFAULT false
@@ -221,7 +221,7 @@ CREATE TABLE media (
     title TEXT NOT NULL UNIQUE,
     category media_types NOT NULL,
     release DATE NOT NULL,
-    picture PATH
+    picture TEXT
 );
 
 CREATE TABLE favourite (
