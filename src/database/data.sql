@@ -94,3 +94,17 @@ INSERT INTO comment_question (cq_id, description, creation_date, question_id, au
 
 INSERT INTO comment_answer (ca_id, description, creation_date, answer_id, author) VALUES (1, 'Very Greek mythologie based', '2019-01-01 10:07:01', 2, 19);
 INSERT INTO comment_answer (ca_id, description, creation_date, answer_id, author) VALUES (2, 'I agree', '2019-05-04 08:55:47', 1, 4);
+
+INSERT INTO vote_q(user_id, question_id, value, date) VALUES (30, 1, 1, '2019-01-01 01:30:47');
+INSERT INTO vote_q(user_id, question_id, value, date) VALUES (5, 1, 1,'2019-01-01 01:30:47');
+INSERT INTO vote_q(user_id, question_id, value, date) VALUES (10, 1, 1, '2019-01-01 01:30:47');
+INSERT INTO vote_q(user_id, question_id, value, date) VALUES (13, 1, -1, '2019-01-01 01:30:47');
+INSERT INTO vote_q(user_id, question_id, value, date) VALUES (22, 1, 1, '2019-01-01 01:30:47');
+
+INSERT INTO vote_q(user_id, question_id, value, date) VALUES (10, 2, 1, '2019-04-05 01:31:47');
+INSERT INTO vote_q(user_id, question_id, value, date) VALUES (26, 2, 1, '2019-04-05 01:31:47');
+INSERT INTO vote_q(user_id, question_id, value, date) VALUES (3, 2, -1, '2019-04-05 01:31:47');
+
+INSERT INTO vote_q(user_id, question_id, value, date) VALUES (16, 3, 1, '2019-04-05 01:30:47');
+
+INSERT INTO vote_a(user_id, answer_id, value, date) VALUES (23, 1, 1, '2019-05-04 08:33:00');
