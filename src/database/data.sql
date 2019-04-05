@@ -108,3 +108,25 @@ INSERT INTO vote_q(user_id, question_id, value, date) VALUES (3, 2, -1, '2019-04
 INSERT INTO vote_q(user_id, question_id, value, date) VALUES (16, 3, 1, '2019-04-05 01:30:47');
 
 INSERT INTO vote_a(user_id, answer_id, value, date) VALUES (23, 1, 1, '2019-05-04 08:33:00');
+
+INSERT INTO follow(user_id, question_id) VALUES (2, 3);
+INSERT INTO follow(user_id, question_id) VALUES (16, 3);
+INSERT INTO follow(user_id, question_id) VALUES (26, 3);
+INSERT INTO follow(user_id, question_id) VALUES (27, 3);
+INSERT INTO follow(user_id, question_id) VALUES (8, 3);
+INSERT INTO follow(user_id, question_id) VALUES (30, 3);
+
+INSERT INTO follow(user_id, question_id) VALUES (13, 2);
+INSERT INTO follow(user_id, question_id) VALUES (9, 2);
+INSERT INTO follow(user_id, question_id) VALUES (23, 2);
+INSERT INTO follow(user_id, question_id) VALUES (1, 2);
+INSERT INTO follow(user_id, question_id) VALUES (24, 2);
+INSERT INTO follow(user_id, question_id) VALUES (12, 2);
+
+INSERT INTO follow(user_id, question_id) VALUES (7, 1);
+INSERT INTO follow(user_id, question_id) VALUES (10, 1);
+INSERT INTO follow(user_id, question_id) VALUES (15, 1);
+INSERT INTO follow(user_id, question_id) VALUES (19, 1);
+INSERT INTO follow(user_id, question_id) VALUES (3, 1);
+INSERT INTO follow(user_id, question_id) VALUES (27, 1);
+
