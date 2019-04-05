@@ -76,6 +76,7 @@ INSERT INTO favourite (user_id, media_id) VALUES (28,5);
 INSERT INTO favourite (user_id, media_id) VALUES (28,10);
 
 
+-- questions & answers & comments
 INSERT INTO question (question_id, title, description, creation_date, score, category, author) VALUES (1, 'Was a deal made with Warner Bros so that Peter Porker can do the things he does?', 'In the movie Spider-Man: Into the Spider-Verse there is this spider-man character called Peter Porker, who is an alternate funny cartoon version of Spider-Man. He does things and says things closely to what the Looney Tunes cartoon character Porky Pig does and says.
 Was a deal made with Warner Bros so that Peter Porker can do the things he does? If so, what kind of deal?', '2019-01-01 01:30:47', 130, 'animation', 24);
 INSERT INTO question (question_id, title, description, creation_date, score, category, author) VALUES (2, 'Is Shazam''s look, Billy Batson''s future look?', 'I know this
@@ -88,6 +89,10 @@ INSERT INTO answer (answer_id, description, creation_date, score, question_id, a
 INSERT INTO answer (answer_id, description, creation_date, score, question_id, author) VALUES (2, 'Shazam is a adult muscular man because of the magical powers he have, mostly from Herculese and Appolo
 (from the powers he inherit when becoming Shazam), AFAIK we don''t know how Billy will looks like when he grown up, nor probably we''ll see it in DCEU', '2019-01-01 08:30:00', 5, 2, 30);
 INSERT INTO answer (answer_id, description, creation_date, score, question_id, author) VALUES (3, 'Sansa was 14 when she was married to Tyrion. I think her age gets brought up a couple of times during the back half of season 3.', '2019-04-05 09:30:00', 5, 3, 3);
+
+UPDATE question SET best = 1 WHERE question_id = 1;
+UPDATE question SET best = 2 WHERE question_id = 2;
+UPDATE question SET best = 3 WHERE question_id = 3;
 
 INSERT INTO comment_question (cq_id, description, creation_date, question_id, author) VALUES (1, 'I wish i knew too', '2019-04-05 01:37:33', 3, 17);
 INSERT INTO comment_question (cq_id, description, creation_date, question_id, author) VALUES (2, 'Why care about Sansa''s age?', '2019-04-05 03:37:33', 3, 8);
