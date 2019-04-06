@@ -135,3 +135,26 @@ INSERT INTO follow(user_id, question_id) VALUES (19, 1);
 INSERT INTO follow(user_id, question_id) VALUES (3, 1);
 INSERT INTO follow(user_id, question_id) VALUES (27, 1);
 
+
+
+INSERT INTO tag(tag_id, name) VALUES (1, 'GoT');
+INSERT INTO tag(tag_id, name) VALUES (2, 'Spider_man');
+INSERT INTO tag(tag_id, name) VALUES (3, 'Shazam');
+INSERT INTO tag(tag_id, name) VALUES (4, 'Drama');
+INSERT INTO tag(tag_id, name) VALUES (5, 'Comedy');
+INSERT INTO tag(tag_id, name) VALUES (6, 'Adventure');
+INSERT INTO tag(tag_id, name) VALUES (7, 'DC');
+
+INSERT INTO report(report_id, description, date, author, target) VALUES (1, 'user is spamming questions', '2019-04-05 01:31:47', 1, 30);
+INSERT INTO report(report_id, description, date, author, target) VALUES (1, 'posting mature content', '2019-04-05 01:31:47', 15, 8);
+INSERT INTO report(report_id, description, date, author, target) VALUES (1, 'wrong use of tags', '2019-04-05 01:31:47', 17, 22);
+INSERT INTO report(report_id, description, date, author, target) VALUES (1, 'spoilers in title of question', '2019-04-05 01:31:47', 25, 7);
+INSERT INTO report(report_id, description, date, author, target) VALUES (1, 'spoiler', '2019-04-05 01:31:47', 29, 11);
+
+
+INSERT INTO tag_question(tag_id, question_id) VALUES (1, 3);
+INSERT INTO tag_question(tag_id, question_id) VALUES (4, 3);
+INSERT INTO tag_question(tag_id, question_id) VALUES (2, 1);
+INSERT INTO tag_question(tag_id, question_id) VALUES (3, 2);
+INSERT INTO tag_question(tag_id, question_id) VALUES (7, 2);
+INSERT INTO tag_question(tag_id, question_id) VALUES (5, 2);
