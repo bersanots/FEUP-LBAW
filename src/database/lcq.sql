@@ -86,7 +86,8 @@ CREATE TABLE question (
     creation_date DATE DEFAULT now(), 
     score INTEGER DEFAULT 0,
     category media_types NOT NULL,
-    author INTEGER NOT NULL REFERENCES users(user_id)
+    author INTEGER NOT NULL REFERENCES users(user_id),
+    search tsvector
 );
 
 CREATE TABLE answer (
