@@ -11,12 +11,14 @@ SELECT title, category, media.picture
 -- User's notifications
 SELECT date, has_seen
   FROM notification, notified
-  WHERE $user_id = notified.user_id AND notification.notification_id = notified.notification_id;
+  WHERE $user_id = notified.user_id AND notification.notification_id = notified.notification_id
+  ORDER BY date DESC;
 
 -- User's message inbox
 SELECT title, content, date, author
   FROM message, message_target
-  WHERE $user_id = user_id AND message.message_id = message_target.message_id;
+  WHERE $user_id = user_id AND message.message_id = message_target.message_id
+  ORDER BY date DESC;
 
 -- User's medals
 SELECT name, description, date
@@ -31,12 +33,14 @@ SELECT title, creation_date, score, username, ts_rank_cd(textsearch, query) AS r
 -- Questions list by category
 SELECT title, score, username
   FROM question, users
-  WHERE question.author = users.user_id AND category = $category;
+  WHERE question.author = users.user_id AND category = $category
+  ORDER BY creation_date DESC;
 
 -- User's followed questions
 SELECT title, score, username
   FROM follow, question, users
-  WHERE $user_id = follow.user_id AND question.question_id = follow.question_id AND question.author = users.user_id;
+  WHERE $user_id = follow.user_id AND question.question_id = follow.question_id AND question.author = users.user_id
+  ORDER BY creation_date DESC;
 
 -- Question's page
 SELECT title, question.description, creation_date, score, category, username, best

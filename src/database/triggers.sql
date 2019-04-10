@@ -1,3 +1,43 @@
+-------------------
+--  ADMINS/MODS  --
+-------------------
+
+CREATE FUNCTION new_administrator() RETURNS TRIGGER AS
+$BODY$
+BEGIN
+    IF EXISTS (SELECT * FROM moderator WHERE NEW.admin_id = moderator_id) THEN
+        RAISE EXCEPTION 'This user id is already attributed to a moderator';
+    END IF;
+    RETURN NEW;
+END
+$BODY$
+LANGUAGE plpgsql;
+ 
+CREATE TRIGGER new_administrator
+    BEFORE INSERT ON administrator
+    FOR EACH ROW
+    EXECUTE PROCEDURE new_administrator();
+
+
+
+CREATE FUNCTION new_moderator() RETURNS TRIGGER AS
+$BODY$
+BEGIN
+    IF EXISTS (SELECT * FROM administrator WHERE NEW.moderator_id = admin_id) THEN
+        RAISE EXCEPTION 'This user id is already attributed to an administrator';
+    END IF;
+    RETURN NEW;
+END
+$BODY$
+LANGUAGE plpgsql;
+ 
+CREATE TRIGGER new_moderator
+    BEFORE INSERT ON moderator
+    FOR EACH ROW
+    EXECUTE PROCEDURE new_moderator();
+
+
+
 ------------------
 --     BANS     --
 ------------------
@@ -212,7 +252,7 @@ BEGIN
     IF EXISTS (SELECT * FROM notif_comment_q WHERE notif_id = ncq_id UNION
                 SELECT * FROM notif_comment_ans WHERE notif_id = nca_id UNION
                 SELECT * FROM notif_new_msg WHERE notif_id = nnm_id) THEN
-        RAISE EXCEPTION 'This notification id is already on use on another kind of notification';
+        RAISE EXCEPTION 'This notification id is already attributed to another kind of notification';
     END IF;
     INSERT INTO notif_new_ans
         VALUES (notif_id, NEW.answer_id);
@@ -240,7 +280,7 @@ BEGIN
     IF EXISTS (SELECT * FROM notif_new_ans WHERE notif_id = nna_id UNION
                 SELECT * FROM notif_comment_ans WHERE notif_id = nca_id UNION
                 SELECT * FROM notif_new_msg WHERE notif_id = nnm_id) THEN
-        RAISE EXCEPTION 'This notification id is already on use on another kind of notification';
+        RAISE EXCEPTION 'This notification id is already attributed to another kind of notification';
     END IF;
     INSERT INTO notif_comment_q
         VALUES (notif_id, NEW.cq_id);
@@ -268,7 +308,7 @@ BEGIN
     IF EXISTS (SELECT * FROM notif_new_ans WHERE notif_id = nna_id UNION
                 SELECT * FROM notif_comment_q WHERE notif_id = ncq_id UNION
                 SELECT * FROM notif_new_msg WHERE notif_id = nnm_id) THEN
-        RAISE EXCEPTION 'This notification id is already on use on another kind of notification';
+        RAISE EXCEPTION 'This notification id is already attributed to another kind of notification';
     END IF;
     INSERT INTO notif_comment_ans
         VALUES (notif_id, NEW.ca_id);
@@ -297,7 +337,7 @@ BEGIN
         IF EXISTS (SELECT * FROM notif_new_ans WHERE notif_id = nna_id UNION
                 SELECT * FROM notif_comment_q WHERE notif_id = ncq_id UNION
                 SELECT * FROM notif_comment_ans WHERE notif_id = nca_id) THEN
-            RAISE EXCEPTION 'This notification id is already on use on another kind of notification';
+            RAISE EXCEPTION 'This notification id is already attributed to another kind of notification';
         END IF;
         INSERT INTO notif_new_msg
             VALUES (notif_id, NEW.message_id);

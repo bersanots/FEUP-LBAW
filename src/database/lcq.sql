@@ -32,6 +32,8 @@ DROP TABLE IF EXISTS notif_comment_q CASCADE;
 DROP TABLE IF EXISTS media CASCADE;
 DROP TABLE IF EXISTS favourite CASCADE;
 
+DROP FUNCTION IF EXISTS new_administrator() CASCADE;
+DROP FUNCTION IF EXISTS new_moderator() CASCADE;
 DROP FUNCTION IF EXISTS auto_ban() CASCADE;
 DROP FUNCTION IF EXISTS same_ban() CASCADE;
 DROP FUNCTION IF EXISTS auto_report() CASCADE;
@@ -48,6 +50,8 @@ DROP FUNCTION IF EXISTS notification_new_comment_in_answer() CASCADE;
 DROP FUNCTION IF EXISTS notification_new_message() CASCADE;
 DROP FUNCTION IF EXISTS delete_account_information() CASCADE;
  
+DROP TRIGGER IF EXISTS new_administrator ON administrator;
+DROP TRIGGER IF EXISTS new_moderator ON moderator;
 DROP TRIGGER IF EXISTS auto_ban ON ban;
 DROP TRIGGER IF EXISTS same_ban ON ban;
 DROP TRIGGER IF EXISTS auto_report ON report;
@@ -281,16 +285,60 @@ CREATE TABLE favourite (
 -- INDEXES
 -----------------------------------------
 
-CREATE INDEX usernames ON 'users' USING hash (username);
+CREATE INDEX usernames ON users USING hash (username);
 
-CREATE INDEX question_date ON 'question' USING btree (creation_date);
+CREATE INDEX user_notification ON notified USING hash (user_id);
 
-CREATE INDEX search ON 'question' USING GIST (to_tsvector('english', title || ' '));
+CREATE INDEX user_message ON message_target USING hash (user_id);
+
+CREATE INDEX user_followed_question ON follow USING hash (user_id);
+
+CREATE INDEX question_date ON question USING btree (creation_date);
+
+CREATE INDEX notification_date ON notification USING btree (date);
+
+CREATE INDEX message_date ON message USING btree (date);
+
+CREATE INDEX search ON question USING GIST (to_tsvector('english', title || ' '));
 
 
 -----------------------------------------
 -- TRIGGERS and UDFs
 -----------------------------------------
+
+CREATE FUNCTION new_administrator() RETURNS TRIGGER AS
+$BODY$
+BEGIN
+    IF EXISTS (SELECT * FROM moderator WHERE NEW.admin_id = moderator_id) THEN
+        RAISE EXCEPTION 'This user id is already attributed to a moderator';
+    END IF;
+    RETURN NEW;
+END
+$BODY$
+LANGUAGE plpgsql;
+ 
+CREATE TRIGGER new_administrator
+    BEFORE INSERT ON administrator
+    FOR EACH ROW
+    EXECUTE PROCEDURE new_administrator();
+
+
+CREATE FUNCTION new_moderator() RETURNS TRIGGER AS
+$BODY$
+BEGIN
+    IF EXISTS (SELECT * FROM administrator WHERE NEW.moderator_id = admin_id) THEN
+        RAISE EXCEPTION 'This user id is already attributed to an administrator';
+    END IF;
+    RETURN NEW;
+END
+$BODY$
+LANGUAGE plpgsql;
+ 
+CREATE TRIGGER new_moderator
+    BEFORE INSERT ON moderator
+    FOR EACH ROW
+    EXECUTE PROCEDURE new_moderator();
+
 
 CREATE FUNCTION auto_ban() RETURNS TRIGGER AS
 $BODY$
