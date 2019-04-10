@@ -130,7 +130,6 @@ INSERT INTO follow(user_id, question_id) VALUES (27, 3);
 INSERT INTO follow(user_id, question_id) VALUES (8, 3);
 INSERT INTO follow(user_id, question_id) VALUES (30, 3);
 
-INSERT INTO follow(user_id, question_id) VALUES (13, 2);
 INSERT INTO follow(user_id, question_id) VALUES (9, 2);
 INSERT INTO follow(user_id, question_id) VALUES (23, 2);
 INSERT INTO follow(user_id, question_id) VALUES (1, 2);

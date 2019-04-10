@@ -494,9 +494,11 @@ CREATE TRIGGER follow_created_question
 
 CREATE FUNCTION best_answer_belongs_to_question() RETURNS TRIGGER AS
 $BODY$
+DECLARE
+  q_id INTEGER;
 BEGIN
     IF (NEW.best IS DISTINCT FROM OLD.best) THEN
-        SELECT question_id AS q_id FROM answer WHERE answer_id = NEW.best;
+        SELECT question_id INTO q_id FROM answer WHERE answer_id = NEW.best;
         IF (q_id IS DISTINCT FROM NEW.question_id) THEN
             RAISE EXCEPTION 'The best answer must belong to the respective question';
         END IF;
@@ -514,17 +516,20 @@ CREATE TRIGGER best_answer_belongs_to_question
 
 CREATE FUNCTION notification_new_answer() RETURNS TRIGGER AS
 $BODY$
+DECLARE
+  notif_id INTEGER;
+  author_id INTEGER;
 BEGIN
     INSERT INTO notification DEFAULT VALUES;
-    SELECT notification_id AS notif_id FROM notification ORDER BY notification_id DESC LIMIT 1;
+    SELECT notification_id INTO notif_id FROM notification ORDER BY notification_id DESC LIMIT 1;
     IF EXISTS (SELECT * FROM notif_comment_q WHERE notif_id = ncq_id UNION
                 SELECT * FROM notif_comment_ans WHERE notif_id = nca_id UNION
                 SELECT * FROM notif_new_msg WHERE notif_id = nnm_id) THEN
         RAISE EXCEPTION 'This notification id is already on use on another kind of notification';
     END IF;
-    INSERT INTO notif_new_ans
+    INSERT INTO notif_new_ans(nna_id,answer_id)
         VALUES (notif_id, NEW.answer_id);
-    SELECT question.author AS author_id FROM question, answer
+    SELECT question.author INTO author_id FROM question, answer
         WHERE question.question_id = answer.question_id AND NEW.answer_id = answer_id;
     INSERT INTO notified (user_id, notification_id)
         VALUES (author_id, notif_id);
@@ -541,17 +546,20 @@ CREATE TRIGGER notification_new_answer
 
 CREATE FUNCTION notification_new_comment_in_question() RETURNS TRIGGER AS
 $BODY$
+DECLARE
+  notif_id INTEGER;
+  author_id INTEGER;
 BEGIN
     INSERT INTO notification DEFAULT VALUES;
-    SELECT notification_id AS notif_id FROM notification ORDER BY notification_id DESC LIMIT 1;
+    SELECT notification_id INTO notif_id FROM notification ORDER BY notification_id DESC LIMIT 1;
     IF EXISTS (SELECT * FROM notif_new_ans WHERE notif_id = nna_id UNION
                 SELECT * FROM notif_comment_ans WHERE notif_id = nca_id UNION
                 SELECT * FROM notif_new_msg WHERE notif_id = nnm_id) THEN
         RAISE EXCEPTION 'This notification id is already on use on another kind of notification';
     END IF;
-    INSERT INTO notif_comment_q
+    INSERT INTO notif_comment_q(ncq_id,comment_question_id)
         VALUES (notif_id, NEW.cq_id);
-    SELECT question.author AS author_id FROM question, comment_question
+    SELECT question.author INTO author_id FROM question, comment_question
         WHERE question.question_id = comment_question.question_id AND NEW.cq_id = cq_id;
     INSERT INTO notified (user_id, notification_id)
         VALUES (author_id, notif_id);
@@ -568,17 +576,20 @@ CREATE TRIGGER notification_new_comment_in_question
 
 CREATE FUNCTION notification_new_comment_in_answer() RETURNS TRIGGER AS
 $BODY$
+DECLARE
+  notif_id INTEGER;
+  author_id INTEGER;
 BEGIN
     INSERT INTO notification DEFAULT VALUES;
-    SELECT notification_id AS notif_id FROM notification ORDER BY notification_id DESC LIMIT 1;
+    SELECT notification_id INTO notif_id FROM notification ORDER BY notification_id DESC LIMIT 1;
     IF EXISTS (SELECT * FROM notif_new_ans WHERE notif_id = nna_id UNION
                 SELECT * FROM notif_comment_q WHERE notif_id = ncq_id UNION
                 SELECT * FROM notif_new_msg WHERE notif_id = nnm_id) THEN
         RAISE EXCEPTION 'This notification id is already on use on another kind of notification';
     END IF;
-    INSERT INTO notif_comment_ans
+    INSERT INTO notif_comment_ans(nca_id,comment_answer_id)
         VALUES (notif_id, NEW.ca_id);
-    SELECT answer.author AS author_id FROM answer, comment_answer
+    SELECT answer.author INTO author_id FROM answer, comment_answer
         WHERE answer.answer_id = comment_answer.answer_id AND NEW.ca_id = ca_id;
     INSERT INTO notified (user_id, notification_id)
         VALUES (author_id, notif_id);
@@ -595,16 +606,18 @@ CREATE TRIGGER notification_new_comment_in_answer
 
 CREATE FUNCTION notification_new_message() RETURNS TRIGGER AS
 $BODY$
+DECLARE
+  notif_id INTEGER;
 BEGIN
-    IF NOT EXISTS (SELECT nnm_id AS notif_id FROM notif_new_msg WHERE NEW.message_id = message_id) THEN
+    IF NOT EXISTS (SELECT nnm_id INTO notif_id FROM notif_new_msg WHERE NEW.message_id = message_id) THEN
         INSERT INTO notification DEFAULT VALUES;
-        SELECT notification_id AS notif_id FROM notification ORDER BY notification_id DESC LIMIT 1;
+        SELECT notification_id INTO notif_id FROM notification ORDER BY notification_id DESC LIMIT 1;
         IF EXISTS (SELECT * FROM notif_new_ans WHERE notif_id = nna_id UNION
                 SELECT * FROM notif_comment_q WHERE notif_id = ncq_id UNION
                 SELECT * FROM notif_comment_ans WHERE notif_id = nca_id) THEN
             RAISE EXCEPTION 'This notification id is already on use on another kind of notification';
         END IF;
-        INSERT INTO notif_new_msg
+        INSERT INTO notif_new_msg(nnm_id,message_id)
             VALUES (notif_id, NEW.message_id);
     END IF;
     INSERT INTO notified (user_id, notification_id)
