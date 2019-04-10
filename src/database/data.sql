@@ -168,6 +168,26 @@ INSERT INTO report(report_id, description, date, author, target) VALUES (3, 'wro
 INSERT INTO report(report_id, description, date, author, target) VALUES (4, 'spoilers in title of question', '2019-04-05 01:31:47', 25, 7);
 INSERT INTO report(report_id, description, date, author, target) VALUES (5, 'spoiler', '2019-04-05 01:31:47', 29, 11);
 
+
+--messages
+INSERT INTO message(message_id, title, content, date, author) VALUES (1, 'Welcome to LCQ!', 'Hi buddy, I just saw that you registered and couldn''t believe it!
+Hope you enjoy this website, it''s very neat! Any questions you have don''t hesitate and send me a message! See you around.', '2019-04-05 01:31:47', 1);
+INSERT INTO message(message_id, title, content, date, author) VALUES (2, 'Was not expecting this', 'Thanks so much for the welcoming message, wasn''t expecting this at all!
+I''ll try to find my way around the website, otherwise I''ll hit you up for sure!', '2019-04-05 02:41:47', 10);
+INSERT INTO message(message_id, title, content, date, author) VALUES (3, 'Avengers Fans Meeting', 'Good afternoon, I''m sending this email to remind you all that the VII Annual Avengers Fans Meeting will take place next Saturday, around 4pm.
+As agreed, we should all wear cosplay so that we embody the true spirit of Avengers. Best regards.', '2019-04-15 18:11:47', 5);
+
+INSERT INTO message_target(user_id, message_id) VALUES (10,1);
+INSERT INTO message_target(user_id, message_id) VALUES (1,2);
+INSERT INTO message_target(user_id, message_id) VALUES (5,3);
+INSERT INTO message_target(user_id, message_id) VALUES (7,3);
+INSERT INTO message_target(user_id, message_id) VALUES (9,3);
+INSERT INTO message_target(user_id, message_id) VALUES (13,3);
+INSERT INTO message_target(user_id, message_id) VALUES (17,3);
+INSERT INTO message_target(user_id, message_id) VALUES (22,3);
+INSERT INTO message_target(user_id, message_id) VALUES (27,3);
+
+
 -----------------------------------------
 -- end
 -----------------------------------------

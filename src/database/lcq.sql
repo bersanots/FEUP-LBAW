@@ -609,7 +609,8 @@ $BODY$
 DECLARE
   notif_id INTEGER;
 BEGIN
-    IF NOT EXISTS (SELECT nnm_id INTO notif_id FROM notif_new_msg WHERE NEW.message_id = message_id) THEN
+    SELECT nnm_id INTO notif_id FROM notif_new_msg WHERE NEW.message_id = message_id;
+    IF notif_id IS NULL THEN
         INSERT INTO notification DEFAULT VALUES;
         SELECT notification_id INTO notif_id FROM notification ORDER BY notification_id DESC LIMIT 1;
         IF EXISTS (SELECT * FROM notif_new_ans WHERE notif_id = nna_id UNION
