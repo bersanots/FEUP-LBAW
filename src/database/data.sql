@@ -187,7 +187,6 @@ INSERT INTO message_target(user_id, message_id) VALUES (17,3);
 INSERT INTO message_target(user_id, message_id) VALUES (22,3);
 INSERT INTO message_target(user_id, message_id) VALUES (27,3);
 
-
 -----------------------------------------
 -- end
 -----------------------------------------
