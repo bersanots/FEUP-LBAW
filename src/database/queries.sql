@@ -10,7 +10,7 @@ SELECT title, category, media.picture
 
 -- Search with filter
 SELECT title, creation_date, score, username, ts_rank_cd(textsearch, query) AS rank
-  FROM question, users, to_tsquery($search) AS query, to_tsvector(title || ' ') AS textsearch
+  FROM question, users, to_tsquery($search) AS query, to_tsvector('english', title || ' ') AS textsearch
   WHERE question.author = users.user_id AND query @@ textsearch ORDER BY rank DESC;
 
 -- Category's questions
