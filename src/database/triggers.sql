@@ -327,8 +327,10 @@ BEGIN
         UPDATE users
             SET username = to_char(OLD.user_id,'FM99999MI'),
                 email = to_char(OLD.user_id,'FM99999MI"@lcq.com"'),
-                password = to_char(OLD.user_id,'FM99999MI')
-            WHERE user_id = $user_id;
+                password = to_char(OLD.user_id,'FM99999MI'),
+                picture = NULL,
+                description = NULL
+            WHERE user_id = NEW.user_id;
     END IF;
     RETURN NEW;
 END

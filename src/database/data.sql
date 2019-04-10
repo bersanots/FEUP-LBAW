@@ -1,3 +1,7 @@
+-----------------------------------------
+-- Populate the database
+-----------------------------------------
+
 -- users
 INSERT INTO users (user_id,username,email,password,picture,description,joined_date,is_deleted) VALUES (1,'Maggy','quis.pede@gmail.com','SUF90BEM6SM','pictures/QKE39KVM1LY.png','Love means never having to say you are sorry.','2018-08-08 07:27:21','false');
 INSERT INTO users (user_id,username,email,password,picture,description,joined_date,is_deleted) VALUES (2,'Logan','justo@hotmail.com','QYX88TWK8MK','pictures/BLC65XKX3XG.png','They may take our lives, but they will never take our freedom!','2018-10-21 23:40:35','false');
@@ -29,6 +33,7 @@ INSERT INTO users (user_id,username,email,password,picture,description,joined_da
 INSERT INTO users (user_id,username,email,password,picture,description,joined_date,is_deleted) VALUES (28,'Valentine','lacus.quisque@yahoo.com','LSL26JJO7SS','pictures/OHC33SHX7XK.png','Toto, I have a feeling we are not in Kansas anymore.','2019-02-01 16:20:17','false');
 INSERT INTO users (user_id,username,email,password,picture,description,joined_date,is_deleted) VALUES (29,'Charity','nec@hotmail.com','VCY24NJT4WY','pictures/AIU23YID0XG.png','I am going to make him an offer he cannot refuse.','2019-03-06 12:57:55','false');
 INSERT INTO users (user_id,username,email,password,picture,description,joined_date,is_deleted) VALUES (30,'Jasper','tera@gmail.com','DWM27YXI9PH','pictures/LLV96WOR3EV.png','You talkin to me?','2018-05-14 17:15:11','false');
+
 
 --media
 INSERT INTO media (media_id, title, category, release, picture) VALUES (1,'Gone With the Wind','film','1943-09-20 00:00:00','pictures/gone_with_the_wind.png');
@@ -159,7 +164,11 @@ INSERT INTO tag_question(tag_id, question_id) VALUES (5, 2);
 
 --reports
 INSERT INTO report(report_id, description, date, author, target) VALUES (1, 'user is spamming questions', '2019-04-05 01:31:47', 1, 30);
-INSERT INTO report(report_id, description, date, author, target) VALUES (1, 'posting mature content', '2019-04-05 01:31:47', 15, 8);
-INSERT INTO report(report_id, description, date, author, target) VALUES (1, 'wrong use of tags', '2019-04-05 01:31:47', 17, 22);
-INSERT INTO report(report_id, description, date, author, target) VALUES (1, 'spoilers in title of question', '2019-04-05 01:31:47', 25, 7);
-INSERT INTO report(report_id, description, date, author, target) VALUES (1, 'spoiler', '2019-04-05 01:31:47', 29, 11);
+INSERT INTO report(report_id, description, date, author, target) VALUES (2, 'posting mature content', '2019-04-05 01:31:47', 15, 8);
+INSERT INTO report(report_id, description, date, author, target) VALUES (3, 'wrong use of tags', '2019-04-05 01:31:47', 17, 22);
+INSERT INTO report(report_id, description, date, author, target) VALUES (4, 'spoilers in title of question', '2019-04-05 01:31:47', 25, 7);
+INSERT INTO report(report_id, description, date, author, target) VALUES (5, 'spoiler', '2019-04-05 01:31:47', 29, 11);
+
+-----------------------------------------
+-- end
+-----------------------------------------
