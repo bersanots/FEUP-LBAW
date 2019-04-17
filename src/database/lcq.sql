@@ -298,12 +298,6 @@ CREATE INDEX search_question ON question USING GIST (setweight(to_tsvector('engl
 CREATE INDEX search_answer ON answer USING GIST (setweight(to_tsvector('english', description), 'B'));
 
 
-CLUSTER notified USING user_notification;
-
-CLUSTER message_target USING user_message;
-
-CLUSTER follow USING user_followed_question;
-
 CLUSTER question USING question_date;
 
 CLUSTER notification USING notification_date;
@@ -404,13 +398,19 @@ CREATE FUNCTION update_question_score() RETURNS TRIGGER AS
 $BODY$
 DECLARE
   total INTEGER;
+  q_id INTEGER;
 BEGIN
+    IF NEW IS NOT NULL THEN
+        q_id = NEW.question_id;     --Insert operation
+    ELSE
+        q_id = OLD.question_id;     --Delete operation
+    END IF;
     SELECT SUM (value) INTO total
         FROM vote_q
-        WHERE question_id = NEW.question_id;
+        WHERE question_id = q_id;
     UPDATE question
         SET score = total
-        WHERE question_id = NEW.question_id;
+        WHERE question_id = q_id;
     RETURN NEW;
 END
 $BODY$
@@ -426,13 +426,19 @@ CREATE FUNCTION update_answer_score() RETURNS TRIGGER AS
 $BODY$
 DECLARE
   total INTEGER;
+  a_id INTEGER;
 BEGIN
+    IF NEW IS NOT NULL THEN
+        a_id = NEW.answer_id;   --Insert operation
+    ELSE
+        a_id = OLD.answer_id;   --Delete operation
+    END IF;
     SELECT SUM (value) INTO total
         FROM vote_a
-        WHERE question_id = NEW.question_id;
+        WHERE answer_id = a_id;
     UPDATE answer
         SET score = total
-        WHERE answer_id = NEW.answer_id;
+        WHERE answer_id = a_id;
     RETURN NEW;
 END
 $BODY$
