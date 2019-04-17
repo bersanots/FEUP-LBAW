@@ -35,13 +35,10 @@ DROP TABLE IF EXISTS favourite CASCADE;
 DROP FUNCTION IF EXISTS new_administrator() CASCADE;
 DROP FUNCTION IF EXISTS new_moderator() CASCADE;
 DROP FUNCTION IF EXISTS auto_ban() CASCADE;
-DROP FUNCTION IF EXISTS same_ban() CASCADE;
 DROP FUNCTION IF EXISTS auto_report() CASCADE;
 DROP FUNCTION IF EXISTS same_report() CASCADE;
-DROP FUNCTION IF EXISTS add_question_vote() CASCADE;
-DROP FUNCTION IF EXISTS add_answer_vote() CASCADE;
-DROP FUNCTION IF EXISTS remove_question_vote() CASCADE;
-DROP FUNCTION IF EXISTS remove_answer_vote() CASCADE;
+DROP FUNCTION IF EXISTS update_question_score() CASCADE;
+DROP FUNCTION IF EXISTS update_answer_score() CASCADE;
 DROP FUNCTION IF EXISTS follow_created_question() CASCADE;
 DROP FUNCTION IF EXISTS best_answer_belongs_to_question() CASCADE;
 DROP FUNCTION IF EXISTS notification_new_answer() CASCADE;
@@ -53,13 +50,10 @@ DROP FUNCTION IF EXISTS delete_account_information() CASCADE;
 DROP TRIGGER IF EXISTS new_administrator ON administrator;
 DROP TRIGGER IF EXISTS new_moderator ON moderator;
 DROP TRIGGER IF EXISTS auto_ban ON ban;
-DROP TRIGGER IF EXISTS same_ban ON ban;
 DROP TRIGGER IF EXISTS auto_report ON report;
 DROP TRIGGER IF EXISTS same_report ON report;
-DROP TRIGGER IF EXISTS add_question_vote ON vote_q;
-DROP TRIGGER IF EXISTS add_answer_vote ON vote_a;
-DROP TRIGGER IF EXISTS remove_question_vote ON vote_q;
-DROP TRIGGER IF EXISTS remove_answer_vote ON vote_a;
+DROP TRIGGER IF EXISTS update_question_score ON vote_q;
+DROP TRIGGER IF EXISTS update_answer_score ON vote_a;
 DROP TRIGGER IF EXISTS follow_created_question ON question;
 DROP TRIGGER IF EXISTS best_answer_belongs_to_question ON question;
 DROP TRIGGER IF EXISTS notification_new_answer ON answer;
@@ -118,7 +112,7 @@ CREATE TABLE ban (
     description TEXT NOT NULL, 
     date DATE DEFAULT now(),
     admin_id INTEGER NOT NULL REFERENCES administrator(administrator_id),
-    user_id INTEGER NOT NULL REFERENCES users(user_id)
+    user_id INTEGER NOT NULL UNIQUE REFERENCES users(user_id)
 );
 
 CREATE TABLE report (
@@ -299,7 +293,22 @@ CREATE INDEX notification_date ON notification USING btree (date);
 
 CREATE INDEX message_date ON message USING btree (date);
 
-CREATE INDEX search ON question USING GIST (to_tsvector('english', title || ' '));
+CREATE INDEX search_question ON question USING GIST (setweight(to_tsvector('english', title || ' ' || description), 'A'));
+
+CREATE INDEX search_answer ON answer USING GIST (setweight(to_tsvector('english', description), 'B'));
+
+
+CLUSTER notified USING user_notification;
+
+CLUSTER message_target USING user_message;
+
+CLUSTER follow USING user_followed_question;
+
+CLUSTER question USING question_date;
+
+CLUSTER notification USING notification_date;
+
+CLUSTER message USING message_date;
 
 
 -----------------------------------------
@@ -357,23 +366,6 @@ CREATE TRIGGER auto_ban
     EXECUTE PROCEDURE auto_ban(); 
 
 
-CREATE FUNCTION same_ban() RETURNS TRIGGER AS
-$BODY$
-BEGIN
-    IF EXISTS (SELECT * FROM ban WHERE NEW.user_id = user_id) THEN
-        RAISE EXCEPTION 'This user has already been banned';
-    END IF;
-    RETURN NEW;
-END
-$BODY$
-LANGUAGE plpgsql;
- 
-CREATE TRIGGER same_ban
-    BEFORE INSERT OR UPDATE ON ban
-    FOR EACH ROW
-    EXECUTE PROCEDURE same_ban();
-
-
 CREATE FUNCTION auto_report() RETURNS TRIGGER AS
 $BODY$
 BEGIN
@@ -408,72 +400,48 @@ CREATE TRIGGER same_report
     EXECUTE PROCEDURE same_report();
 
 
-CREATE FUNCTION add_question_vote() RETURNS TRIGGER AS
+CREATE FUNCTION update_question_score() RETURNS TRIGGER AS
 $BODY$
+DECLARE
+  total INTEGER;
 BEGIN
+    SELECT SUM (value) INTO total
+        FROM vote_q
+        WHERE question_id = NEW.question_id;
     UPDATE question
-        SET score = score + NEW.value
+        SET score = total
         WHERE question_id = NEW.question_id;
     RETURN NEW;
 END
 $BODY$
 LANGUAGE plpgsql;
  
-CREATE TRIGGER add_question_vote
-    AFTER INSERT ON vote_q
+CREATE TRIGGER update_question_score
+    AFTER INSERT OR DELETE ON vote_q
     FOR EACH ROW
-    EXECUTE PROCEDURE add_question_vote();
+    EXECUTE PROCEDURE update_question_score();
 
 
-CREATE FUNCTION add_answer_vote() RETURNS TRIGGER AS
+CREATE FUNCTION update_answer_score() RETURNS TRIGGER AS
 $BODY$
+DECLARE
+  total INTEGER;
 BEGIN
-    UPDATE answer
-        SET score = score + NEW.value
-        WHERE answer_id = NEW.answer_id;
-    RETURN NEW;
-END
-$BODY$
-LANGUAGE plpgsql;
- 
-CREATE TRIGGER add_answer_vote
-    AFTER INSERT ON vote_a
-    FOR EACH ROW
-    EXECUTE PROCEDURE add_answer_vote();
-
-
-CREATE FUNCTION remove_question_vote() RETURNS TRIGGER AS
-$BODY$
-BEGIN
-    UPDATE question
-        SET score = score - OLD.value
+    SELECT SUM (value) INTO total
+        FROM vote_a
         WHERE question_id = NEW.question_id;
-    RETURN NEW;
-END
-$BODY$
-LANGUAGE plpgsql;
- 
-CREATE TRIGGER remove_question_vote
-    BEFORE DELETE ON vote_q
-    FOR EACH ROW
-    EXECUTE PROCEDURE remove_question_vote();
-
-
-CREATE FUNCTION remove_answer_vote() RETURNS TRIGGER AS
-$BODY$
-BEGIN
     UPDATE answer
-        SET score = score - OLD.value
+        SET score = total
         WHERE answer_id = NEW.answer_id;
     RETURN NEW;
 END
 $BODY$
 LANGUAGE plpgsql;
  
-CREATE TRIGGER remove_answer_vote
-    BEFORE DELETE ON vote_a
+CREATE TRIGGER update_answer_score
+    AFTER INSERT OR DELETE ON vote_a
     FOR EACH ROW
-    EXECUTE PROCEDURE remove_answer_vote();
+    EXECUTE PROCEDURE update_answer_score();
 
 
 CREATE FUNCTION follow_created_question() RETURNS TRIGGER AS
