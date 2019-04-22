@@ -5,10 +5,11 @@ services:
     image: postgres:9.4
     restart: always
     environment:
+      POSTGRES_DB: postgres
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: pg!lol!2019
     ports:
-      - "5432:5432"
+      - "5433:5432"
 
   pgadmin:
     image: thajeztah/pgadmin4
