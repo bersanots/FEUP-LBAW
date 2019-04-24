@@ -4,22 +4,22 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Card extends Model
+class Question extends Model
 {
   // Don't add create and update timestamps in database.
   public $timestamps  = false;
 
   /**
-   * The user this card belongs to
+   * The user this question belongs to
    */
   public function user() {
     return $this->belongsTo('App\User');
   }
 
   /**
-   * Items inside this card
+   * Answers inside this question
    */
-  public function items() {
-    return $this->hasMany('App\Item');
+  public function answers() {
+    return $this->hasMany('App\Answer');
   }
 }
