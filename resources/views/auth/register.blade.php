@@ -13,8 +13,8 @@
       <div id="register-form" class="auth-form">
         <form>
           <fieldset>
-            <label for="name">Username</label>
-            <input id="name" type="text" name="name" value="{{ old('name') }}" required autofocus>
+            <label for="username">Username</label>
+            <input id="username" type="text" name="username" value="{{ old('name') }}" required autofocus>
             @if ($errors->has('name'))
             <span class="error">
               {{ $errors->first('name') }}
@@ -36,9 +36,17 @@
               {{ $errors->first('password') }}
             </span>
             @endif
-          </fieldset>
-          <button type="submit">Next</button>
-          <a id="alt-auth" class="button" href="{{ route('login') }}">Login</a>
+
+            <label for="password_confirmation">Confirm Password</label>
+            <input id="password_confirmation" type="password" name="password" required>
+            @if ($errors->has('password'))
+            <span class="error">
+              {{ $errors->first('password') }}
+            </span>
+            @endif
+
+            <button type="submit">Register</button>
+            <a class="button" href="{{ route('login') }}">Login</a>
         </form>
       </div>
     </div>
