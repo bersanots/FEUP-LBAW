@@ -52,7 +52,8 @@ class QuestionController extends Controller
 
       $this->authorize('create', $question);
 
-      $question->name = $request->input('name');
+      $question->title = $request->input('title');
+      $question->description = $request->input('description');
       $question->user_id = Auth::user()->id;
       $question->save();
 
