@@ -14,7 +14,7 @@
         <form>
           <fieldset>
             <label for="username">Username</label>
-            <input id="username" type="text" name="username" value="{{ old('name') }}" required autofocus>
+            <input id="username" type="text" name="username" value="{{ old('username') }}" required autofocus>
             @if ($errors->has('name'))
             <span class="error">
               {{ $errors->first('name') }}
@@ -38,13 +38,12 @@
             @endif
 
             <label for="password_confirmation">Confirm Password</label>
-            <input id="password_confirmation" type="password" name="password" required>
+            <input id="password_confirmation" type="password" name="password_confirmation" required>
             @if ($errors->has('password'))
             <span class="error">
               {{ $errors->first('password') }}
             </span>
             @endif
-
             <button type="submit">Register</button>
             <a class="button" href="{{ route('login') }}">Login</a>
         </form>
