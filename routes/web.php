@@ -15,6 +15,14 @@ Route::get('/', function () {
     return redirect('login');
 });
 
+//Homepage
+//Route::view('homepage', 'pages/homepage');
+
+//Static pages
+Route::view('faq', 'pages/faq');
+Route::view('about', 'pages/about');
+//Route::view('contact', 'pages/contact');
+
 // Questions
 Route::get('questions', 'QuestionController@list');
 Route::get('questions/{id}', 'QuestionController@show');
