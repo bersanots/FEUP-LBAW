@@ -185,6 +185,33 @@ input[type=text]:focus, input[type=email]:focus, input[type=password]:focus {
 HERE
 */
 
+#header-bar {
+  background-color: #a22c29;
+}
+
+#filterBy {
+  background-color: #eeeeee;
+}
+
+#search-input {
+  background-color: #f8f8f8;
+}
+
+a.button 
+{
+  background-color: #a22c29;
+  border-color:#f8f8f8;
+}
+
+button 
+{
+  background-color: transparent;
+  border-color: #a22c29;
+  color: #222222;
+  font-weight: bold;
+  font-size: 2em;
+}
+
 div#auth {
   width: 100%;
   max-width: 700px;
@@ -196,7 +223,7 @@ legend#auth-legend {
   font-weight: bold;
 }
 
-div#auth-card {
+div#login-card {
   margin: auto;
   padding: 1em;
   overflow: auto;
@@ -204,16 +231,22 @@ div#auth-card {
   background-color: #3aa0a5;
 }
 
+div#register-card {
+  padding: 1em;
+  overflow: auto;
+  border: solid 0.5em #a22c29;
+  background-color: #a6cbc1;
+}
+
 div.auth-side {
   float: left;
   width: 50%;
-  height: 20em;
-  background-color: #3aa0a5;
 }
 
-form.auth-form {
-  background-color: #f8f8f8;
+div.auth-form {
+  background-color: #eeeeee;
   border-color: #A22C29;
+  color:#222222;
   float: right;
   width: 50%;
   padding: 1em;
@@ -226,11 +259,19 @@ img#img-login {
   margin: auto;
 }
 
+img#register-img {
+  float: left;
+  height: 50%;
+  width: 100%;
+  display: block;
+  margin: auto;
+}
+
 @media screen and (max-width: 600px) {
   div.auth-side {
     display: none;
   }
-  form.auth-form {
+  div.auth-form {
     width: 100%;
   }
 }
