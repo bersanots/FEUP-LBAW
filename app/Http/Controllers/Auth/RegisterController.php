@@ -62,7 +62,10 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $id = User::max('user_id') + 1;
+
         return User::create([
+            'user_id' => $id,
             'username' => $data['username'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
