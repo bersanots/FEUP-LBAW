@@ -94,7 +94,8 @@ CREATE TABLE users (
     picture TEXT,
     description TEXT,
     joined_date DATE DEFAULT now(), 
-    is_deleted BOOLEAN DEFAULT false
+    is_deleted BOOLEAN DEFAULT false,
+    remember_token TEXT DEFAULT false
 );
 
 CREATE TABLE moderator (

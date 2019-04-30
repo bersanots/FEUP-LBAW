@@ -32,10 +32,7 @@ INSERT INTO users (username,email,password,picture,description,joined_date,is_de
 INSERT INTO users (username,email,password,picture,description,joined_date,is_deleted) VALUES ('Sonya','velit.quisque.varius@amazon.com','SAA23RGU6EV','pictures/KQX63YBZ0UM.png','May the Force be with you.','2018-12-26 07:11:38','false');
 INSERT INTO users (username,email,password,picture,description,joined_date,is_deleted) VALUES ('Valentine','lacus.quisque@yahoo.com','LSL26JJO7SS','pictures/OHC33SHX7XK.png','Toto, I have a feeling we are not in Kansas anymore.','2019-02-01 16:20:17','false');
 INSERT INTO users (username,email,password,picture,description,joined_date,is_deleted) VALUES ('Charity','nec@hotmail.com','VCY24NJT4WY','pictures/AIU23YID0XG.png','I am going to make him an offer he cannot refuse.','2019-03-06 12:57:55','false');
-INSERT INTO users (username,email,password,picture,description,joined_date,is_deleted) VALUES ('Jasper','tera@gmail.com','DWM27YXI9PH','pictures/LLV96WOR3EV.png','You talkin to me?','2018-05-14 17:15:11','false');
-
-
-
+INSERT INTO users (username,email,password,picture,description,joined_date,is_deleted) VALUES ('user','user@name.com','$2y$10$/6re1d8fAxQIF0m5iz4VAefMtaK3L04pJZsK5RkDyOG9gQSkOb4Oy','pictures/LLV96WOR3EV.png','You talkin to me?','2018-05-14 17:15:11','false');
 
 --media
 INSERT INTO media (media_id, title, category, release, picture) VALUES (1,'Gone With the Wind','film','1943-09-20 00:00:00','pictures/gone_with_the_wind.png');
