@@ -4,7 +4,7 @@
 set -e
 
 DOCKER_USERNAME=diogoteixeira9 # Replace by your docker hub username
-IMAGE_NAME=lbaw1821-prod
+IMAGE_NAME=lbaw1821
 
 # Ensure that dependencies are available
 composer install
