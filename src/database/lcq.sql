@@ -111,7 +111,8 @@ CREATE TABLE administrator (
 CREATE TABLE ban (
     ban_id SERIAL PRIMARY KEY,
     description TEXT NOT NULL, 
-    date DATE DEFAULT now(),
+    start_date DATE DEFAULT now(),
+    end_date DATE,
     admin_id INTEGER NOT NULL REFERENCES administrator(administrator_id),
     user_id INTEGER NOT NULL UNIQUE REFERENCES users(user_id)
 );
@@ -120,6 +121,7 @@ CREATE TABLE report (
     report_id SERIAL PRIMARY KEY,
     description TEXT NOT NULL, 
     date DATE DEFAULT now(),
+    resolved BOOLEAN DEFAULT false,
     author INTEGER NOT NULL REFERENCES users(user_id),
     target INTEGER NOT NULL REFERENCES users(user_id)
 );
