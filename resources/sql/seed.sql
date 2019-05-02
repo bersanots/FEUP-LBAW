@@ -495,8 +495,7 @@ DECLARE
   notif_id INTEGER;
   author_id INTEGER;
 BEGIN
-    INSERT INTO notification DEFAULT VALUES;
-    SELECT notification_id INTO notif_id FROM notification ORDER BY notification_id DESC LIMIT 1;
+    INSERT INTO notification DEFAULT VALUES RETURNING notification_id INTO notif_id;
     IF EXISTS (SELECT * FROM notif_comment_q WHERE notif_id = ncq_id UNION
                 SELECT * FROM notif_comment_ans WHERE notif_id = nca_id UNION
                 SELECT * FROM notif_new_msg WHERE notif_id = nnm_id) THEN
@@ -525,8 +524,7 @@ DECLARE
   notif_id INTEGER;
   author_id INTEGER;
 BEGIN
-    INSERT INTO notification DEFAULT VALUES;
-    SELECT notification_id INTO notif_id FROM notification ORDER BY notification_id DESC LIMIT 1;
+    INSERT INTO notification DEFAULT VALUES RETURNING notification_id INTO notif_id;
     IF EXISTS (SELECT * FROM notif_new_ans WHERE notif_id = nna_id UNION
                 SELECT * FROM notif_comment_ans WHERE notif_id = nca_id UNION
                 SELECT * FROM notif_new_msg WHERE notif_id = nnm_id) THEN
@@ -555,8 +553,7 @@ DECLARE
   notif_id INTEGER;
   author_id INTEGER;
 BEGIN
-    INSERT INTO notification DEFAULT VALUES;
-    SELECT notification_id INTO notif_id FROM notification ORDER BY notification_id DESC LIMIT 1;
+    INSERT INTO notification DEFAULT VALUES RETURNING notification_id INTO notif_id;
     IF EXISTS (SELECT * FROM notif_new_ans WHERE notif_id = nna_id UNION
                 SELECT * FROM notif_comment_q WHERE notif_id = ncq_id UNION
                 SELECT * FROM notif_new_msg WHERE notif_id = nnm_id) THEN
@@ -586,8 +583,7 @@ DECLARE
 BEGIN
     SELECT nnm_id INTO notif_id FROM notif_new_msg WHERE NEW.message_id = message_id;
     IF notif_id IS NULL THEN
-        INSERT INTO notification DEFAULT VALUES;
-        SELECT notification_id INTO notif_id FROM notification ORDER BY notification_id DESC LIMIT 1;
+        INSERT INTO notification DEFAULT VALUES RETURNING notification_id INTO notif_id;
         IF EXISTS (SELECT * FROM notif_new_ans WHERE notif_id = nna_id UNION
                 SELECT * FROM notif_comment_q WHERE notif_id = ncq_id UNION
                 SELECT * FROM notif_comment_ans WHERE notif_id = nca_id) THEN
