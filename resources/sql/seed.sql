@@ -111,7 +111,8 @@ CREATE TABLE administrator (
 CREATE TABLE ban (
     ban_id SERIAL PRIMARY KEY,
     description TEXT NOT NULL, 
-    date DATE DEFAULT now(),
+    start_date DATE DEFAULT now(),
+    end_date DATE,
     admin_id INTEGER NOT NULL REFERENCES administrator(administrator_id),
     user_id INTEGER NOT NULL UNIQUE REFERENCES users(user_id)
 );
@@ -120,6 +121,7 @@ CREATE TABLE report (
     report_id SERIAL PRIMARY KEY,
     description TEXT NOT NULL, 
     date DATE DEFAULT now(),
+    resolved BOOLEAN DEFAULT false,
     author INTEGER NOT NULL REFERENCES users(user_id),
     target INTEGER NOT NULL REFERENCES users(user_id)
 );
@@ -794,12 +796,11 @@ INSERT INTO tag_question(tag_id, question_id) VALUES (5, 2);
 
 
 --reports
-INSERT INTO report(report_id, description, date, author, target) VALUES (1, 'user is spamming questions', '2019-04-05 01:31:47', 1, 30);
-INSERT INTO report(report_id, description, date, author, target) VALUES (2, 'posting mature content', '2019-04-05 01:31:47', 15, 8);
-INSERT INTO report(report_id, description, date, author, target) VALUES (3, 'wrong use of tags', '2019-04-05 01:31:47', 17, 22);
-INSERT INTO report(report_id, description, date, author, target) VALUES (4, 'spoilers in title of question', '2019-04-05 01:31:47', 25, 7);
-INSERT INTO report(report_id, description, date, author, target) VALUES (5, 'spoiler', '2019-04-05 01:31:47', 29, 11);
-
+INSERT INTO report(report_id, description, date, resolved, author, target) VALUES (1, 'user is spamming questions', '2019-04-05 01:31:47', false, 1, 30);
+INSERT INTO report(report_id, description, date, resolved, author, target) VALUES (2, 'posting mature content', '2019-04-05 01:31:47', false, 15, 8);
+INSERT INTO report(report_id, description, date, resolved, author, target) VALUES (3, 'wrong use of tags', '2019-04-05 01:31:47', false, 17, 22);
+INSERT INTO report(report_id, description, date, resolved, author, target) VALUES (4, 'spoilers in title of question', '2019-04-05 01:31:47', false, 25, 7);
+INSERT INTO report(report_id, description, date, resolved, author, target) VALUES (5, 'spoiler', '2019-04-05 01:31:47', false,  29, 11);
 
 --messages
 INSERT INTO message(message_id, title, content, date, author) VALUES (1, 'Welcome to LCQ!', 'Hi buddy, I just saw that you registered and couldn''t believe it!
