@@ -12,7 +12,7 @@ class QuestionPolicy
 {
     use HandlesAuthorization;
 
-    /*public function show(User $user, Question $question)
+    public function show(User $user, Question $question)
     {
       // Only a question owner can see it
       return $user->id == $question->user_id;
@@ -34,5 +34,5 @@ class QuestionPolicy
     {
       // Only a question owner can delete it
       return $user->id == $question->user_id;
-    }*/
+    }
 }

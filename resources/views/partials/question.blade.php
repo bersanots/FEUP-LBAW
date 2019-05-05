@@ -4,7 +4,7 @@
   <a href="#" class="delete">&#10761;</a>
 </header>
 <ul>
-  @each('partials.answer', $question->answers()->orderBy('id')->get(), 'answer')
+  @each('partials.answer', $question->answers()->orderBy('creation_date', 'ASC')->get(), 'answer')
 </ul>
 <form class="new_answer">
   <input type="text" name="description" placeholder="Description of the answer">

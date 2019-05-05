@@ -36,7 +36,9 @@ class QuestionController extends Controller
 
       $this->authorize('list', Question::class);
 
-      $questions = Auth::user()->questions()->orderBy('id')->get();
+      $questions = Question::orderBy('creation_date', 'DESC')->get();
+
+      //$questions = Auth::user()->questions()->orderBy('creation_date', 'DESC')->get();
 
       return view('pages.questions', ['questions' => $questions]);
     }

@@ -38,6 +38,13 @@ class User extends Authenticatable
      * The questions this user made.
      */
      public function questions() {
-      return $this->hasMany('App\Question');
+      return $this->hasMany('App\Question', 'question_id');
     }
+
+    /**
+     * The answers this user made.
+     */
+    public function answers() {
+        return $this->hasMany('App\Answer', 'answer_id');
+      }
 }
