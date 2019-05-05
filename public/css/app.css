@@ -197,6 +197,12 @@ HERE
   background-color: #f8f8f8;
 }
 
+#username-header {
+  font-size: 3em;
+  color: #f8f8f8;
+  margin-right:2em;
+}
+
 a.button 
 {
   background-color: #a22c29;
