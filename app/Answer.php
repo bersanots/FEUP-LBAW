@@ -10,6 +10,13 @@ class Answer extends Model
   public $timestamps  = false;
 
   /**
+   * The user this question belongs to
+   */
+  public function user() {
+    return $this->belongsTo('App\User');
+  }
+
+  /**
    * The question this answer belongs to.
    */
   public function question() {

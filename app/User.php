@@ -40,4 +40,11 @@ class User extends Authenticatable
      public function questions() {
       return $this->hasMany('App\Question');
     }
+
+    /**
+     * The answers this user made.
+     */
+    public function answer() {
+        return $this->hasMany('App\Answer');
+    }
 }
