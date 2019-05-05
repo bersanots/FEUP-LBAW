@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return redirect('login');
+    return redirect('home');
 });
 
 //Homepage
@@ -20,8 +20,9 @@ Route::get('/', function () {
 
 //Static pages
 Route::view('faq', 'pages/faq');
-Route::view('about', 'pages/about');
-//Route::view('contact', 'pages/contact');
+Route::view('homeabout', 'pages/about');
+//Route::viewhome('contact', 'pages/contact');
+Route::view('home', 'pages/home');
 
 // Questions
 Route::get('questions', 'QuestionController@list');
@@ -40,3 +41,9 @@ Route::post('login', 'Auth\LoginController@login');
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
 Route::post('register', 'Auth\RegisterController@register');
+
+//Profile
+Route::get('users/{username}', 'ProfileController@viewProfile');
+Route::get('users/{username}/edit', 'ProfileController@viewEditProfile');
+Route::post('users/{username}/edit/personal', 'ProfileController@editPersonalDetails')->name('editPersonal');
+Route::post('users/{username}/edit/account', 'ProfileController@editAccountDetails');

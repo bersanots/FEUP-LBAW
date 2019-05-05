@@ -26,11 +26,11 @@ class QuestionController extends Controller
     }
 
     /**
-     * Shows all questions.
+     * Shows all questions by logged user.
      *
      * @return Response
      */
-    public function list()
+    public function listUserQuestions()
     {
       if (!Auth::check()) return redirect('/login');
 

@@ -26,7 +26,7 @@
 <body>
   <main>
     <header>
-      <nav id="header-bar" class="navbar navbar-expand-lg navbar-dark" >
+      <nav id="header-bar" class="navbar navbar-expand-lg navbar-dark">
         <a class="navbar-brand" href="{{ url('/') }}">LCQ</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -40,7 +40,8 @@
           <button id="search-button" class="btn my-2 my-sm-0 text-light" type="submit" style="margin-left: -15px; background: #000000;">Search</button>
         </div>
         @if (Auth::check())
-        <a id="logout-header" class="button" href="{{ url('/logout') }}"> Logout </a> <span>{{ Auth::user()->name }}</span>
+        <?php echo '<a href="users/' . Auth::user()->username . '">{{ ' . Auth::user()->username . ' }}</a>' ?>
+        <a id="logout-header" class="button" href="{{ url('/logout') }}"> Logout </a>
         @else
         <a id="register-header" class="button" href="{{ url('/register') }}"> Register </a>
         <a id="login-header" class="button" href="{{ url('/login') }}"> Login </a>
@@ -51,9 +52,7 @@
       @yield('content')
     </section>
   </main>
-</body>
-
-<footer id="footer">
+  <footer id="footer">
     <div class="col-lg-12" style="border-top-color: #A22C29; border-top-style: solid; border-top-width: 0.1em; margin-top: 1em;">
       <table class="list-unstyled" cellpadding="7">
         <tr>
@@ -71,7 +70,8 @@
           </td>
         </tr>
       </table>
-  </div>
-</footer>
+    </div>
+  </footer>
+</body>
 
 </html>
