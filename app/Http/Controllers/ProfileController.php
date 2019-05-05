@@ -47,10 +47,15 @@ class ProfileController extends Controller
     $user = User::find($user_id);
     // verifyUser();
   }
-  public function editPersonalDetails($user_id)
+  public function editPersonalDetails(Request $request)
   {
-    $user = User::find($user_id);
     //TODO check same user
+    //TODO validator request data
+    $user = Auth::user();
+    $user->description = $request->description;
+    //TODO profile image
+    $user->save();
+    return redirect()->route('profile', ['user' => $user]);
   }
 
   public function verifyUser($user_id)

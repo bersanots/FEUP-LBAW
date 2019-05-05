@@ -28,13 +28,10 @@
                                         <b>Description</b>
                                         <p>{{ Auth::user()->description }}</p>
                                     </div>
+                                    <a class="button" href="{{Auth::user()->username}}/edit">Edit Profile</a>
+                                    <a class="button" href="">Moderator</a>
+                                    <a class="button"  href="">Admin</a>
                                 </fieldset>
-                                <a href="{{Auth::user()->username}}/edit">Edit Profile</a>
-                                <button type="submit" onclick="event.preventDefault(); location.href = 'moderator.html';" class="btn btn-primary" style="margin: 0.2em;">Moderator</button>
-                                <button type="submit" onclick="event.preventDefault(); location.href = 'admin.html';" class="btn btn-primary" style="margin: 0.2em;">Admin</button>
-                                </fieldset>
-                            </div>
-                            <div class="tab-pane fade" id="log">
                             </div>
                         </div>
                     </div>

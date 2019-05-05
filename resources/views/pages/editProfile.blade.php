@@ -16,20 +16,21 @@
                 <div class="col-lg-12" style="padding-left: 0; padding-right:0;">
                     <div class="bs-ccomponent">
                         <div style="padding: 20px; padding-top: 10px; background-color: #f8f8f8; border: solid #a22c29;" class="border-primary border text-dark">
-                            <form action="{{ route('editPersonal', ['user_id' => $user->user_id])}}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('editPersonal', ['user' => $user])}}" method="POST">
                                 {{csrf_field()}}
+                                {{method_field('PATCH')}}
                                 <h3>Personal details</h3>
                                 <div class="form-group">
                                     <label class="col-form-label" for="eventImg">
                                         <label class="col-form-label" for="inputDefault">Description</label>
                                     </label>
-                                    <input type="text" class="form-control-file" id="descriptionInput" value="{{$user->description}}">
+                                    <input type="text" class="form-control-file" id="descriptionInput" value="{{$user->description}}" name="description">
                                 </div>
                                 <div class="form-group">
                                     <label class="col-form-label" for="eventImg">
                                         <label class="col-form-label" for="inputDefault">Profile Image</label>
                                     </label>
-                                    <input type="file" class="form-control-file" id="eventImg" aria-describedby="fileHelp">
+                                    <input type="file" class="form-control-file" id="eventImg" aria-describedby="fileHelp" name="image">
                                 </div>
                                 <br>
                                 <button type="submit" class="btn btn-primary">Save changes</button>
