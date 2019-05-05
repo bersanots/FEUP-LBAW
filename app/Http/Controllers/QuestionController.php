@@ -26,6 +26,22 @@ class QuestionController extends Controller
     }
 
     /**
+     * Shows all questions.
+     *
+     * @return Response
+     */
+    public function list()
+    {
+      if (!Auth::check()) return redirect('/login');
+
+      $this->authorize('list', Question::class);
+
+      $questions = Question::orderBy('creation_date', 'DESC')->get();
+
+      return view('pages.questions', ['questions' => $questions]);
+    }
+
+    /**
      * Shows all questions by logged user.
      *
      * @return Response
@@ -36,9 +52,7 @@ class QuestionController extends Controller
 
       $this->authorize('list', Question::class);
 
-      $questions = Question::orderBy('creation_date', 'DESC')->get();
-
-      //$questions = Auth::user()->questions()->orderBy('creation_date', 'DESC')->get();
+      $questions = Auth::user()->questions()->orderBy('creation_date', 'DESC')->get();
 
       return view('pages.questions', ['questions' => $questions]);
     }

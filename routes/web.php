@@ -16,13 +16,12 @@ Route::get('/', function () {
 });
 
 //Homepage
-//Route::view('homepage', 'pages/homepage');
+Route::view('home', 'pages/home');
 
 //Static pages
 Route::view('faq', 'pages/faq');
-Route::view('homeabout', 'pages/about');
-//Route::viewhome('contact', 'pages/contact');
-Route::view('home', 'pages/home');
+Route::view('about', 'pages/about');
+Route::view('contact', 'pages/contact');
 
 // Questions
 Route::get('questions', 'QuestionController@list');
