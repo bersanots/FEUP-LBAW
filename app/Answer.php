@@ -14,17 +14,10 @@ class Answer extends Model
   protected $table = 'answer';
 
   /**
-   * The user this question belongs to
+   * The user this answer belongs to
    */
   public function user() {
     return $this->belongsTo('App\User', 'user_id');
-  }
-
-  /**
-   * The user this question belongs to
-   */
-  public function user() {
-    return $this->belongsTo('App\User');
   }
 
   /**
