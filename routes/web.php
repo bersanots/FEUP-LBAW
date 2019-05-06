@@ -42,7 +42,7 @@ Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('re
 Route::post('register', 'Auth\RegisterController@register');
 
 //Profile
-Route::get('users/{username}', 'ProfileController@viewProfile');
+Route::get('users/{username}', 'ProfileController@viewProfile')->name('profile');
 Route::get('users/{username}/edit', 'ProfileController@viewEditProfile');
-Route::post('users/{username}/edit/personal', 'ProfileController@editPersonalDetails')->name('editPersonal');
-Route::post('users/{username}/edit/account', 'ProfileController@editAccountDetails');
+Route::patch('users/{username}/edit/personal', 'ProfileController@editPersonalDetails')->name('editPersonal');
+Route::post('users/{username}/edit/account', 'ProfileController@editAccountDetails')->name('editAccount');
