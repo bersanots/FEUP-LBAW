@@ -14,4 +14,9 @@
   <div class="answer_body">
     <p style="padding-left: 1em;"> {{ $answer->description }} </p>
   </div>
+  <form action="{{ route('deleteAnswer', ['answer_id' => $answer->answer_id])}}" method="POST">
+    {{csrf_field()}}
+    {{method_field('DELETE')}}
+    <button type="submit" class="btn btn-primary">Delete</button>
+  </form>
 </div>

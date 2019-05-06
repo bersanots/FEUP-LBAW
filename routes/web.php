@@ -27,12 +27,15 @@ Route::view('contact', 'pages/contact');
 Route::get('questions', 'QuestionController@list');
 Route::get('questions/{id}', 'QuestionController@show');
 
+//Answers
+Route::delete('answer/{id}', 'AnswerController@delete')->name('deleteAnswer');
+
 // API
-Route::put('api/questions', 'QuestionController@create');
+/*Route::put('api/questions', 'QuestionController@create');
 Route::delete('api/questions/{question_id}', 'QuestionController@delete');
 Route::put('api/questions/{question_id}/', 'AnswerController@create');
 Route::post('api/answer/{id}', 'AnswerController@update');
-Route::delete('api/answer/{id}', 'AnswerController@delete');
+Route::delete('api/answer/{id}', 'AnswerController@delete');*/
 
 // Authentication
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
