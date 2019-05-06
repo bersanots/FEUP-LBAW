@@ -40,7 +40,7 @@
           <button id="search-button" class="btn my-2 my-sm-0 text-light" type="submit" style="margin-left: -15px; background: #000000;">Search</button>
         </div>
         @if (Auth::check())
-        <?php echo '<a id="username-header" href="users/' . Auth::user()->username . '">'?> {{ Auth::user()->username }}</a>' 
+        <?php echo '<a id="username-header" href="/users/' . Auth::user()->username . '">'?> {{ Auth::user()->username }}</a> 
         <a id="logout-header" class="button" href="{{ url('/logout') }}"> Logout </a>
         @else
         <a id="register-header" class="button" href="{{ url('/register') }}"> Register </a>

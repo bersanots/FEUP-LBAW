@@ -15,7 +15,7 @@
             <div class="col-lg-4">
                 <div class="bs-ccomponent">
                     <div class="card mb-3 text-light bg-primary border-primary zoom" style="transition: transform 500ms;">
-                        <a href="series.html">
+                        <a href="questions">
                             <h3 class="card-header" style="background-color: #A22C29; color: white;">Series</h3>
                             <img style="width: 100%; height: 200px; object-fit: cover; border: solid #a22c29;" src="img/Series.jpeg" alt="Card image">
                         </a>
@@ -27,7 +27,7 @@
             <div class="col-lg-4">
                 <div class="bs-ccomponent">
                     <div class="card mb-3 text-light bg-primary border-primary zoom" style="transition: transform 500ms;">
-                        <a href="series.html">
+                        <a href="questions">
                             <h3 class="card-header" style="background-color: #A22C29; color: white;">Films</h3>
                             <img style="width: 100%; height: 200px; object-fit: cover; border: solid #a22c29;" src="img/Films.jpeg" alt="Card image">
                         </a>
@@ -39,7 +39,7 @@
             <div class="col-lg-4">
                 <div class="bs-ccomponent">
                     <div class="card mb-3 text-light bg-primary border-primary zoom" style="transition: transform 500ms;">
-                        <a href="series.html">
+                        <a href="questions">
                             <h3 class="card-header" style="background-color: #A22C29; color: white;">Animations</h3>
                             <img style="width: 100%; height: 200px; object-fit: cover; border: solid #a22c29;" src="img/Animation.jpg" alt="Card image">
                             <ul class="list-group list-group-flush">

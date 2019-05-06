@@ -17,7 +17,7 @@ class Question extends Model
    * The user this question belongs to
    */
   public function user() {
-    return $this->belongsTo('App\User');
+    return $this->belongsTo('App\User', 'author', 'user_id');
   }
 
   /**

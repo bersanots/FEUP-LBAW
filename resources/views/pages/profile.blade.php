@@ -7,7 +7,7 @@
 <div class="container">
     <legend class="text-light" style="padding: 10px; border-bottom: solid 0.2em #a22c29; margin-top: 1em;">
         <img style="padding-right: 20px;" src="icon/profile.png">&nbsp;
-        <b class="text-light">{{ Auth::user()->username }}</b>'s' profile
+        <b class="text-light">{{ Auth::user()->username }}</b>'s profile
     </legend>
     <div class="bs-docs-section">
         <div class="row">

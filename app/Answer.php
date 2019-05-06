@@ -17,13 +17,13 @@ class Answer extends Model
    * The user this answer belongs to
    */
   public function user() {
-    return $this->belongsTo('App\User');
+    return $this->belongsTo('App\User', 'author', 'user_id');
   }
 
   /**
    * The question this answer belongs to.
    */
   public function question() {
-    return $this->belongsTo('App\Question');
+    return $this->belongsTo('App\Question', 'question_id', 'question_id');
   }
 }
