@@ -1,4 +1,4 @@
-<li class="answer" data-id="{{$answer->id}}">
+<li class="answer" data-id="{{$answer->answer_id}}">
   <label>
     <input type="checkbox" {{ $answer->done?'checked':''}}>
     <span>{{ $answer->description }}</span>

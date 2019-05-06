@@ -25,7 +25,6 @@ class AnswerController extends Controller
 
     $this->authorize('create', $answer);
 
-    $answer->done = false;
     $answer->description = $request->input('description');
     $answer->save();
 
@@ -45,7 +44,6 @@ class AnswerController extends Controller
 
       $this->authorize('update', $answer);
 
-      $answer->done = $request->input('done');
       $answer->save();
 
       return $answer;

@@ -1,6 +1,7 @@
-<article class="question" data-id="{{ $question->id }}">
+<article class="question" data-id="{{ $question->question_id }}">
 <header>
-  <h2><a href="/questions/{{ $question->id }}">{{ $question->title }}</a></h2>
+  <h2><a href="/questions/{{ $question->question_id }}">{{ $question->title }}</a></h2>
+  <h2>{{ $question->description }}</h2>
   <a href="#" class="delete">&#10761;</a>
 </header>
 <ul>
