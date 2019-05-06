@@ -33,7 +33,7 @@ class ProfileController extends Controller
   public function viewProfile($username)
   {
     $user = User::where('username', $username) -> first();
-    return view('pages.profile', ['username' => $user]);
+    return view('pages.profile', ['user' => $user]);
   }
 
   public function viewEditProfile($username)

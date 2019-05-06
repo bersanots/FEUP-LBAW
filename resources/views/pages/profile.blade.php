@@ -7,13 +7,13 @@
 <div class="container">
     <legend class="text-light" style="padding: 10px; border-bottom: solid 0.2em #a22c29; margin-top: 1em;">
         <img style="padding-right: 20px;" src="icon/profile.png">&nbsp;
-        <b class="text-light">{{ Auth::user()->username }}</b>'s profile
+        <b class="text-light">{{ $user->username }}</b>'s profile
     </legend>
     <div class="bs-docs-section">
         <div class="row">
             <div class="col-lg-4" style="padding-top: 23px;">
                 <div class="bs-ccomponent">
-                    <img src="{{ Auth::user()->picture }}" style="width: 100%; height: 200px; object-fit: cover; border: solid 0.2em #a22c29;" class="border border-primary">
+                    <img src="{{ $user->picture }}" style="width: 100%; height: 200px; object-fit: cover; border: solid 0.2em #a22c29;" class="border border-primary">
                     <div id="myTabContent" class="tab-content">
                         <div class="tab-pane fade active show" id="about">
                             <div style="padding: 20px; padding-top: 10px; border: solid 0.2em #a22c29;" class="text-light border border-primary">
@@ -22,15 +22,17 @@
                                         <label class="col-form-label" for="inputDefault">
                                             <b>Email address</b>
                                         </label>
-                                        <p><a href=".">{{ Auth::user()->email }}</a></p>
+                                        <p><a href=".">{{ $user->email }}</a></p>
                                     </div>
                                     <div class="form-group">
                                         <b>Description</b>
-                                        <p>{{ Auth::user()->description }}</p>
+                                        <p>{{ $user->description }}</p>
                                     </div>
-                                    <a class="button" href="{{Auth::user()->username}}/edit">Edit Profile</a>
-                                    <a class="button" href="">Moderator</a>
-                                    <a class="button"  href="">Admin</a>
+                                    @if(Auth::user()->user_id == $user->user_id)
+                                        <a class="button" href="{{Auth::user()->username}}/edit">Edit Profile</a>
+                                        <a class="button" href="">Moderator</a>
+                                        <a class="button" href="">Admin</a>
+                                    @endif
                                 </fieldset>
                             </div>
                         </div>
