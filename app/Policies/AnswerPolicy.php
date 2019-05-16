@@ -8,11 +8,11 @@ use App\Answer;
 
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class ItemPolicy
+class AnswerPolicy
 {
     use HandlesAuthorization;
 
-    /*public function create(User $user, Answer $answer)
+    public function create(User $user, Answer $answer)
     {
       // User can only create answers in questions they own
       return $user->id == $answer->question->user_id;
@@ -28,5 +28,5 @@ class ItemPolicy
     {
       // User can only delete answers in questions they own
       return $user->id == $answer->question->user_id;
-    }*/
+    }
 }
