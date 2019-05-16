@@ -9,7 +9,7 @@ class Answer extends Model
   // Don't add create and update timestamps in database.
   public $timestamps  = false;
 
-  protected $primaryKey = 'anwser_id';
+  protected $primaryKey = 'answer_id';
 
   protected $table = 'answer';
 
