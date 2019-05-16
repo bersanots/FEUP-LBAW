@@ -22,16 +22,16 @@
                                         <label class="col-form-label" for="inputDefault">
                                             <b>Email address</b>
                                         </label>
-                                        <p><a href=".">{{ $user->email }}</a></p>
+                                        <p>{{ $user->email }}</p>
                                     </div>
                                     <div class="form-group">
                                         <b>Description</b>
                                         <p>{{ $user->description }}</p>
                                     </div>
                                     @if(Auth::user()->user_id == $user->user_id)
-                                        <a class="button" href="{{Auth::user()->username}}/edit">Edit Profile</a>
-                                        <a class="button" href="">Moderator</a>
-                                        <a class="button" href="">Admin</a>
+                                    <a class="button" href="{{Auth::user()->username}}/edit">Edit Profile</a>
+                                    <a class="button" href="">Moderator</a>
+                                    <a class="button" href="">Admin</a>
                                     @endif
                                 </fieldset>
                             </div>
@@ -72,27 +72,26 @@
             <div class="col-lg-4" style="border-color: #A22C29; padding-top: 23px;">
                 <div class="bs-ccomponent">
                     <div class="list-group">
+                        @foreach ($user->notifications($user->user_id) as $notification)
+                        @if($notification->has_seen == false)
                         <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active" style="border-color: #A22C29; background-color: #A22C29;">
-                            <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-1">Title of question</h5>
-                                <small>1 day ago</small>
-                            </div>
-                            <p class="mb-1">Your question has been answered.</p>
-                        </a>
+                        @else
                         <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                        @endif
                             <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-1">Question you follow</h5>
-                                <small class="text-muted">2 days ago</small>
+                        @if($notification->type == 'New message')
+                                <h5 class="mb-1">New message from {{ $notification->author }}</h5>
+                        @elseif($notification->type == 'New answer')
+                                <h5 class="mb-1">Your question has been answered by {{ $notification->author }}</h5>
+                        @elseif($notification->type == 'New comment on question')
+                                <h5 class="mb-1">Your question has been commented by {{ $notification->author }}</h5>
+                        @else
+                                <h5 class="mb-1">Your answer has been commented by {{ $notification->author }}</h5>
+                        @endif
+                                <small class="text-muted">{{ \Carbon\Carbon::parse($notification->date)->diffForHumans() }}</small>
                             </div>
-                            <p class="mb-1">This question has X new answers.</p>
                         </a>
-                        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                            <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-1">Answer you follow</h5>
-                                <small class="text-muted">3 days ago</small>
-                            </div>
-                            <p class="mb-1">This answer has X new comments.</p>
-                        </a>
+                        @endforeach
                     </div>
                 </div>
             </div>
