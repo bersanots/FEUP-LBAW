@@ -66,7 +66,7 @@
             <a href="{{ url('about') }}" class="font-weight-bold text-light">About</a>
           </td>
           <td>
-            <a href="{{ url('#') }}" class="font-weight-bold text-light">Contact</a>
+            <a href="{{ url('contact') }}" class="font-weight-bold text-light">Contact</a>
           </td>
         </tr>
       </table>

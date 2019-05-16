@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -10,6 +9,10 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+use Illuminate\Http\Request;
+use App\Mail\ContactMail;
+use Illuminate\Support\Facades\Mail;
 
 Route::get('/', function () {
     return redirect('home');
@@ -22,6 +25,11 @@ Route::view('home', 'pages/home');
 Route::view('faq', 'pages/faq');
 Route::view('about', 'pages/about');
 Route::view('contact', 'pages/contact');
+Route::post('/contact', function(Request $request)
+{
+    Mail::send( new ContactMail($request));
+    return redirect('/');
+});
 
 // Questions
 Route::get('questions', 'QuestionController@list');
