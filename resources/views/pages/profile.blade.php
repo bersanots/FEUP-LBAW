@@ -69,32 +69,52 @@
                     </div>
                 </div>
             </div>
+            @if(Auth::user()->user_id == $user->user_id)
             <div class="col-lg-4" style="border-color: #A22C29; padding-top: 23px;">
                 <div class="bs-ccomponent">
                     <div class="list-group">
                         @foreach ($user->notifications($user->user_id) as $notification)
-                        @if($notification->has_seen == false)
-                        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active" style="border-color: #A22C29; background-color: #A22C29;">
-                        @else
-                        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                        @endif
-                            <div class="d-flex w-100 justify-content-between">
-                        @if($notification->type == 'New message')
-                                <h5 class="mb-1">New message from {{ $notification->author }}</h5>
-                        @elseif($notification->type == 'New answer')
-                                <h5 class="mb-1">Your question has been answered by {{ $notification->author }}</h5>
-                        @elseif($notification->type == 'New comment on question')
-                                <h5 class="mb-1">Your question has been commented by {{ $notification->author }}</h5>
-                        @else
-                                <h5 class="mb-1">Your answer has been commented by {{ $notification->author }}</h5>
-                        @endif
-                                <small class="text-muted">{{ \Carbon\Carbon::parse($notification->date)->diffForHumans() }}</small>
-                            </div>
-                        </a>
+                            @if($notification->type == 'New message')
+                                @if($notification->has_seen == false)
+                                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active" style="border-color: #A22C29; background-color: #A22C29;">
+                                @else
+                                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                                @endif
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h5 class="mb-1">New message from {{ $notification->author }}</h5>
+                            @elseif($notification->type == 'New answer')
+                                @if($notification->has_seen == false)
+                                    <a href="../questions/{{ $user->notification_resource($notification->notification_id)[0]->object_id }}" class="list-group-item list-group-item-action flex-column align-items-start active" style="border-color: #A22C29; background-color: #A22C29;">
+                                @else
+                                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                                @endif
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h5 class="mb-1">Your question has been answered by {{ $notification->author }}</h5>
+                            @elseif($notification->type == 'New comment on question')
+                                @if($notification->has_seen == false)
+                                    <a href="../questions/{{ $user->notification_resource($notification->notification_id)[0]->object_id }}" class="list-group-item list-group-item-action flex-column align-items-start active" style="border-color: #A22C29; background-color: #A22C29;">
+                                @else
+                                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                                @endif
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h5 class="mb-1">Your question has been commented by {{ $notification->author }}</h5>
+                            @else
+                                @if($notification->has_seen == false)
+                                    <a href="../questions/{{ $user->notification_resource($notification->notification_id)[0]->object_id }}" class="list-group-item list-group-item-action flex-column align-items-start active" style="border-color: #A22C29; background-color: #A22C29;">
+                                @else
+                                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                                @endif
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h5 class="mb-1">Your answer has been commented by {{ $notification->author }}</h5>
+                            @endif
+                                    <small class="text-muted">{{ \Carbon\Carbon::parse($notification->date)->diffForHumans() }}</small>
+                                </div>
+                            </a>
                         @endforeach
                     </div>
                 </div>
             </div>
+            @endif
         </div>
     </div>
 </div>

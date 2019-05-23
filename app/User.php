@@ -38,14 +38,16 @@ class User extends Authenticatable
     /**
      * The questions this user made.
      */
-     public function questions() {
-      return $this->hasMany('App\Question', 'author');
+    public function questions()
+    {
+        return $this->hasMany('App\Question', 'author');
     }
 
     /**
      * The answers this user made.
      */
-    public function answers() {
+    public function answers()
+    {
         return $this->hasMany('App\Answer', 'author');
     }
 
@@ -57,7 +59,7 @@ class User extends Authenticatable
     public function notifications($user_id)
     {
         $notifications = DB::select("
-        SELECT type, date, has_seen, notifs.description, username AS author
+        SELECT notifs.notification_id, type, date, has_seen, notifs.description, username AS author
         FROM
         ((SELECT notification.notification_id, 'New message' AS type, notification.date, message.title AS description, message.author AS author_id
         FROM notification
@@ -85,5 +87,35 @@ class User extends Authenticatable
         ", ['user_id' => $user_id]);
 
         return $notifications;
+    }
+
+    /**
+     * Get the id of the resource that generated a user's notification.
+     *
+     * @return Response
+     */
+    public function notification_resource($notif_id)
+    {
+        $obj_id = DB::select("
+        SELECT object_id
+        FROM
+        ((SELECT message_id AS object_id
+        FROM notif_new_msg
+        WHERE nnm_id = :notif_id)
+        UNION
+        (SELECT answer_id AS object_id
+        FROM notif_new_ans
+        WHERE nna_id = :notif_id)
+        UNION
+        (SELECT comment_answer_id AS object_id
+        FROM notif_comment_ans
+        WHERE nca_id = :notif_id)
+        UNION
+        (SELECT comment_question_id AS object_id
+        FROM notif_comment_q
+        WHERE ncq_id = :notif_id)) AS tables;
+        ", ['notif_id' => $notif_id]);
+
+        return $obj_id;
     }
 }
