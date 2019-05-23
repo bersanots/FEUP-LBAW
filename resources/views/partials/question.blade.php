@@ -13,9 +13,12 @@
             <span class="question_date">{{ $question->creation_date }}</span>
           </div>
           <div class="question_score" style="font-size: 1.5em; grid-column: 2; text-align: right;">
-            <i class="fas fa-arrow-up" style="color:#a22c29"></i>
-            <span class="score">{{ $question->score }}</span>
-            <i class="fas fa-arrow-down"></i>
+            <!-- <i class="fas fa-arrow-up" style="color:#a22c29"></i> -->
+            <a class="upvote-arrow" id="question-upvote"> Upvote <a>
+            <span class="score" id="question-score">{{ $question->score }}</span>
+            <p id="question-id-score" hidden>{{ $question->question_id }}</p>
+            <!-- <i class="fas fa-arrow-down"></i> -->
+            <a class="downvote-arrow" id="question-downvote"> Downvote <a>
           </div>
         </div>
       </div>
