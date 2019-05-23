@@ -42,21 +42,34 @@ class ProfileController extends Controller
     return view('pages.editProfile', ['user' => $user]);
   }
 
-  public function editAccountDetails($user_id)
+  public function editAccountDetails(Request $request)
   {
-    $user = User::find($user_id);
+    //TODo check email and confirm password
+    $user = Auth::user();
+    $user->password = bcrypt($request->password);
+    $user->save();
+    return redirect()->route('profile', ['user' => $user->username]);
     // verifyUser();
   }
+
   public function editPersonalDetails(Request $request)
   {
+    
     //TODO check same user
     //TODO validator request data
     $user = Auth::user();
     $user->description = $request->description;
     //TODO profile image
     $user->save();
-    return redirect()->route('profile', ['user' => $user]);
+    return redirect()->route('profile', ['user' => $user->username]);
   }
+
+public function viewModeration($username)
+{
+  $user = User::where('username', $username) -> first();
+  return view('pages.moderation',  ['user' => $user]);
+}
+
 
   public function verifyUser($user_id)
   {
