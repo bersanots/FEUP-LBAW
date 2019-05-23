@@ -56,4 +56,4 @@ Route::post('register', 'Auth\RegisterController@register');
 Route::get('users/{username}', 'ProfileController@viewProfile')->name('profile');
 Route::get('users/{username}/edit', 'ProfileController@viewEditProfile');
 Route::patch('users/{username}/edit/personal', 'ProfileController@editPersonalDetails')->name('editPersonal');
-Route::post('users/{username}/edit/account', 'ProfileController@editAccountDetails')->name('editAccount');
+Route::patch('users/{username}/edit/account', 'ProfileController@editAccountDetails')->name('editAccount');

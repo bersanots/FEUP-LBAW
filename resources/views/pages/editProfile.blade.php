@@ -43,29 +43,33 @@
                 <div class="col-lg-12" style="padding-left: 0; padding-right:0;">
                     <div class="bs-ccomponent">
                         <div style="padding: 20px; padding-top: 10px; border: solid #a22c29; background-color: #f8f8f8;" class="border-primary border text-dark">
+                          
+                          
+                        <form action="{{ route('editAccount', ['user' => $user])}}" method="POST">
+
+                            {{csrf_field()}}
+                            {{method_field('PATCH')}}
                             <h3>Account details</h3>
-                            <fieldset style=" margin-bottom:1.140em;">
                                 <div class="form-group">
                                     <label class="col-form-label" for="inputDefault">
                                         <label class="col-form-label" for="inputDefault">Email adress</label>
                                     </label>
-                                    <input type="text" class="form-control" placeholder="Enter e-mail address" id="inputDefault" maxlength="50">
+                                    <input type="text" class="form-control-file" id="descriptionInput" name="email" required>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-form-label" for="inputDefault">
                                         <label class="col-form-label" for="inputDefault">New Password</label>
                                     </label>
-                                    <input type="password" class="form-control" placeholder="New Password" id="inputDefault" maxlength="25">
+                                    <input type="password" class="form-control-file" id="descriptionInput" name="password">
                                 </div>
                                 <div class="form-group">
                                     <label class="col-form-label" for="inputDefault">
                                         <label class="col-form-label" for="inputDefault">Confirm Password</label>
                                     </label>
-                                    <input type="password" class="form-control" placeholder="Confirm New Password" id="inputDefault" maxlength="25">
+                                    <input type="password" class="form-control-file" id="descriptionInput" name="confirmPassword">
                                 </div>
 
-                            </fieldset>
-                            <button type="submit" onclick="event.preventDefault(); location.href = 'createEvent2.html';" class="btn btn-primary ">Save changes</button>
+                                <button type="submit" class="btn btn-primary">Save changes</button>
                         </div>
                     </div>
                 </div>
