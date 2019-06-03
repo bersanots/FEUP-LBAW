@@ -58,19 +58,32 @@ class QuestionController extends Controller
     }
 
     /**
+     * Show create a question page
+     */
+
+    public function ask()
+    {
+      if(!Auth::check()) return redirect('login');
+
+      return view('pages.createQuestion');
+    }
+
+    /**
      * Creates a new question.
      *
      * @return Question The question created.
      */
-    public function create(Request $request)
+    public function createQuestion(Request $request)
     {
       $question = new Question();
 
       $this->authorize('create', $question);
 
+      var_dump($request);
+
       $question->title = $request->input('title');
       $question->description = $request->input('description');
-      $question->user_id = Auth::user()->id;
+      $question->author = Auth::user()->id;
       $question->save();
 
       return $question;
