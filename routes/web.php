@@ -38,7 +38,16 @@ Route::get('questions', 'QuestionController@list');
 Route::get('questions/{id}', 'QuestionController@show');
 
 //Answers
+Route::post('createAnswer/{question_id}', 'AnswerController@create')->name('createAnswer');
 Route::delete('answer/{id}', 'AnswerController@delete')->name('deleteAnswer');
+
+//Comments in Questions
+Route::post('createCommentQuestion/{question_id}', 'CommentQuestionController@create')->name('createCommentQuestion');
+Route::delete('commentQuestion/{id}', 'CommentQuestionController@delete')->name('deleteCommentQuestion');
+
+//Comments in Answers
+Route::post('createCommentAnswer/{answer_id}', 'CommentAnswerController@create')->name('createCommentAnswer');
+Route::delete('commentAnswer/{id}', 'CommentAnswerController@delete')->name('deleteCommentAnswer');
 
 // API
 /*Route::put('api/questions', 'QuestionController@create');

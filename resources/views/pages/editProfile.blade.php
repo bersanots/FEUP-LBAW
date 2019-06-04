@@ -43,13 +43,11 @@
                 <div class="col-lg-12" style="padding-left: 0; padding-right:0;">
                     <div class="bs-ccomponent">
                         <div style="padding: 20px; padding-top: 10px; border: solid #a22c29; background-color: #f8f8f8;" class="border-primary border text-dark">
-                          
-                          
-                        <form action="{{ route('editAccount', ['user' => $user])}}" method="POST">
 
-                            {{csrf_field()}}
-                            {{method_field('PATCH')}}
-                            <h3>Account details</h3>
+                            <form action="{{ route('editAccount', ['user' => $user])}}" method="POST">
+                                {{csrf_field()}}
+                                {{method_field('PATCH')}}
+                                <h3>Account details</h3>
                                 <div class="form-group">
                                     <label class="col-form-label" for="inputDefault">
                                         <label class="col-form-label" for="inputDefault">Email adress</label>
@@ -68,8 +66,8 @@
                                     </label>
                                     <input type="password" class="form-control-file" id="descriptionInput" name="confirmPassword">
                                 </div>
-
                                 <button type="submit" class="btn btn-primary">Save changes</button>
+                            </form>
                         </div>
                     </div>
                 </div>

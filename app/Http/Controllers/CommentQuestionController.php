@@ -23,6 +23,7 @@ class CommentQuestionController extends Controller
     $this->authorize('create', $comment_q);
 
     $comment_q->description = $request->input('description');
+    $comment_q->author = Auth::user()->id;
     $comment_q->save();
 
     return $comment_q;

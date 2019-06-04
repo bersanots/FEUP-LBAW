@@ -25,7 +25,7 @@
           </div>
         </div>
       </div>
-      @each('partials.preview_question', $questions, 'question')
+      @each('partials.previewQuestion', $questions, 'question')
     </div>
   </div>
 </section>

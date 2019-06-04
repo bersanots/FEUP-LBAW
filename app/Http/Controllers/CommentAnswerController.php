@@ -23,6 +23,7 @@ class CommentAnswerController extends Controller
     $this->authorize('create', $comment_a);
 
     $comment_a->description = $request->input('description');
+    $comment_a->author = Auth::user()->id;
     $comment_a->save();
 
     return $comment_a;

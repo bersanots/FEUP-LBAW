@@ -26,6 +26,7 @@ class AnswerController extends Controller
     $this->authorize('create', $answer);
 
     $answer->description = $request->input('description');
+    $answer->author = Auth::user()->id;
     $answer->save();
 
     return $answer;

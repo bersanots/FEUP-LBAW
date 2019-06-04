@@ -3,7 +3,7 @@
     <div class="question_user" style="font-style: italic; text-align: left; grid-area: auto / 1 / auto / 1;">
       by
       <a href="/users/{{ $answer->user->username }}" class="comment-user">{{ $answer->user->username }}</a>
-      <span class="question_date">{{ $answer->creation_date }}</span>
+      <span class="question_date">{{ \Carbon\Carbon::parse($answer->creation_date)->diffForHumans() }}</span>
     </div>
     <div class="question_score" style="grid-column: 2; text-align: right;">
       <i class="fas fa-arrow-up"></i>
@@ -21,4 +21,13 @@
     <button type="submit" class="btn btn-primary">Delete</button>
   </form>
   @endif
+  <div class="comments" style="text-indent: 18px;padding:0.3em">
+    @each('partials.commentAnswer', $answer->comments()->orderBy('creation_date', 'ASC')->get(), 'comment_a')
+    <div>
+      <form action="{{ route('createCommentAnswer', ['answer_id' => $answer->answer_id])}}" method="POST">
+        <input class="form-control mr-sm-3 " type="text" placeholder="Comment" style="margin-left: 1em; width:10em">
+        <button type="submit" class="btn btn-primary">Send</button>
+      </form>
+    </div>
+  </div>
 </div>

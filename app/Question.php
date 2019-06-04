@@ -26,4 +26,11 @@ class Question extends Model
   public function answers() {
     return $this->hasMany('App\Answer', 'question_id');
   }
+
+  /**
+   * Comments inside this question
+   */
+  public function comments() {
+    return $this->hasMany('App\CommentQuestion', 'question_id');
+  }
 }

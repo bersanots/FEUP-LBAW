@@ -103,17 +103,29 @@ class User extends Authenticatable
         FROM notif_new_msg
         WHERE nnm_id = :notif_id)
         UNION
-        (SELECT answer_id AS object_id
+        (SELECT question_id AS object_id
+        FROM answer
+        WHERE answer_id = 
+        (SELECT answer_id
         FROM notif_new_ans
-        WHERE nna_id = :notif_id)
+        WHERE nna_id = :notif_id))
         UNION
-        (SELECT comment_answer_id AS object_id
+        (SELECT question_id AS object_id
+        FROM answer
+        WHERE answer_id = 
+        (SELECT answer_id
+        FROM comment_answer
+        WHERE ca_id = 
+        (SELECT comment_answer_id
         FROM notif_comment_ans
-        WHERE nca_id = :notif_id)
+        WHERE nca_id = :notif_id)))
         UNION
-        (SELECT comment_question_id AS object_id
+        (SELECT question_id AS object_id
+        FROM comment_question
+        WHERE cq_id = 
+        (SELECT comment_question_id
         FROM notif_comment_q
-        WHERE ncq_id = :notif_id)) AS tables;
+        WHERE ncq_id = :notif_id))) AS tables;
         ", ['notif_id' => $notif_id]);
 
         return $obj_id;

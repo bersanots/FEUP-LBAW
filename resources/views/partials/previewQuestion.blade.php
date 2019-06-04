@@ -8,7 +8,7 @@
                     <div class="question_user" style="font-style: italic; text-align: left; grid-area: auto / 1 / auto / 1;">
                         by
                         <a href="/users/{{ $question->user->username }}" class="comment-user">{{ $question->user->username }}</a>
-                        <span class="question_date">{{ $question->creation_date }}</span>
+                        <span class="question_date">{{ \Carbon\Carbon::parse($question->creation_date)->diffForHumans() }}</span>
                     </div>
                     <div class="question_score" style="font-size: 1.5em; grid-column: 3; text-align: right;">
                         <i class="fas fa-arrow-up" style="color:#a22c29"></i>

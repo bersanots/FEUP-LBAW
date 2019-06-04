@@ -86,7 +86,7 @@
                                 @if($notification->has_seen == false)
                                     <a href="../questions/{{ $user->notification_resource($notification->notification_id)[0]->object_id }}" class="list-group-item list-group-item-action flex-column align-items-start active" style="border-color: #A22C29; background-color: #A22C29;">
                                 @else
-                                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                                    <a href="../questions/{{ $user->notification_resource($notification->notification_id)[0]->object_id }}" class="list-group-item list-group-item-action flex-column align-items-start">
                                 @endif
                                     <div class="d-flex w-100 justify-content-between">
                                         <h5 class="mb-1">Your question has been answered by {{ $notification->author }}</h5>
@@ -94,7 +94,7 @@
                                 @if($notification->has_seen == false)
                                     <a href="../questions/{{ $user->notification_resource($notification->notification_id)[0]->object_id }}" class="list-group-item list-group-item-action flex-column align-items-start active" style="border-color: #A22C29; background-color: #A22C29;">
                                 @else
-                                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                                    <a href="../questions/{{ $user->notification_resource($notification->notification_id)[0]->object_id }}" class="list-group-item list-group-item-action flex-column align-items-start">
                                 @endif
                                     <div class="d-flex w-100 justify-content-between">
                                         <h5 class="mb-1">Your question has been commented by {{ $notification->author }}</h5>
@@ -102,7 +102,7 @@
                                 @if($notification->has_seen == false)
                                     <a href="../questions/{{ $user->notification_resource($notification->notification_id)[0]->object_id }}" class="list-group-item list-group-item-action flex-column align-items-start active" style="border-color: #A22C29; background-color: #A22C29;">
                                 @else
-                                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                                    <a href="../questions/{{ $user->notification_resource($notification->notification_id)[0]->object_id }}" class="list-group-item list-group-item-action flex-column align-items-start">
                                 @endif
                                     <div class="d-flex w-100 justify-content-between">
                                         <h5 class="mb-1">Your answer has been commented by {{ $notification->author }}</h5>
