@@ -14,7 +14,9 @@
           </div>
           <div class="question_score" style="font-size: 1.5em; grid-column: 2; text-align: right;">
             <!-- <i class="fas fa-arrow-up" style="color:#a22c29"></i> -->
+
             <a class="upvote-arrow" id="question-upvote"> Upvote <a>
+            <button id="upvoteBtn" type="button" onClick="votePost(<?=$question->question_id?>, 1)">Upvote</button> 
                 <span class="score" id="question-score">{{ $question->score }}</span>
                 <p id="question-id-score" hidden>{{ $question->question_id }}</p>
                 <!-- <i class="fas fa-arrow-down"></i> -->
@@ -22,19 +24,21 @@
           </div>
         </div>
       </div>
-      <div class="question-body" style="background-color: #f5f5f5;">
+       <div class="question-body" style="background-color: #f5f5f5;">
         <p style="padding-left: 1em;">{{ $question->description }}</p>
       </div>
       <div class="comments" style="text-indent: 18px;padding:0.3em">
-        @each('partials.commentQuestion', $question->comments()->orderBy('creation_date', 'ASC')->get(), 'comment_q')
-        <div>
+        {{-- @each('partials.commentQuestion', $question->comments()->orderBy('creation_date', 'ASC')->get(), 'comment_q')
+        <div> --}}
           <form action="{{ route('createCommentQuestion', ['question_id' => $question->question_id])}}" method="POST">
+            {{ csrf_field() }}
             <input class="form-control mr-sm-3 " type="text" placeholder="Comment" style="margin-left: 1em; width:10em">
             <button type="submit" class="btn btn-primary">Send</button>
           </form>
-        </div>
+        {{-- </div> --}}
+        
       </div>
-    </div>
+    </div> 
     <div class="answers">
       @each('partials.answer', $question->answers()->orderBy('creation_date', 'ASC')->get(), 'answer')
       <div class="new_answer text-dark" style="padding: 0.5em; border-left-style: solid; border-left-color: #a22c29; margin-top: 1em; background-color: #f8f8f8;">

@@ -1,11 +1,9 @@
 <!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}">
 
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
   <!-- CSRF Token -->
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -19,8 +17,7 @@
     // Fix for Firefox autofocus CSS bug
     // See: http://stackoverflow.com/questions/18943276/html-5-autofocus-messes-up-css-loading/18945951#18945951
   </script>
-  <script type="text/javascript" src={{ asset('js/app.js') }} defer>
-  </script>
+  <script type="text/javascript" src="{{ asset('js/ajax.js') }}" defer></script>
 </head>
 
 <body>
@@ -40,7 +37,7 @@
           <button id="search-button" class="btn my-2 my-sm-0 text-light" type="submit" style="margin-left: -15px; background: #000000;">Search</button>
         </div>
         @if (Auth::check())
-        <?php echo '<a id="username-header" href="/users/' . Auth::user()->username . '">'?> {{ Auth::user()->username }}</a> 
+        <?php echo '<a id="username-header" href="/users/' . Auth::user()->username . '">' ?> {{ Auth::user()->username }}</a>
         <a id="logout-header" class="button" href="{{ url('/logout') }}"> Logout </a>
         @else
         <a id="register-header" class="button" href="{{ url('/register') }}"> Register </a>

@@ -25,9 +25,8 @@ Route::view('home', 'pages/home');
 Route::view('faq', 'pages/faq');
 Route::view('about', 'pages/about');
 Route::view('contact', 'pages/contact');
-Route::post('/contact', function(Request $request)
-{
-    Mail::send( new ContactMail($request));
+Route::post('/contact', function (Request $request) {
+    Mail::send(new ContactMail($request));
     return redirect('/');
 });
 
@@ -68,3 +67,13 @@ Route::get('users/{username}', 'ProfileController@viewProfile')->name('profile')
 Route::get('users/{username}/edit', 'ProfileController@viewEditProfile');
 Route::patch('users/{username}/edit/personal', 'ProfileController@editPersonalDetails')->name('editPersonal');
 Route::patch('users/{username}/edit/account', 'ProfileController@editAccountDetails')->name('editAccount');
+
+//AJAX
+Route::get('ajax', function () {
+    return view('message');
+});
+Route::post('questions/vote', 'AjaxController@vote');
+
+
+//test
+Route::view('test', 'pages/test');

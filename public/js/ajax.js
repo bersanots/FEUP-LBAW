@@ -1,8 +1,14 @@
+"use_strict";
+
+const csrf_token = document.querySelector("meta[name='csrf-token']");
+
 function votePost(post_id, value) {
-  var xmlhttp = new XMLHttpRequest();
-  xmlhttp.onreadystatechange = function() {
+  const xmlhttp = new XMLHttpRequest();
+  xmlhttp.onload = function() {
     if (this.readyState == 4 && this.status == 200) {
-      var myobj = JSON.parse(this.responseText);
+      console.log(this.responseText);
+      const myobj = JSON.parse(this.responseText);
+     
       document.getElementById("question-score").innerHTML = myobj[0];
       if (myobj[1] == 1) {
         //is upvoted
@@ -25,14 +31,22 @@ function votePost(post_id, value) {
       }
     }
   };
-  //TODO create php upvote
-  xmlhttp.open("GET", "../", true);
-  xmlhttp.send();
+
+
+  console.log("Here");
+
+  xmlhttp.open("POST", "/questions/vote", true);
+  xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+  xmlhttp.send(JSON.stringify({
+    _token: csrf_token.content,
+    postID: post_id,
+    value,
+  }));
 }
 
 function checkIfVoted() {
-  var xmlhttp = new XMLHttpRequest();
-  let question_id = document.getElementById("question-id-score").innerHTML;
+  const xmlhttp = new XMLHttpRequest();
+  const question_id = document.getElementById("question-id-score").innerHTML;
   xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
       let vote_value = this.responseText;
@@ -58,7 +72,7 @@ function checkIfVoted() {
       }
     }
   };
-    //TODO create php upvote
-    xmlhttp.open("GET", "../", true);
-    xmlhttp.send();
+  //TODO create php upvote
+  xmlhttp.open("GET", "../", true);
+  xmlhttp.send();
 }
