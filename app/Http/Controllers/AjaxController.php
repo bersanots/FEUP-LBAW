@@ -17,6 +17,7 @@ class AjaxController extends Controller
          $question = $request->question_id;
          $user = Auth::user()->user_id;
 
+         //checks if user voted
          $entry = QuestionVote::where('user_id', $user)->where('question_id', $question)->first();
          if ($entry != null) {
             return json_encode($entry->value);
