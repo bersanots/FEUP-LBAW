@@ -14,12 +14,10 @@
             <span class="question_date">{{ \Carbon\Carbon::parse($question->creation_date)->diffForHumans() }}</span>
           </div>
           <div class="question_score" style="font-size: 1.5em; grid-column: 2; text-align: right;">
-            <!-- <i class="fas fa-arrow-up" style="color:#a22c29"></i> -->
-            <button id="questionUpBtn" class="upvote-button" type="button" onClick="voteQuestion(<?= $question->question_id ?>, 1)">Upvote</button>
+            <button id="questionUpBtn" class="upvote-button" type="button" onClick="voteQuestion(<?= $question->question_id ?>, 1)"><i class="fas fa-arrow-up"></i></button>
             <span class="score" id="question-score">{{ $question->score }}</span>
             <p id="question-id-score" hidden>{{ $question->question_id }}</p>
-            <!-- <i class="fas fa-arrow-down"></i> -->
-            <button id="questionDownBtn" class="downvote-button" type="button" onClick="voteQuestion(<?= $question->question_id ?>, -1)">Downvote</button>
+            <button id="questionDownBtn" class="downvote-button" type="button" onClick="voteQuestion(<?= $question->question_id ?>, -1)"><i class="fas fa-arrow-down"></i></button>
           </div>
         </div>
       </div>

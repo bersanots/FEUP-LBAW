@@ -1,7 +1,8 @@
 body {
-  background-color: #123456;
-  color: #f8f8f8;
+    background-color: #123456;
+    color: #f8f8f8;
 }
+
 
 /* main>header {
   display: grid;
@@ -181,103 +182,150 @@ input[type=text]:focus, input[type=email]:focus, input[type=password]:focus {
   border-color: #9b4dca;
 } */
 
+
 /*
 HERE
 */
 
 #header-bar {
-  background-color: #a22c29;
+    background-color: #a22c29;
 }
 
 #filterBy {
-  background-color: #eeeeee;
+    background-color: #eeeeee;
 }
 
 #search-input {
-  background-color: #f8f8f8;
+    background-color: #f8f8f8;
 }
 
 #username-header {
-  font-size: 3em;
-  color: #f8f8f8;
-  margin-right:2em;
+    font-size: 3em;
+    color: #f8f8f8;
+    margin-right: 2em;
 }
 
-a.button 
-{
-  background-color: #a22c29;
-  border-color:#f8f8f8;
+a.button {
+    background-color: #a22c29;
+    border-color: #f8f8f8;
 }
 
-button 
-{
-  background-color: transparent;
-  border-color: #a22c29;
-  color: #222222;
-  font-weight: bold;
-  font-size: 2em;
+button {
+    background-color: transparent;
+    border-color: #a22c29;
+    color: #222222;
+    font-weight: bold;
+    font-size: 2em;
 }
 
 div#auth {
-  width: 100%;
-  max-width: 700px;
+    width: 100%;
+    max-width: 700px;
 }
 
 legend#auth-legend {
-  padding: 10px;
-  text-align: center;
-  font-weight: bold;
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
 }
 
 div#login-card {
-  margin: auto;
-  padding: 1em;
-  overflow: auto;
-  border: solid 0.2em #a22c29;
-  background-color: #3aa0a5;
+    margin: auto;
+    padding: 1em;
+    overflow: auto;
+    border: solid 0.2em #a22c29;
+    background-color: #3aa0a5;
 }
 
 div#register-card {
-  padding: 1em;
-  overflow: auto;
-  border: solid 0.5em #a22c29;
-  background-color: #a6cbc1;
+    padding: 1em;
+    overflow: auto;
+    border: solid 0.5em #a22c29;
+    background-color: #a6cbc1;
 }
 
 div.auth-side {
-  float: left;
-  width: 50%;
+    float: left;
+    width: 50%;
 }
 
 div.auth-form {
-  background-color: #eeeeee;
-  border-color: #A22C29;
-  color:#222222;
-  float: right;
-  width: 50%;
-  padding: 1em;
+    background-color: #eeeeee;
+    border-color: #A22C29;
+    color: #222222;
+    float: right;
+    width: 50%;
+    padding: 1em;
 }
 
 img#img-login {
-  float: left;
-  width: 100%;
-  display: block;
-  margin: auto;
+    float: left;
+    width: 100%;
+    display: block;
+    margin: auto;
 }
 
 img#register-img {
-  float: left;
-  height: 50%;
-  width: 100%;
-  display: block;
-  margin: auto;
+    float: left;
+    height: 50%;
+    width: 100%;
+    display: block;
+    margin: auto;
+}
+
+
+/**
+* Vote arrows
+*/
+
+#question-score {
+    font-size: 2.25em;
+    font-weight: bold;
+    padding: 0em 0.2em;
+    border: 0.1em solid black;
+}
+
+button#questionUpBtn {
+    border: 0;
+    padding: 0;
+}
+
+button#questionDownBtn {
+    border: 0;
+    padding: 0;
+}
+
+button#questionUpBtn.question-upvote {
+    color: black;
+}
+
+button#questionUpBtn.question-upvoted {
+    color: #a22c29;
+}
+
+button#questionDownBtn.question-downvote {
+    color: black;
+}
+
+button#questionDownBtn.question-downvoted {
+    color: #3aa0a5;
+}
+
+button#questionUpBtn:focus,
+button#questionUpBtn:hover {
+    background: transparent;
+}
+
+button#questionDownBtn:focus,
+button#questionDownBtn:hover {
+    background: transparent;
 }
 
 @media screen and (max-width: 600px) {
-  div.auth-side {
-    display: none;
-  }
-  div.auth-form {
-    width: 100%;
-  }
+    div.auth-side {
+        display: none;
+    }
+    div.auth-form {
+        width: 100%;
+    }
 }

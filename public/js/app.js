@@ -13,29 +13,7 @@ function voteQuestion(question_id, value) {
       document.getElementById("question-score").innerHTML = myobj['count'];
       upBtn = document.getElementById("questionUpBtn");
       downBtn = document.getElementById("questionDownBtn");
-      switch (myobj['userVote']) {
-        case 1: {
-          //is upvoted
-          upBtn.className = "question-upvoted";
-          upBtn.innerHTML = "Upvoted";
-          downBtn.className = "question-downvote";
-          downBtn.innerHTML = "Downvote";
-          break;
-        } case -1: {
-          //is downvoted
-          upBtn.className = "question-upvote";
-          upBtn.innerHTML = "Upvote";
-          downBtn.className = "question-downvoted";
-          downBtn.innerHTML = "Downvoted";
-          break;
-        } default: {
-          //is not upvoted
-          upBtn.className = "question-upvote";
-          upBtn.innerHTML = "Upvote";
-          downBtn.className = "question-downvote";
-          downBtn.innerHTML = "Downvote";
-        }
-      }
+      changeVoteArrows(myobj['userVote'],upBtn, downBtn);
     }
   };
   xmlhttp.open("POST", "vote", true);
@@ -50,36 +28,13 @@ function voteQuestion(question_id, value) {
 function checkIfVoted() {
   const xmlhttp = new XMLHttpRequest();
   let question_id = document.getElementById("questionId").innerHTML;
-  
   xmlhttp.onload = function () {
     if (this.readyState == 4 && this.status == 200) {
       const myobj = JSON.parse(this.responseText);
-      console.log(myobj);
       upBtn = document.getElementById("questionUpBtn");
       downBtn = document.getElementById("questionDownBtn");
-      switch (myobj) {
-        case 1: {
-          //is upvoted
-          upBtn.className = "question-upvoted";
-          upBtn.innerHTML = "Upvoted";
-          downBtn.className = "question-downvote";
-          downBtn.innerHTML = "Downvote";
-          break;
-        } case -1: {
-          //is downvoted
-          upBtn.className = "question-upvote";
-          upBtn.innerHTML = "Upvote";
-          downBtn.className = "question-downvoted";
-          downBtn.innerHTML = "Downvoted";
-          break;
-        } default: {
-          //is not upvoted
-          upBtn.className = "question-upvote";
-          upBtn.innerHTML = "Upvote";
-          downBtn.className = "question-downvote";
-          downBtn.innerHTML = "Downvote";
-        }
-      }
+      console.log(upBtn)
+      changeVoteArrows(myobj, upBtn, downBtn);
     }
   };
   xmlhttp.open("POST", "getVoteValue", true);
@@ -90,6 +45,26 @@ function checkIfVoted() {
   }));
 }
 
+function changeVoteArrows(value, upvoteBtn, downvoteBtn)
+{
+  switch (value) {
+    case 1: {
+      //is upvoted
+      upvoteBtn.className = "question-upvoted";
+      downvoteBtn.className = "question-downvote";
+      break;
+    } case -1: {
+      //is downvoted
+      upvoteBtn.className = "question-upvote";
+      downvoteBtn.className = "question-downvoted";
+      break;
+    } default: {
+      //is not upvoted
+      upvoteBtn.className = "question-upvote";
+      downvoteBtn.className = "question-downvote";
+    }
+  }
+}
 
 
 function addEventListeners() {
