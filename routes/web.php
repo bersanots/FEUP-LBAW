@@ -73,7 +73,7 @@ Route::get('ajax', function () {
     return view('message');
 });
 Route::post('questions/vote', 'AjaxController@vote');
-
+Route::post('questions/getVoteValue', 'AjaxController@getVoteValue');
 
 //test
 Route::view('test', 'pages/test');

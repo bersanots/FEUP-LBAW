@@ -1,41 +1,123 @@
-function getMessage() {
-  console.log("HERE");
-  $.ajax({
-    type: "POST",
-    url: "/getmsg",
-    data: "_token = <?php echo csrf_token() ?>",
-    success: function(data) {
-      $("#msg").html(data.msg);
+"use_strict";
+
+const csrf_token = document.querySelector("meta[name='csrf-token']");
+
+checkIfVoted();
+
+function voteQuestion(question_id, value) {
+  const xmlhttp = new XMLHttpRequest();
+  xmlhttp.onload = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      const myobj = JSON.parse(this.responseText);
+      console.log(myobj);
+      document.getElementById("question-score").innerHTML = myobj['count'];
+      upBtn = document.getElementById("questionUpBtn");
+      downBtn = document.getElementById("questionDownBtn");
+      switch (myobj['userVote']) {
+        case 1: {
+          //is upvoted
+          upBtn.className = "question-upvoted";
+          upBtn.innerHTML = "Upvoted";
+          downBtn.className = "question-downvote";
+          downBtn.innerHTML = "Downvote";
+          break;
+        } case -1: {
+          //is downvoted
+          upBtn.className = "question-upvote";
+          upBtn.innerHTML = "Upvote";
+          downBtn.className = "question-downvoted";
+          downBtn.innerHTML = "Downvoted";
+          break;
+        } default: {
+          //is not upvoted
+          upBtn.className = "question-upvote";
+          upBtn.innerHTML = "Upvote";
+          downBtn.className = "question-downvote";
+          downBtn.innerHTML = "Downvote";
+        }
+      }
     }
-  });
+  };
+  xmlhttp.open("POST", "vote", true);
+  xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+  xmlhttp.send(JSON.stringify({
+    _token: csrf_token.content,
+    question_id: question_id,
+    value: value
+  }));
 }
+
+function checkIfVoted() {
+  const xmlhttp = new XMLHttpRequest();
+  let question_id = document.getElementById("questionId").innerHTML;
+  
+  xmlhttp.onload = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      const myobj = JSON.parse(this.responseText);
+      console.log(myobj);
+      upBtn = document.getElementById("questionUpBtn");
+      downBtn = document.getElementById("questionDownBtn");
+      switch (myobj) {
+        case 1: {
+          //is upvoted
+          upBtn.className = "question-upvoted";
+          upBtn.innerHTML = "Upvoted";
+          downBtn.className = "question-downvote";
+          downBtn.innerHTML = "Downvote";
+          break;
+        } case -1: {
+          //is downvoted
+          upBtn.className = "question-upvote";
+          upBtn.innerHTML = "Upvote";
+          downBtn.className = "question-downvoted";
+          downBtn.innerHTML = "Downvoted";
+          break;
+        } default: {
+          //is not upvoted
+          upBtn.className = "question-upvote";
+          upBtn.innerHTML = "Upvote";
+          downBtn.className = "question-downvote";
+          downBtn.innerHTML = "Downvote";
+        }
+      }
+    }
+  };
+  xmlhttp.open("POST", "getVoteValue", true);
+  xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+  xmlhttp.send(JSON.stringify({
+    _token: csrf_token.content,
+    question_id: question_id,
+  }));
+}
+
+
 
 function addEventListeners() {
   let answerCheckers = document.querySelectorAll(
     "article.question li.answer input[type=checkbox]"
   );
-  [].forEach.call(answerCheckers, function(checker) {
+  [].forEach.call(answerCheckers, function (checker) {
     checker.addEventListener("change", sendanswerUpdateRequest);
   });
 
   let answerCreators = document.querySelectorAll(
     "article.question form.new_answer"
   );
-  [].forEach.call(answerCreators, function(creator) {
+  [].forEach.call(answerCreators, function (creator) {
     creator.addEventListener("submit", sendCreateanswerRequest);
   });
 
   let answerDeleters = document.querySelectorAll(
     "article.question li a.delete"
   );
-  [].forEach.call(answerDeleters, function(deleter) {
+  [].forEach.call(answerDeleters, function (deleter) {
     deleter.addEventListener("click", sendDeleteanswerRequest);
   });
 
   let questionDeleters = document.querySelectorAll(
     "article.question header a.delete"
   );
-  [].forEach.call(questionDeleters, function(deleter) {
+  [].forEach.call(questionDeleters, function (deleter) {
     deleter.addEventListener("click", sendDeletequestionRequest);
   });
 
@@ -49,7 +131,7 @@ function addEventListeners() {
 function encodeForAjax(data) {
   if (data == null) return null;
   return Object.keys(data)
-    .map(function(k) {
+    .map(function (k) {
       return encodeURIComponent(k) + "=" + encodeURIComponent(data[k]);
     })
     .join("&");
@@ -223,7 +305,7 @@ function createanswer(answer) {
   new_answer.innerHTML = `
   <label>
     <input type="checkbox"> <span>${
-      answer.description
+    answer.description
     }</span><a href="#" class="delete">&#10761;</a>
   </label>
   `;

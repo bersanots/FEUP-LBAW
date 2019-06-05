@@ -403,10 +403,10 @@ DECLARE
   total INTEGER;
   q_id INTEGER;
 BEGIN
-    IF NEW IS NOT NULL THEN
-        q_id = NEW.question_id;     --Insert operation
-    ELSE
+  IF TG_OP = 'DELETE' THEN
         q_id = OLD.question_id;     --Delete operation
+    ELSE
+        q_id = NEW.question_id;     --Insert operation
     END IF;
     SELECT SUM (value) INTO total
         FROM vote_q
@@ -420,7 +420,7 @@ $BODY$
 LANGUAGE plpgsql;
  
 CREATE TRIGGER update_question_score
-    AFTER INSERT OR DELETE ON vote_q
+    AFTER INSERT OR DELETE OR UPDATE ON vote_q
     FOR EACH ROW
     EXECUTE PROCEDURE update_question_score();
 
