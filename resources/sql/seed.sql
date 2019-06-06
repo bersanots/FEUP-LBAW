@@ -676,16 +676,16 @@ INSERT INTO users (username,email,password,picture,description,joined_date,is_de
 INSERT INTO users (username,email,password,picture,description,joined_date,is_deleted) VALUES ('user','user@name.com','$2y$10$/6re1d8fAxQIF0m5iz4VAefMtaK3L04pJZsK5RkDyOG9gQSkOb4Oy','pictures/LLV96WOR3EV.png','You talkin to me?','2018-05-14 17:15:11','false');
 
 --media
-INSERT INTO media (media_id, title, category, release, picture) VALUES ('Gone With the Wind','film','1943-09-20 00:00:00','pictures/gone_with_the_wind.png');
-INSERT INTO media (media_id, title, category, release, picture) VALUES ('Casablanca','film','1945-05-17 00:00:00','pictures/casablanca.png');
-INSERT INTO media (media_id, title, category, release, picture) VALUES ('Jaws','film','1977-03-25 00:00:00','pictures/jaws.png');
-INSERT INTO media (media_id, title, category, release, picture) VALUES ('Star Wars: A New Hope','film','1977-12-06 00:00:00','pictures/new_hope.png');
-INSERT INTO media (media_id, title, category, release, picture) VALUES ('12 Years a Slave','film','2014-01-02 00:00:00','pictures/12_years_a_slave.png');
-INSERT INTO media (media_id, title, category, release, picture) VALUES ('The Office','series','2005-03-24 00:00:00','pictures/the_office.png');
-INSERT INTO media (media_id, title, category, release, picture) VALUES ('Friends','series','1994-09-22 00:00:00','pictures/friends.png');
-INSERT INTO media (media_id, title, category, release, picture) VALUES ('Seinfeld','series','1989-07-05 00:00:00','pictures/seinfeld.png');
-INSERT INTO media (media_id, title, category, release, picture) VALUES ('Avatar: The Last Airbender','animation','2005-02-21 00:00:00','pictures/avatar_the_last_airbender.png');
-INSERT INTO media (media_id, title, category, release, picture) VALUES ('The Simpsons','animation','1989-12-17 00:00:00','pictures/the_simpsons.png');
+INSERT INTO media (title, category, release, picture) VALUES ('Gone With the Wind','film','1943-09-20 00:00:00','pictures/gone_with_the_wind.png');
+INSERT INTO media (title, category, release, picture) VALUES ('Casablanca','film','1945-05-17 00:00:00','pictures/casablanca.png');
+INSERT INTO media (title, category, release, picture) VALUES ('Jaws','film','1977-03-25 00:00:00','pictures/jaws.png');
+INSERT INTO media (title, category, release, picture) VALUES ('Star Wars: A New Hope','film','1977-12-06 00:00:00','pictures/new_hope.png');
+INSERT INTO media (title, category, release, picture) VALUES ('12 Years a Slave','film','2014-01-02 00:00:00','pictures/12_years_a_slave.png');
+INSERT INTO media (title, category, release, picture) VALUES ('The Office','series','2005-03-24 00:00:00','pictures/the_office.png');
+INSERT INTO media (title, category, release, picture) VALUES ('Friends','series','1994-09-22 00:00:00','pictures/friends.png');
+INSERT INTO media (title, category, release, picture) VALUES ('Seinfeld','series','1989-07-05 00:00:00','pictures/seinfeld.png');
+INSERT INTO media (title, category, release, picture) VALUES ('Avatar: The Last Airbender','animation','2005-02-21 00:00:00','pictures/avatar_the_last_airbender.png');
+INSERT INTO media (title, category, release, picture) VALUES ('The Simpsons','animation','1989-12-17 00:00:00','pictures/the_simpsons.png');
 
 
 --favourite
@@ -730,11 +730,11 @@ INSERT INTO question (title, description, creation_date, score, category, author
 Now, ignoring Jon Snow''s parentage for the moment, there are three trueborn Stark children currently in Winterfell: Sansa, Arya and Bran. My question is, what is their current age according to the show''s canon as per the latest episode (S07E07).
 (An approximation or an educated guess will do if the explicit age is not known. I remember Sansa telling Tyrion her age back when she was at King''s Landing, but I don''t remember the episode.) It would also be interesting to know how old Robb Stark was when he was declared King in the North.', '2019-04-05 01:30:47', 10, 'series', 5);
 
-INSERT INTO answer ( description, creation_date, score, question_id, author) VALUES ('But this is a visual trademark which means you can not replicate that sentence in that font on wearable merchandise.', '2019-05-04 08:30:00', 30, 1, 28);
-INSERT INTO answer ( description, creation_date, score, question_id, author) VALUES ( 'Shazam is a adult muscular man because of the magical powers he have, mostly from Herculese and Appolo
+INSERT INTO answer (description, creation_date, score, question_id, author) VALUES ('But this is a visual trademark which means you can not replicate that sentence in that font on wearable merchandise.', '2019-05-04 08:30:00', 30, 1, 28);
+INSERT INTO answer (description, creation_date, score, question_id, author) VALUES ('Shazam is a adult muscular man because of the magical powers he have, mostly from Herculese and Appolo
 (from the powers he inherit when becoming Shazam), AFAIK we don''t know how Billy will looks like when he grown up, nor probably we''ll see it in DCEU', '2019-01-01 08:30:00', 5, 2, 30);
-INSERT INTO answer ( description, creation_date, score, question_id, author) VALUES ('Sansa was 14 when she was married to Tyrion. I think her age gets brought up a couple of times during the back half of season 3.', '2019-04-05 09:30:00', 5, 3, 3);
-INSERT INTO answer ( description, creation_date, score, question_id, author) VALUES ( 'Copyright issues are a thing', '2019-05-04 08:30:00', 30, 1, 28);
+INSERT INTO answer (description, creation_date, score, question_id, author) VALUES ('Sansa was 14 when she was married to Tyrion. I think her age gets brought up a couple of times during the back half of season 3.', '2019-04-05 09:30:00', 5, 3, 3);
+INSERT INTO answer (description, creation_date, score, question_id, author) VALUES ('Copyright issues are a thing', '2019-05-04 08:30:00', 30, 1, 28);
 
 UPDATE question SET best = 1 WHERE question_id = 1;
 UPDATE question SET best = 2 WHERE question_id = 2;
@@ -749,7 +749,7 @@ INSERT INTO comment_answer (description, creation_date, answer_id, author) VALUE
 
 --votes
 INSERT INTO vote_q(user_id, question_id, value, date) VALUES (30, 1, 1, '2019-01-01 01:30:47');
-INSERT INTO vote_q(user_id, question_id, value, date) VALUES (5, 1, 1,'2019-01-01 01:30:47');
+INSERT INTO vote_q(user_id, question_id, value, date) VALUES (5, 1, 1, '2019-01-01 01:30:47');
 INSERT INTO vote_q(user_id, question_id, value, date) VALUES (10, 1, 1, '2019-01-01 01:30:47');
 INSERT INTO vote_q(user_id, question_id, value, date) VALUES (13, 1, -1, '2019-01-01 01:30:47');
 INSERT INTO vote_q(user_id, question_id, value, date) VALUES (22, 1, 1, '2019-01-01 01:30:47');
