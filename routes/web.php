@@ -70,11 +70,9 @@ Route::patch('users/{username}/edit/personal', 'ProfileController@editPersonalDe
 Route::patch('users/{username}/edit/account', 'ProfileController@editAccountDetails')->name('editAccount');
 
 //AJAX
-Route::get('ajax', function () {
-    return view('message');
-});
 Route::post('questions/vote', 'AjaxController@vote');
 Route::post('questions/getVoteValue', 'AjaxController@getVoteValue');
+Route::post('questions/favourite', 'AjaxController@favourite');
 
 //test
 Route::view('test', 'pages/test');

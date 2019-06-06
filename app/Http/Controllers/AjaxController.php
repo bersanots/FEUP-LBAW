@@ -7,6 +7,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Auth;
 use App\QuestionVote;
+use App\QuestionFavourite;
 
 class AjaxController extends Controller
 {
@@ -19,11 +20,21 @@ class AjaxController extends Controller
 
          //checks if user voted
          $entry = QuestionVote::where('user_id', $user)->where('question_id', $question)->first();
+         $favEntry = QuestionFavourite::where('user_id', $user)->where('question_id', $question)->first();
+
+
          if ($entry != null) {
-            return json_encode($entry->value);
+            $vote = $entry->value;
          } else {
-            return json_encode(0);
+            $vote = 0;
          }
+
+         if ($favEntry != null)
+            $favourite = true;
+         else
+            $favourite = false;
+
+         return json_encode(array('vote' => $vote, 'favourite' => $favourite));
       }
    }
 
@@ -60,5 +71,26 @@ class AjaxController extends Controller
 
       $count = $countUp - $countDown;
       return json_encode(array('count' => $count, 'userVote' => $voteValue));
+   }
+
+   public function favourite(Request $request)
+   {
+      if (!Auth::check()) return route('login');
+      $question = $request->question_id;
+      $user = Auth::user()->user_id;
+
+      //check if user favourited
+      $entry = QuestionFavourite::where('user_id', $user)->where('question_id', $question)->first();
+      if ($entry != null) {
+         $entry->delete();
+         $favouriteValue = false;
+      } else {
+         $newEntry = new QuestionFavourite;
+         $newEntry->user_id = $user;
+         $newEntry->question_id = $question;
+         $favouriteValue = true;
+         $newEntry->save();
+      }
+      return json_encode($favouriteValue);
    }
 }

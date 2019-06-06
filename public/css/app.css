@@ -323,16 +323,18 @@ div.bs-docs-section {
     border: 0.1em solid black;
 }
 
+button#questionFavBtn,
+button#questionDownBtn,
 button#questionUpBtn {
     border: 0;
     padding: 0;
 }
 
-button#questionDownBtn {
-    border: 0;
-    padding: 0;
+button#questionFavBtn {
+    margin: 0em 1em;
 }
 
+button#questionDownBtn.question-downvote,
 button#questionUpBtn.question-upvote {
     color: black;
 }
@@ -341,19 +343,22 @@ button#questionUpBtn.question-upvoted {
     color: #a22c29;
 }
 
-button#questionDownBtn.question-downvote {
-    color: black;
-}
-
 button#questionDownBtn.question-downvoted {
     color: #3aa0a5;
 }
 
-button#questionUpBtn:focus,
-button#questionUpBtn:hover {
-    background: transparent;
+button#questionFavBtn.question-favourited {
+    color: #a22c29;
 }
 
+button#questionFavBtn.question-favourite {
+    color: black;
+}
+
+button#questionFavBtn:focus,
+button#questionFavBtn:hover,
+button#questionUpBtn:focus,
+button#questionUpBtn:hover,
 button#questionDownBtn:focus,
 button#questionDownBtn:hover {
     background: transparent;

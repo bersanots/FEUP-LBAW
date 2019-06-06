@@ -6,7 +6,6 @@
           <a href="/questions/{{ $question->question_id }}">{{ $question->title }}</a>
           <p id="questionId" hidden>{{ $question->question_id }}</p>
         </h2>
-        <i class="fas fa-star" style="font-size:1.5em; color:#a22c29"></i>
         <div class="question_info" style="padding: 1em; font-size: 0.75em; width: 100%; display: grid; grid-template-column: auto auto auto; columns: 2; margin: 0em 0em 1em 0em;">
           <div class="question_user" style="font-style: italic; text-align: left; grid-area: auto / 1 / auto / 1;">
             by
@@ -14,10 +13,11 @@
             <span class="question_date">{{ \Carbon\Carbon::parse($question->creation_date)->diffForHumans() }}</span>
           </div>
           <div class="question_score" style="font-size: 1.5em; grid-column: 2; text-align: right;">
-            <button id="questionUpBtn" class="upvote-button" type="button" onClick="voteQuestion(<?= $question->question_id ?>, 1)"><i class="fas fa-arrow-up"></i></button>
+            <button id="questionFavBtn" class="question-favourite" type="button" onClick="favouriteQuestion(<?= $question->question_id ?>)"><i class="fas fa-star"></i></button>
+            <button id="questionUpBtn" class="question-upvote" type="button" onClick="voteQuestion(<?= $question->question_id ?>, 1)"><i class="fas fa-arrow-up"></i></button>
             <span class="score" id="question-score">{{ $question->score }}</span>
             <p id="question-id-score" hidden>{{ $question->question_id }}</p>
-            <button id="questionDownBtn" class="downvote-button" type="button" onClick="voteQuestion(<?= $question->question_id ?>, -1)"><i class="fas fa-arrow-down"></i></button>
+            <button id="questionDownBtn" class="question-downvote" type="button" onClick="voteQuestion(<?= $question->question_id ?>, -1)"><i class="fas fa-arrow-down"></i></button>
           </div>
         </div>
       </div>
