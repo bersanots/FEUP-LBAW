@@ -58,6 +58,22 @@ class QuestionController extends Controller
     }
 
     /**
+     * Shows all questions from a category.
+     *
+     * @return Response
+     */
+    public function listCategoryQuestions($category)
+    {
+      if (!Auth::check()) return redirect('/login');
+
+      $this->authorize('list', Question::class);
+
+      $questions = Question::where('category', $category)->orderBy('creation_date', 'DESC')->get();
+
+      return view('pages.questions', ['questions' => $questions]);
+    }
+
+    /**
      * Show create a question page
      */
 

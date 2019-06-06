@@ -52,6 +52,14 @@ class User extends Authenticatable
     }
 
     /**
+    * The favourite media of this user
+    */
+    public function favourite()
+    {
+        return $this->belongsToMany('App\Media', 'favourite', 'user_id', 'media_id');
+    }
+
+    /**
      * Show a list of all of the user's notifications.
      *
      * @return Response

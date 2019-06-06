@@ -11,25 +11,7 @@ use App\User;
 
 class ProfileController extends Controller
 {
-  /**
-   * Shows the question for a given id.
-   *
-   * @param  int  $id
-   * @return Response
-   */
-  public function show($id)
-  {
-    $question = Question::find($id);
-
-    $this->authorize('show', $question);
-
-    return view('pages.question', ['question' => $question]);
-  }
-
-  /**
-   * 
-   */
-
+  
   public function viewProfile($username)
   {
     $user = User::where('username', $username) -> first();

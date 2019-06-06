@@ -6,14 +6,14 @@
 
 <div class="container">
     <legend class="text-light" style="padding: 10px; border-bottom: solid 0.2em #a22c29; margin-top: 1em;">
-        <img style="padding-right: 20px;" src="icon/profile.png">&nbsp;
+        <img style="padding-right: 20px;" src="../img/icon/{{ $user->picture }}">&nbsp;
         <b class="text-light">{{ $user->username }}</b>'s profile
     </legend>
     <div class="bs-docs-section">
         <div class="row">
             <div class="col-lg-4" style="padding-top: 23px;">
                 <div class="bs-ccomponent">
-                    <img src="{{ $user->picture }}" style="width: 100%; height: 200px; object-fit: cover; border: solid 0.2em #a22c29;" class="border border-primary">
+                    <img src="../img/{{ $user->picture }}" style="width: 100%; height: 200px; object-fit: cover; border: solid 0.2em #a22c29;" class="border border-primary">
                     <div id="myTabContent" class="tab-content">
                         <div class="tab-pane fade active show" id="about">
                             <div style="padding: 20px; padding-top: 10px; border: solid 0.2em #a22c29;" class="text-light border border-primary">
@@ -44,28 +44,40 @@
                     <div class="list-group">
                         <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active" style="border-color: #A22C29; background-color: #A22C29;">
                             <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-1">Favorite Films</h5>
+                                <h5 class="mb-1">Favourite Films</h5>
                                 <small><br></small>
                             </div>
                             <p class="mb-1"></p>
                         </a>
                         <div class="form-group text-light" style="border: solid 0.2em #a22c29;">
-                            <p style="font-size: 23px;">List of favourite user films</p>
+                            @foreach ($user->favourite()->where('category', 'film')->get() as $media)
+                            <p style="font-size: 23px;">{{ $media->title }}</p>
+                            @endforeach
                         </div>
                         <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active" style="border-color: #A22C29; background-color: #A22C29;">
                             <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-1">Favorite Series</h5>
+                                <h5 class="mb-1">Favourite Series</h5>
                                 <small><br></small>
                             </div>
                             <p class="mb-1"></p>
                         </a>
+                        <div class="form-group text-light" style="border: solid 0.2em #a22c29;">
+                            @foreach ($user->favourite()->where('category', 'series')->get() as $media)
+                            <p style="font-size: 23px;">{{ $media->title }}</p>
+                            @endforeach    
+                        </div>
                         <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active" style="border-color: #A22C29; background-color: #A22C29;">
                             <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-1">Favorite Animations</h5>
+                                <h5 class="mb-1">Favourite Animations</h5>
                                 <small><br></small>
                             </div>
                             <p class="mb-1"></p>
                         </a>
+                        <div class="form-group text-light" style="border: solid 0.2em #a22c29;">
+                            @foreach ($user->favourite()->where('category', 'animation')->get() as $media)
+                            <p style="font-size: 23px;">{{ $media->title }}</p>
+                            @endforeach
+                        </div>
                     </div>
                 </div>
             </div>
