@@ -16,7 +16,7 @@ function voteQuestion(question_id, value) {
             changeVoteArrows(myobj['userVote'], upBtn, downBtn);
         }
     };
-    xmlhttp.open("POST", "vote", true);
+    xmlhttp.open("POST", "vote/question", true);
     xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xmlhttp.send(JSON.stringify({
         _token: csrf_token.content,
@@ -61,6 +61,54 @@ function checkIfVoted() {
         _token: csrf_token.content,
         question_id: question_id,
     }));
+}
+
+function voteAnswer(answer_id, value) {
+    const xmlhttp = new XMLHttpRequest();
+    xmlhttp.onload = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            const myobj = JSON.parse(this.responseText);
+            console.log(myobj);
+            let score = document.querySelector("[id='" + answer_id + "'] .answer-score");
+            score.innerHTML = myobj['count'];
+            let upBtn = document.querySelector("[id='" + answer_id + "'] .answerUp");
+            let downBtn = document.querySelector("[id='" + answer_id + "'] .answerDown");
+            changeVoteArrowsAnswer(myobj['userVote'], upBtn, downBtn);
+        }
+    };
+    xmlhttp.open("POST", "vote/answer", true);
+    xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xmlhttp.send(JSON.stringify({
+        _token: csrf_token.content,
+        answer_id: answer_id,
+        value: value
+    }));
+}
+
+
+function changeVoteArrowsAnswer(value, upvoteBtn, downvoteBtn) {
+    switch (value) {
+        case 1:
+            {
+                //is upvoted
+                upvoteBtn.className = "answerUp upvoted";
+                downvoteBtn.className = "answerDown downvote";
+                break;
+            }
+        case -1:
+            {
+                //is downvoted
+                upvoteBtn.className = "answerUp upvote";
+                downvoteBtn.className = "answerDown downvoted";
+                break;
+            }
+        default:
+            {
+                //is not upvoted
+                upvoteBtn.className = "answerUp upvote";
+                downvoteBtn.className = "answerDown downvote";
+            }
+    }
 }
 
 function changeVoteArrows(value, upvoteBtn, downvoteBtn) {

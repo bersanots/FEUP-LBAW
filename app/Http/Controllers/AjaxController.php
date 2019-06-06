@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Auth;
 use App\QuestionVote;
 use App\QuestionFavourite;
+use App\AnswerVote;
 
 class AjaxController extends Controller
 {
@@ -38,7 +39,7 @@ class AjaxController extends Controller
       }
    }
 
-   public function vote(Request $request)
+   public function questionVote(Request $request)
    {
       if (!Auth::check()) return route('login');
       //get data
@@ -92,5 +93,38 @@ class AjaxController extends Controller
          $newEntry->save();
       }
       return json_encode($favouriteValue);
+   }
+
+   public function answerVote(Request $request)
+   {
+      if (!Auth::check()) return route('login');
+
+      $answer = $request->answer_id;
+      $vote = $request->value;
+      $user = Auth::user()->user_id;
+
+      $entry = AnswerVote::where('user_id', $user)->where('answer_id', $answer)->first();
+      if ($entry != null) {
+         if ($entry->value == $vote) {
+            $entry->delete();
+            $voteValue = 0;
+         } else {
+            $entry->value = $vote;
+            $voteValue = $vote;
+            $entry->save();
+         }
+      } else {
+         $newEntry = new AnswerVote;
+         $newEntry->user_id = $user;
+         $newEntry->answer_id = $answer;
+         $newEntry->value = $vote;
+         $voteValue = $vote;
+         $newEntry->save();
+      }
+      $countUp = AnswerVote::where('answer_id', $answer)->where('value', 1)->count();
+      $countDown = AnswerVote::where('answer_id', $answer)->where('value', -1)->count();
+
+      $count = $countUp - $countDown;
+      return json_encode(array('count' => $count, 'userVote' => $voteValue));
    }
 }
