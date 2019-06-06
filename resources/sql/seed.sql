@@ -676,16 +676,16 @@ INSERT INTO users (username,email,password,picture,description,joined_date,is_de
 INSERT INTO users (username,email,password,picture,description,joined_date,is_deleted) VALUES ('user','user@name.com','$2y$10$/6re1d8fAxQIF0m5iz4VAefMtaK3L04pJZsK5RkDyOG9gQSkOb4Oy','pictures/LLV96WOR3EV.png','You talkin to me?','2018-05-14 17:15:11','false');
 
 --media
-INSERT INTO media (media_id, title, category, release, picture) VALUES (1,'Gone With the Wind','film','1943-09-20 00:00:00','pictures/gone_with_the_wind.png');
-INSERT INTO media (media_id, title, category, release, picture) VALUES (2,'Casablanca','film','1945-05-17 00:00:00','pictures/casablanca.png');
-INSERT INTO media (media_id, title, category, release, picture) VALUES (3,'Jaws','film','1977-03-25 00:00:00','pictures/jaws.png');
-INSERT INTO media (media_id, title, category, release, picture) VALUES (4,'Star Wars: A New Hope','film','1977-12-06 00:00:00','pictures/new_hope.png');
-INSERT INTO media (media_id, title, category, release, picture) VALUES (5,'12 Years a Slave','film','2014-01-02 00:00:00','pictures/12_years_a_slave.png');
-INSERT INTO media (media_id, title, category, release, picture) VALUES (6,'The Office','series','2005-03-24 00:00:00','pictures/the_office.png');
-INSERT INTO media (media_id, title, category, release, picture) VALUES (7,'Friends','series','1994-09-22 00:00:00','pictures/friends.png');
-INSERT INTO media (media_id, title, category, release, picture) VALUES (8,'Seinfeld','series','1989-07-05 00:00:00','pictures/seinfeld.png');
-INSERT INTO media (media_id, title, category, release, picture) VALUES (9,'Avatar: The Last Airbender','animation','2005-02-21 00:00:00','pictures/avatar_the_last_airbender.png');
-INSERT INTO media (media_id, title, category, release, picture) VALUES (10,'The Simpsons','animation','1989-12-17 00:00:00','pictures/the_simpsons.png');
+INSERT INTO media (media_id, title, category, release, picture) VALUES ('Gone With the Wind','film','1943-09-20 00:00:00','pictures/gone_with_the_wind.png');
+INSERT INTO media (media_id, title, category, release, picture) VALUES ('Casablanca','film','1945-05-17 00:00:00','pictures/casablanca.png');
+INSERT INTO media (media_id, title, category, release, picture) VALUES ('Jaws','film','1977-03-25 00:00:00','pictures/jaws.png');
+INSERT INTO media (media_id, title, category, release, picture) VALUES ('Star Wars: A New Hope','film','1977-12-06 00:00:00','pictures/new_hope.png');
+INSERT INTO media (media_id, title, category, release, picture) VALUES ('12 Years a Slave','film','2014-01-02 00:00:00','pictures/12_years_a_slave.png');
+INSERT INTO media (media_id, title, category, release, picture) VALUES ('The Office','series','2005-03-24 00:00:00','pictures/the_office.png');
+INSERT INTO media (media_id, title, category, release, picture) VALUES ('Friends','series','1994-09-22 00:00:00','pictures/friends.png');
+INSERT INTO media (media_id, title, category, release, picture) VALUES ('Seinfeld','series','1989-07-05 00:00:00','pictures/seinfeld.png');
+INSERT INTO media (media_id, title, category, release, picture) VALUES ('Avatar: The Last Airbender','animation','2005-02-21 00:00:00','pictures/avatar_the_last_airbender.png');
+INSERT INTO media (media_id, title, category, release, picture) VALUES ('The Simpsons','animation','1989-12-17 00:00:00','pictures/the_simpsons.png');
 
 
 --favourite
@@ -740,11 +740,11 @@ UPDATE question SET best = 1 WHERE question_id = 1;
 UPDATE question SET best = 2 WHERE question_id = 2;
 UPDATE question SET best = 3 WHERE question_id = 3;
 
-INSERT INTO comment_question (cq_id, description, creation_date, question_id, author) VALUES (1, 'I wish i knew too', '2019-04-05 01:37:33', 3, 17);
-INSERT INTO comment_question (cq_id, description, creation_date, question_id, author) VALUES (2, 'Why care about Sansa''s age?', '2019-04-05 03:37:33', 3, 8);
+INSERT INTO comment_question (description, creation_date, question_id, author) VALUES ('I wish i knew too', '2019-04-05 01:37:33', 3, 17);
+INSERT INTO comment_question (description, creation_date, question_id, author) VALUES ('Why care about Sansa''s age?', '2019-04-05 03:37:33', 3, 8);
 
-INSERT INTO comment_answer (ca_id, description, creation_date, answer_id, author) VALUES (1, 'Very Greek mythologie based', '2019-01-01 10:07:01', 2, 19);
-INSERT INTO comment_answer (ca_id, description, creation_date, answer_id, author) VALUES (2, 'I agree', '2019-05-04 08:55:47', 1, 4);
+INSERT INTO comment_answer (description, creation_date, answer_id, author) VALUES ('Very Greek mythologie based', '2019-01-01 10:07:01', 2, 19);
+INSERT INTO comment_answer (description, creation_date, answer_id, author) VALUES ('I agree', '2019-05-04 08:55:47', 1, 4);
 
 
 --votes
@@ -786,13 +786,13 @@ INSERT INTO follow(user_id, question_id) VALUES (27, 1);
 
 
 --tags
-INSERT INTO tag(tag_id, name) VALUES (1, 'GoT');
-INSERT INTO tag(tag_id, name) VALUES (2, 'Spider_man');
-INSERT INTO tag(tag_id, name) VALUES (3, 'Shazam');
-INSERT INTO tag(tag_id, name) VALUES (4, 'Drama');
-INSERT INTO tag(tag_id, name) VALUES (5, 'Comedy');
-INSERT INTO tag(tag_id, name) VALUES (6, 'Adventure');
-INSERT INTO tag(tag_id, name) VALUES (7, 'DC');
+INSERT INTO tag(name) VALUES ('GoT');
+INSERT INTO tag(name) VALUES ('Spider_man');
+INSERT INTO tag(name) VALUES ('Shazam');
+INSERT INTO tag(name) VALUES ('Drama');
+INSERT INTO tag(name) VALUES ('Comedy');
+INSERT INTO tag(name) VALUES ('Adventure');
+INSERT INTO tag(name) VALUES ('DC');
 
 INSERT INTO tag_question(tag_id, question_id) VALUES (1, 3);
 INSERT INTO tag_question(tag_id, question_id) VALUES (4, 3);
@@ -803,18 +803,18 @@ INSERT INTO tag_question(tag_id, question_id) VALUES (5, 2);
 
 
 --reports
-INSERT INTO report(report_id, description, date, resolved, author, target) VALUES (1, 'user is spamming questions', '2019-04-05 01:31:47', false, 1, 30);
-INSERT INTO report(report_id, description, date, resolved, author, target) VALUES (2, 'posting mature content', '2019-04-05 01:31:47', false, 15, 8);
-INSERT INTO report(report_id, description, date, resolved, author, target) VALUES (3, 'wrong use of tags', '2019-04-05 01:31:47', false, 17, 22);
-INSERT INTO report(report_id, description, date, resolved, author, target) VALUES (4, 'spoilers in title of question', '2019-04-05 01:31:47', false, 25, 7);
-INSERT INTO report(report_id, description, date, resolved, author, target) VALUES (5, 'spoiler', '2019-04-05 01:31:47', false,  29, 11);
+INSERT INTO report(description, date, resolved, author, target) VALUES ('user is spamming questions', '2019-04-05 01:31:47', false, 1, 30);
+INSERT INTO report(description, date, resolved, author, target) VALUES ('posting mature content', '2019-04-05 01:31:47', false, 15, 8);
+INSERT INTO report(description, date, resolved, author, target) VALUES ('wrong use of tags', '2019-04-05 01:31:47', false, 17, 22);
+INSERT INTO report(description, date, resolved, author, target) VALUES ('spoilers in title of question', '2019-04-05 01:31:47', false, 25, 7);
+INSERT INTO report(description, date, resolved, author, target) VALUES ('spoiler', '2019-04-05 01:31:47', false,  29, 11);
 
 --messages
-INSERT INTO message(message_id, title, content, date, author) VALUES (1, 'Welcome to LCQ!', 'Hi buddy, I just saw that you registered and couldn''t believe it!
+INSERT INTO message(title, content, date, author) VALUES ('Welcome to LCQ!', 'Hi buddy, I just saw that you registered and couldn''t believe it!
 Hope you enjoy this website, it''s very neat! Any questions you have don''t hesitate and send me a message! See you around.', '2019-04-05 01:31:47', 1);
-INSERT INTO message(message_id, title, content, date, author) VALUES (2, 'Was not expecting this', 'Thanks so much for the welcoming message, wasn''t expecting this at all!
+INSERT INTO message(title, content, date, author) VALUES ('Was not expecting this', 'Thanks so much for the welcoming message, wasn''t expecting this at all!
 I''ll try to find my way around the website, otherwise I''ll hit you up for sure!', '2019-04-05 02:41:47', 10);
-INSERT INTO message(message_id, title, content, date, author) VALUES (3, 'Avengers Fans Meeting', 'Good afternoon, I''m sending this email to remind you all that the VII Annual Avengers Fans Meeting will take place next Saturday, around 4pm.
+INSERT INTO message(title, content, date, author) VALUES ('Avengers Fans Meeting', 'Good afternoon, I''m sending this email to remind you all that the VII Annual Avengers Fans Meeting will take place next Saturday, around 4pm.
 As agreed, we should all wear cosplay so that we embody the true spirit of Avengers. Best regards.', '2019-04-15 18:11:47', 5);
 
 INSERT INTO message_target(user_id, message_id) VALUES (10,1);
