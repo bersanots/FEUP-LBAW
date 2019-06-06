@@ -431,24 +431,30 @@ DECLARE
   total INTEGER;
   a_id INTEGER;
 BEGIN
-    IF NEW IS NOT NULL THEN
-        a_id = NEW.answer_id;   --Insert operation
+  IF TG_OP = 'DELETE' THEN
+        a_id = OLD.answer_id;     --Delete operation
     ELSE
-        a_id = OLD.answer_id;   --Delete operation
+        a_id = NEW.answer_id;     --Insert operation
     END IF;
     SELECT SUM (value) INTO total
         FROM vote_a
         WHERE answer_id = a_id;
-    UPDATE answer
+    IF total IS NULL THEN
+        UPDATE answer
+        SET score = 0
+        WHERE answer_id = a_id;
+    ELSE
+        UPDATE answer
         SET score = total
         WHERE answer_id = a_id;
+    END IF;
     RETURN NEW;
 END
 $BODY$
 LANGUAGE plpgsql;
  
 CREATE TRIGGER update_answer_score
-    AFTER INSERT OR DELETE ON vote_a
+    AFTER INSERT OR DELETE OR UPDATE ON vote_a
     FOR EACH ROW
     EXECUTE PROCEDURE update_answer_score();
 
@@ -716,18 +722,19 @@ INSERT INTO favourite (user_id, media_id) VALUES (28,10);
 
 
 -- questions & answers & comments
-INSERT INTO question (question_id, title, description, creation_date, score, category, author) VALUES (1, 'Was a deal made with Warner Bros so that Peter Porker can do the things he does?', 'In the movie Spider-Man: Into the Spider-Verse there is this spider-man character called Peter Porker, who is an alternate funny cartoon version of Spider-Man. He does things and says things closely to what the Looney Tunes cartoon character Porky Pig does and says.
+INSERT INTO question (title, description, creation_date, score, category, author) VALUES ('Was a deal made with Warner Bros so that Peter Porker can do the things he does?', 'In the movie Spider-Man: Into the Spider-Verse there is this spider-man character called Peter Porker, who is an alternate funny cartoon version of Spider-Man. He does things and says things closely to what the Looney Tunes cartoon character Porky Pig does and says.
 Was a deal made with Warner Bros so that Peter Porker can do the things he does? If so, what kind of deal?', '2019-01-01 01:30:47', 130, 'animation', 24);
-INSERT INTO question (question_id, title, description, creation_date, score, category, author) VALUES (2, 'Is Shazam''s look, Billy Batson''s future look?', 'I know this
+INSERT INTO question (title, description, creation_date, score, category, author) VALUES ('Is Shazam''s look, Billy Batson''s future look?', 'I know this
 is a very late kind of question but I am curious to know that why Shazam had to be an adult-like character in looks(face + body). Is Shazam''s look, Billy Batson''s future look? I mean would Billy grow up to become a person who looks like(now) Shazam?', '2019-04-05 01:30:47', 450, 'film', 13);
-INSERT INTO question (question_id, title, description, creation_date, score, category, author) VALUES (3, 'What is the current canonical age of Sansa, Bran and Arya Stark?', 'As we know, the ages of the characters on Game of Thrones can be very different from both the corresponding age in the books and the present age of the actors portraying them. Moreover, we don''t really know exactly how much time has passed since the events of season 1. (This question shows that the speculated time is one year per season, but that''s not definitive.)
+INSERT INTO question (title, description, creation_date, score, category, author) VALUES ('What is the current canonical age of Sansa, Bran and Arya Stark?', 'As we know, the ages of the characters on Game of Thrones can be very different from both the corresponding age in the books and the present age of the actors portraying them. Moreover, we don''t really know exactly how much time has passed since the events of season 1. (This question shows that the speculated time is one year per season, but that''s not definitive.)
 Now, ignoring Jon Snow''s parentage for the moment, there are three trueborn Stark children currently in Winterfell: Sansa, Arya and Bran. My question is, what is their current age according to the show''s canon as per the latest episode (S07E07).
 (An approximation or an educated guess will do if the explicit age is not known. I remember Sansa telling Tyrion her age back when she was at King''s Landing, but I don''t remember the episode.) It would also be interesting to know how old Robb Stark was when he was declared King in the North.', '2019-04-05 01:30:47', 10, 'series', 5);
 
-INSERT INTO answer (answer_id, description, creation_date, score, question_id, author) VALUES (1, 'But this is a visual trademark which means you can not replicate that sentence in that font on wearable merchandise.', '2019-05-04 08:30:00', 30, 1, 28);
-INSERT INTO answer (answer_id, description, creation_date, score, question_id, author) VALUES (2, 'Shazam is a adult muscular man because of the magical powers he have, mostly from Herculese and Appolo
+INSERT INTO answer ( description, creation_date, score, question_id, author) VALUES ('But this is a visual trademark which means you can not replicate that sentence in that font on wearable merchandise.', '2019-05-04 08:30:00', 30, 1, 28);
+INSERT INTO answer ( description, creation_date, score, question_id, author) VALUES ( 'Shazam is a adult muscular man because of the magical powers he have, mostly from Herculese and Appolo
 (from the powers he inherit when becoming Shazam), AFAIK we don''t know how Billy will looks like when he grown up, nor probably we''ll see it in DCEU', '2019-01-01 08:30:00', 5, 2, 30);
-INSERT INTO answer (answer_id, description, creation_date, score, question_id, author) VALUES (3, 'Sansa was 14 when she was married to Tyrion. I think her age gets brought up a couple of times during the back half of season 3.', '2019-04-05 09:30:00', 5, 3, 3);
+INSERT INTO answer ( description, creation_date, score, question_id, author) VALUES ('Sansa was 14 when she was married to Tyrion. I think her age gets brought up a couple of times during the back half of season 3.', '2019-04-05 09:30:00', 5, 3, 3);
+INSERT INTO answer ( description, creation_date, score, question_id, author) VALUES ( 'Copyright issues are a thing', '2019-05-04 08:30:00', 30, 1, 28);
 
 UPDATE question SET best = 1 WHERE question_id = 1;
 UPDATE question SET best = 2 WHERE question_id = 2;
