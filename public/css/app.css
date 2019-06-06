@@ -311,6 +311,56 @@ div.bs-docs-section {
       margin: 0em;
   }*/
 
+.accepted_answer {
+    padding: 0.5em;
+    border-left-color: #a22c29;
+    border-left-style: solid;
+    border-left-width: 0.3em;
+    margin-top: 2em;
+    background-color: #f8f8f8;
+}
+
+.answer_info {
+    padding: 1em;
+    font-size: 1em;
+    width: 100%;
+    display: grid;
+    grid-template-column: auto auto auto;
+    columns: 2;
+    margin: 0em 0em 1em 0em;
+}
+
+.answer_user {
+    font-style: italic;
+    text-align: left;
+    grid-area: auto / 1 / auto / 1;
+}
+
+.answer_body {
+    font-size: 1.8em;
+    padding-left: 0.3em;
+}
+
+.question-body {
+    background-color: #f5f5f5;
+    font-size: 1.8em;
+}
+
+.write-comment mr-sm-3 {
+    margin-left: 1em;
+    width: 20em;
+}
+
+.comments {
+    text-indent: 18px;
+    padding: 0.3em;
+}
+
+.answer_score {
+    grid-column: 2;
+    text-align: right;
+}
+
 
 /**
 * Vote arrows
