@@ -24,8 +24,7 @@ Route::view('home', 'pages/home');
 //Static pages
 Route::view('faq', 'pages/faq');
 Route::view('about', 'pages/about');
-Route::view('contact', 'errors/contact');
-Route::view('404', 'pages/404')->name('404');
+Route::view('contact', 'pages/contact');
 Route::post('/contact', function (Request $request) {
     Mail::send(new ContactMail($request));
     return redirect('/');
@@ -50,6 +49,13 @@ Route::delete('commentQuestion/{id}', 'CommentQuestionController@delete')->name(
 //Comments in Answers
 Route::post('createCommentAnswer/{answer_id}', 'CommentAnswerController@create')->name('createCommentAnswer');
 Route::delete('commentAnswer/{id}', 'CommentAnswerController@delete')->name('deleteCommentAnswer');
+
+// API
+/*Route::put('api/questions', 'QuestionController@create');
+Route::delete('api/questions/{question_id}', 'QuestionController@delete');
+Route::put('api/questions/{question_id}/', 'AnswerController@create');
+Route::post('api/answer/{id}', 'AnswerController@update');
+Route::delete('api/answer/{id}', 'AnswerController@delete');*/
 
 // Authentication
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
