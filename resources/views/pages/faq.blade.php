@@ -4,7 +4,7 @@
 
 @section('content')
 
-<div class="container bs-docs-section" style="padding-bottom: -30px; ">
+<div class="container bs-docs-section">
     <div class="faq-item">
         <h2>What topics can I ask about here?</h2>
         <p>Lights, Camera, Action is for Movie & TV enthusiasts and experts alike!</p>

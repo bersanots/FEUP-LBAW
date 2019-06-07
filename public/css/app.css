@@ -191,13 +191,104 @@ input.form-control{
     float: left;
 }
 
+.question_content{
+    background-color: #f8f8f8; 
+    color: #333333; 
+    margin-top: 2em;
+}
+
+.question{
+     padding:1em;
+}
+
+.question-body{
+    background-color: #f5f5f5;
+}
+
+.question-body.container{
+    padding-bottom: -30px
+}
+
+.container.question_content{
+    background-color: #f8f8f8; 
+    color: #333333; 
+    border-color: #a22c29; 
+    border-style: solid; 
+    margin-top: 2em;
+}
+
+.question.h2{
+    background-color: #f8f8f8; 
+    margin: 0em; 
+    padding-left: 0.5em;
+}
+
 .bs-docs-section.col-lg-8{
      padding-top: 23px;
+}
+
+.col-lg-4{
+    border-color: #A22C29; 
+    padding-top: 23px;
+}
+
+.container.bs-docs-section{
+    padding-bottom: -30px;
+}
+
+.container{
+    padding-top: 10px;
+}
+
+.img-container{
+    position: relative;
+}
+
+.img-container.img{
+    width: 100%; 
+    height: auto;
+}
+.container.text-light.img{
+    padding-right: 20px;
+}
+
+.container-homepage{
+    padding-top: 57px;
+}
+
+.card.mb-3.text-light.bg-primary.border-primary.zoom{
+    transition: transform 500ms;
+}
+
+.card-header{
+    background-color: #A22C29; 
+    color: white;
+}
+
+.card-header.img{
+    width: 100%; 
+    height: 200px; 
+    object-fit: cover; 
+    border: solid #a22c29;
+}
+
+#footer{
+    margin: 5em 0;
+}
+
+.border-primary.border{
+    background-color: #f8f8f8; 
+    padding: 20px; 
+    padding-top: 10px; 
+    border-color: #A22C29; 
+    border-style: solid; 
+    border-width: 0.2em;
 }
 
 .bs-docs-section.col-lg-12{
     padding-left: 0; 
     padding-right:0;
+    border: 1px solid #ccc;
 }
 
 .border-primary.border{
@@ -310,6 +401,28 @@ button.search-btn{
     border-top-style: solid; 
     border-top-width: 0.1em; 
     margin-top: 1em;
+}
+
+#about.text-light.border.border-primary{
+    padding: 20px; 
+    padding-top: 10px; 
+    border: solid 0.2em #a22c29;
+}
+
+.list-group-item.list-group-item-action.flex-column.align-items-start.active{
+    border-color: #A22C29; 
+    background-color: #A22C29;
+}
+
+.form-group.text-light.p{
+    font-size: 23px;
+}
+
+.bs-ccomponent.border.border-primary{
+    width: 100%; 
+    height: 200px; 
+    object-fit: cover; 
+    border: solid 0.2em #a22c29;   
 }
 
 h2.about{
