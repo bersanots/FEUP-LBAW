@@ -56,8 +56,6 @@
                     <a href=<?= substr(\Request::url(),0,-9) ?>>Followed</a>
                   @endif
                 @endif
-                <a href="#">Filter 2</a>
-                <a href="#">Filter 3</a>
               </div>
             </div>
             <input id="search-input" class="form-control mr-sm-3 " type="text" name="text" placeholder="Search" style="width: 448px;">
@@ -81,7 +79,7 @@
     <div class="col-lg-12" style="border-top-color: #A22C29; border-top-style: solid; border-top-width: 0.1em; margin-top: 1em;">
       <table class="list-unstyled" cellpadding="7">
         <tr>
-          <td class="float-lg-right">
+          <td>
             <a href="#top" class="font-weight-bold text-light">Back to top</a>
           </td>
           <td>

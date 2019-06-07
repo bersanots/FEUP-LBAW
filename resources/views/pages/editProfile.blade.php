@@ -30,7 +30,7 @@
                                     <label class="col-form-label" for="eventImg">
                                         <label class="col-form-label" for="inputDefault">Profile Image</label>
                                     </label>
-                                    <input type="file" class="form-control-file" id="eventImg" aria-describedby="fileHelp" name="image">
+                                    <input type="file" class="form-control"  name="image">
                                 </div>
                                 <br>
                                 <button type="submit" class="btn btn-primary">Save changes</button>

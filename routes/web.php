@@ -24,7 +24,8 @@ Route::view('home', 'pages/home');
 //Static pages
 Route::view('faq', 'pages/faq');
 Route::view('about', 'pages/about');
-Route::view('contact', 'pages/contact');
+Route::view('contact', 'errors/contact');
+Route::view('404', 'pages/404')->name('404');
 Route::post('/contact', function (Request $request) {
     Mail::send(new ContactMail($request));
     return redirect('/');
