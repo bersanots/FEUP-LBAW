@@ -146,4 +146,36 @@ class User extends Authenticatable
 
         return $obj_id;
     }
+
+    /**
+     * Get all the moderators
+     *
+     * @return Response
+     */
+    public function moderators()
+    {
+        $mods = DB::select("
+        SELECT *
+        FROM users
+        WHERE user_id IN
+        (SELECT * FROM moderator);");
+
+        return $mods;
+    }
+
+    /**
+     * Get all the administrators
+     *
+     * @return Response
+     */
+    public function administrators()
+    {
+        $admins = DB::select("
+        SELECT *
+        FROM users
+        WHERE user_id IN
+        (SELECT * FROM administrator);");
+
+        return $admins;
+    }
 }
