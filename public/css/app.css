@@ -209,12 +209,52 @@ input.form-control{
     padding-bottom: -30px
 }
 
+.answer_body.p{
+    padding-left: 1em;
+}
+
+.comments.input{
+    margin-left: 1em; 
+    width:10em
+}
+
+.comment{
+    border-top-style: dashed; 
+    list-style-type: none; 
+    border-color: #a22c29;
+}
+
+.comment-text{
+    grid-column: 2;
+}
+
 .container.question_content{
     background-color: #f8f8f8; 
     color: #333333; 
     border-color: #a22c29; 
     border-style: solid; 
     margin-top: 2em;
+}
+
+.question_info{
+    padding: 1em; 
+    font-size: 0.75em; 
+    width: 100%; 
+    display: grid; 
+    grid-template-column: auto auto auto auto; 
+    columns: 3; 
+    margin: 0em 0em 1em 0em;
+}
+
+.question_user{
+    font-style: italic; 
+    text-align: left; 
+    grid-area: auto / 1 / auto / 1;
+}
+
+.question_score{
+    grid-column: 2; 
+    text-align: right;
 }
 
 .question.h2{
@@ -636,6 +676,14 @@ div.bs-docs-section {
 .answer_score {
     grid-column: 2;
     text-align: right;
+}
+
+.new_answer.text-dark{
+    padding: 0.5em; 
+    border-left-style: solid; 
+    border-left-color: #a22c29; 
+    margin-top: 1em; 
+    background-color: #f8f8f8;
 }
 
 

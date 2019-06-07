@@ -1,18 +1,18 @@
 <article class="question" data-id="{{ $question->question_id }}">
   <div id="question-column" class="container">
-    <div class="question_content" style="background-color: #f8f8f8; color: #333333; margin-top: 2em;">
-      <div class="question" style="padding:1em">
-        <h2 style="background-color: #f8f8f8; border-bottom-style: solid; border-bottom-color: #a22c29; margin: 0em; padding-left: 0.5em;">
+    <div class="question_content">
+      <div class="question">
+        <h2>
           <a href="/questions/{{ $question->question_id }}">{{ $question->title }}</a>
           <p id="questionId" hidden>{{ $question->question_id }}</p>
         </h2>
-        <div class="question_info" style="padding: 1em; font-size: 0.75em; width: 100%; display: grid; grid-template-column: auto auto auto; columns: 2; margin: 0em 0em 1em 0em;">
-          <div class="question_user" style="font-style: italic; text-align: left; grid-area: auto / 1 / auto / 1;">
+        <div class="question_info" >
+          <div class="question_user">
             by
             <a href="/users/{{ $question->user->username }}" class="comment-user">{{ $question->user->username }}</a>
             <span class="question_date">{{ \Carbon\Carbon::parse($question->creation_date)->diffForHumans() }}</span>
           </div>
-          <div class="question_score" style="font-size: 1.5em; grid-column: 2; text-align: right;">
+          <div class="question_score">
             <button id="questionFavBtn" class="question-favourite" type="button" onClick="favouriteQuestion(<?= $question->question_id ?>)"><i class="fas fa-star"></i></button>
             <button id="questionUpBtn" class="question-upvote" type="button" onClick="voteQuestion(<?= $question->question_id ?>, 1)"><i class="fas fa-arrow-up"></i></button>
             <span class="score" id="question-score">{{ $question->score }}</span>
@@ -21,15 +21,15 @@
           </div>
         </div>
       </div>
-      <div class="question-body" style="background-color: #f5f5f5;">
-        <p style="padding-left: 1em;">{{ $question->description }}</p>
+      <div class="question-body">
+        <p>{{ $question->description }}</p>
       </div>
-      <div class="comments" style="text-indent: 18px;padding:0.3em">
+      <div class="comments">
         {{-- @each('partials.commentQuestion', $question->comments()->orderBy('creation_date', 'ASC')->get(), 'comment_q')
         <div> --}}
         <form action="{{ route('createCommentQuestion', ['question_id' => $question->question_id])}}" method="POST">
           {{ csrf_field() }}
-          <input class="form-control mr-sm-3 " type="text" placeholder="Comment" style="margin-left: 1em; width:10em">
+          <input class="form-control mr-sm-3 " type="text" placeholder="Comment">
           <button type="submit" class="btn btn-primary">Send</button>
         </form>
         {{-- </div> --}}
@@ -38,11 +38,11 @@
     </div>
     <div class="answers">
       @each('partials.answer', $question->answers()->orderBy('creation_date', 'ASC')->get(), 'answer')
-      <div class="new_answer text-dark" style="padding: 0.5em; border-left-style: solid; border-left-color: #a22c29; margin-top: 1em; background-color: #f8f8f8;">
+      <div class="new_answer text-dark">
         <form action="{{ route('createAnswer', ['question_id' => $question->question_id])}}" method="POST">
         {{ csrf_field() }}
           <div class="answer_info">
-            <div class="answer_user" style="font-style: italic; text-align: left; grid-area: auto / 1 / auto / 1;">
+            <div class="answer_user" >
               <h3> Write your own answer </h3>
             </div>
           </div>
