@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
-@section('title', 'LCQ')
+@section('title', 'Homepage')
 
 @section('content')
 <div id="logo" class="img-container" style="position: relative;">
-    <img src="img/LCQ.jpg" alt="Welcome to LCQ" style="width: 100%; height: auto;">
+    <img src="img/LCQ.png" alt="Welcome to LCQ" style="width: 100%; height: auto;">
 </div>
 <div class="collapse navbar-collapse" id="navbarColor02">
 </div>
