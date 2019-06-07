@@ -93,7 +93,7 @@ CREATE TABLE users (
     password TEXT NOT NULL,
     picture TEXT,
     description TEXT,
-    joined_date DATE DEFAULT now(), 
+    joined_date TIMESTAMP DEFAULT now(), 
     is_deleted BOOLEAN DEFAULT false,
     remember_token TEXT DEFAULT false
 );
@@ -111,8 +111,8 @@ CREATE TABLE administrator (
 CREATE TABLE ban (
     ban_id SERIAL PRIMARY KEY,
     description TEXT NOT NULL, 
-    start_date DATE DEFAULT now(),
-    end_date DATE,
+    start_date TIMESTAMP DEFAULT now(),
+    end_date TIMESTAMP,
     admin_id INTEGER NOT NULL REFERENCES administrator(administrator_id),
     user_id INTEGER NOT NULL UNIQUE REFERENCES users(user_id)
 );
@@ -120,7 +120,7 @@ CREATE TABLE ban (
 CREATE TABLE report (
     report_id SERIAL PRIMARY KEY,
     description TEXT NOT NULL, 
-    date DATE DEFAULT now(),
+    date TIMESTAMP DEFAULT now(),
     resolved BOOLEAN DEFAULT false,
     author INTEGER NOT NULL REFERENCES users(user_id),
     target INTEGER NOT NULL REFERENCES users(user_id)
@@ -130,7 +130,7 @@ CREATE TABLE question (
     question_id SERIAL PRIMARY KEY,
     title TEXT NOT NULL UNIQUE,
     description TEXT NOT NULL,
-    creation_date DATE DEFAULT now(), 
+    creation_date TIMESTAMP DEFAULT now(), 
     score INTEGER DEFAULT 0,
     category media_types NOT NULL,
     author INTEGER NOT NULL REFERENCES users(user_id)
@@ -139,7 +139,7 @@ CREATE TABLE question (
 CREATE TABLE answer (
     answer_id SERIAL PRIMARY KEY,
     description TEXT NOT NULL,
-    creation_date DATE DEFAULT now(),
+    creation_date TIMESTAMP DEFAULT now(),
     score INTEGER DEFAULT 0,
     question_id INTEGER NOT NULL REFERENCES question(question_id),
     author INTEGER NOT NULL REFERENCES users(user_id)
@@ -150,7 +150,7 @@ ALTER TABLE question ADD COLUMN best INTEGER REFERENCES answer(answer_id);
 CREATE TABLE comment_question (
     cq_id SERIAL PRIMARY KEY,
     description TEXT NOT NULL,
-    creation_date DATE DEFAULT now(),
+    creation_date TIMESTAMP DEFAULT now(),
     question_id INTEGER NOT NULL REFERENCES question(question_id),
     author INTEGER NOT NULL REFERENCES users(user_id)
 );
@@ -158,7 +158,7 @@ CREATE TABLE comment_question (
 CREATE TABLE comment_answer (
     ca_id SERIAL PRIMARY KEY,
     description TEXT NOT NULL,
-    creation_date DATE DEFAULT now(),
+    creation_date TIMESTAMP DEFAULT now(),
     answer_id INTEGER NOT NULL REFERENCES answer(answer_id), 
     author INTEGER NOT NULL REFERENCES users(user_id)
 );
@@ -167,7 +167,7 @@ CREATE TABLE vote_q (
     user_id INTEGER NOT NULL REFERENCES users(user_id),
     question_id INTEGER NOT NULL REFERENCES question(question_id),
     value INTEGER NOT NULL CONSTRAINT value_ck CHECK ((value = 1 ) OR (value = -1)),
-    date DATE DEFAULT now(),
+    date TIMESTAMP DEFAULT now(),
     PRIMARY KEY (user_id, question_id)
 );
 
@@ -175,7 +175,7 @@ CREATE TABLE vote_a (
     user_id INTEGER NOT NULL REFERENCES users(user_id),
     answer_id INTEGER NOT NULL REFERENCES answer(answer_id),
     value INTEGER NOT NULL CONSTRAINT value_ck CHECK ((value = 1 ) OR (value = -1)),
-    date DATE DEFAULT now(),
+    date TIMESTAMP DEFAULT now(),
     PRIMARY KEY (user_id, answer_id)
 );
 
@@ -205,7 +205,7 @@ CREATE TABLE medal (
 CREATE TABLE achievement (
     user_id INTEGER NOT NULL REFERENCES users(user_id),
     medal_id INTEGER NOT NULL REFERENCES medal(medal_id),
-    date DATE DEFAULT now(),
+    date TIMESTAMP DEFAULT now(),
     PRIMARY KEY (user_id, medal_id)
 );
 
@@ -213,7 +213,7 @@ CREATE TABLE message (
     message_id SERIAL PRIMARY KEY,
     title TEXT NOT NULL,
     content TEXT NOT NULL,
-    date DATE DEFAULT now(),
+    date TIMESTAMP DEFAULT now(),
     author INTEGER NOT NULL REFERENCES users(user_id)
 );
 
@@ -225,7 +225,7 @@ CREATE TABLE message_target (
 
 CREATE TABLE notification (
     notification_id SERIAL PRIMARY KEY,
-    date DATE DEFAULT now()
+    date TIMESTAMP DEFAULT now()
 );
 
 CREATE TABLE notified (
@@ -237,28 +237,28 @@ CREATE TABLE notified (
 
 CREATE TABLE notif_new_msg (
     nnm_id INTEGER NOT NULL REFERENCES notification(notification_id),
-    date DATE DEFAULT now(),
+    date TIMESTAMP DEFAULT now(),
     message_id INTEGER NOT NULL REFERENCES message(message_id),
     PRIMARY KEY (nnm_id)
 );
 
 CREATE TABLE notif_new_ans (
     nna_id INTEGER NOT NULL REFERENCES notification(notification_id),
-    date DATE DEFAULT now(),
+    date TIMESTAMP DEFAULT now(),
     answer_id INTEGER NOT NULL REFERENCES answer(answer_id),
     PRIMARY KEY (nna_id)
 );
 
 CREATE TABLE notif_comment_ans (
     nca_id INTEGER NOT NULL REFERENCES notification(notification_id),
-    date DATE DEFAULT now(),
+    date TIMESTAMP DEFAULT now(),
     comment_answer_id INTEGER NOT NULL REFERENCES comment_answer(ca_id),
     PRIMARY KEY (nca_id)
 );
 
 CREATE TABLE notif_comment_q (
     ncq_id INTEGER NOT NULL REFERENCES notification(notification_id),
-    date DATE DEFAULT now(),
+    date TIMESTAMP DEFAULT now(),
     comment_question_id INTEGER NOT NULL REFERENCES comment_question(cq_id),
     PRIMARY KEY (ncq_id)
 );
