@@ -197,7 +197,7 @@ HERE
 
 #search-input {
     background-color: #f8f8f8;
-    display:inline;
+    display: inline;
 }
 
 #username-header {
@@ -402,7 +402,7 @@ button#questionDownBtn.question-downvoted {
 }
 
 button#questionFavBtn.question-favourited {
-    color: #a22c29;
+    color: goldenrod;
 }
 
 button#questionFavBtn.question-favourite {
@@ -449,35 +449,47 @@ button#questionDownBtn:hover {
 * Search bar
 */
 
+
 /* The container <div> - needed to position the dropdown content */
+
 .dropdown {
-  position: relative;
-  display: inline-block;
+    position: relative;
+    display: inline-block;
 }
+
 
 /* Dropdown Content (Hidden by Default) */
+
 .dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 100px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-  right: 0;
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 100px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    right: 0;
 }
+
 
 /* Links inside the dropdown */
+
 .dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
 }
 
+
 /* Change color of dropdown links on hover */
-.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1
+}
+
 
 /* Show the dropdown menu on hover */
+
 .dropdown:hover .dropdown-content {
-  display: block;
+    display: block;
 }

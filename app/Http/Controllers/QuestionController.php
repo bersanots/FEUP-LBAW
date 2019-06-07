@@ -122,16 +122,20 @@ class QuestionController extends Controller
      */
     public function createQuestion(Request $request)
     {
-      $question = new Question();
+
+      $question = new Question;
 
       $this->authorize('create', $question);
 
       $question->title = $request->input('title');
       $question->description = $request->input('description');
-      $question->author = Auth::user()->id;
+      $question->author = Auth::user()->user_id;
+      $question->category = $request->category;
       $question->save();
 
-      return $question;
+      $redirect = "questions/".$question->question_id;
+
+      return redirect($redirect);
     }
 
     public function delete(Request $request, $id)

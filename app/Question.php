@@ -41,4 +41,16 @@ class Question extends Model
   {
     return $this->belongsToMany('App\User', 'follow', 'question_id', 'user_id');
   }
+
+      /**
+     *  Let Laravel handle created_at without updated_at
+     */
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            $model->creation_date = $model->freshTimestamp();
+        });
+    }
 }

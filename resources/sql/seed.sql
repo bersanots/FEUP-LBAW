@@ -411,9 +411,15 @@ BEGIN
     SELECT SUM (value) INTO total
         FROM vote_q
         WHERE question_id = q_id;
-    UPDATE question
+    IF total IS NULL THEN
+        UPDATE question
+        SET score = 0
+        WHERE question_id = q_id;
+    ELSE
+        UPDATE answer
         SET score = total
         WHERE question_id = q_id;
+    END IF;
     RETURN NEW;
 END
 $BODY$

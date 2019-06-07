@@ -9,8 +9,8 @@
     <div style="padding: 20px; padding-top: 10px; background: #f8f8f8; border-style: solid; border-color: #A22C29; border-width: 0.3em;" class="border border-primary text-dark">
         <form action="{{ route('createQuestion')}}" method="POST">
             {{csrf_field()}}
-            <h3> Create a Question </h3>
-
+            <h3> Create Question </h3>
+            <input hidden type="text" value={{ Request::segment(3) }} name="category">
             <div class="form-group">
                 <label class="col-form-label" for="inputDefault">Question title</label>
                 <input type="text" class="form-control-file" id="descriptionInput" placeholder="Title" name="title" required autofocus>
