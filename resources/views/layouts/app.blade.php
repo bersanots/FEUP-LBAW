@@ -33,7 +33,7 @@
           <form action="{{route('search')}}" method="POST">
             {{csrf_field()}}
             <div class="dropdown">
-              <button id="filterBy" type="button" class="btn btn-default dropdown-toggle text-dark" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-left: 100px; color: #ffffff;">
+              <button id="filterBy" type="button" class="btn btn-default dropdown-toggle text-dark" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span id="search_concept">Filter by</span>
                 <span class="caret"></span>
               </button>
@@ -58,8 +58,8 @@
                 @endif
               </div>
             </div>
-            <input id="search-input" class="form-control mr-sm-3 " type="text" name="text" placeholder="Search" style="width: 448px;">
-            <button id="search-button" class="btn my-2 my-sm-0 text-light" type="submit" style="margin-left: -15px; background: #000000;"><i class="fa fa-search"></i></button>
+            <input id="search-input" class="form-control mr-sm-3 " type="text" name="text" placeholder="Search">
+            <button id="search-button" class="btn my-2 my-sm-0 text-light" type="submit"><i class="fa fa-search"></i></button>
           </form>
         </div>
         @if (Auth::check())
@@ -76,7 +76,7 @@
     </section>
   </main>
   <footer id="footer">
-    <div class="col-lg-12" style="border-top-color: #A22C29; border-top-style: solid; border-top-width: 0.1em; margin-top: 1em;">
+    <div class="col-lg-12"">
       <table class="list-unstyled" cellpadding="7">
         <tr>
           <td>
