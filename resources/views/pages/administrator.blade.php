@@ -8,13 +8,13 @@
     <br>
     <div class="container">
         <legend>
-            <img src="icon/profile.png">
+            <i class="fas fa-ban" style="font-size: 25px; color: #A22C29;"></i>
             <span class="text-light">
                 Manage Users </span>
         </legend>
         <div class="bs-docs-section">
             <div class="row">
-                <div class="text-dark col-lg-11">
+                <div class=" col-lg-11">
                     <div class="col-lg-12">
                         <input class="form-control" type="text" placeholder="Search">
                         <button class="search-btn" type="submit">Search</button>
@@ -67,11 +67,11 @@
             <br>
             <br>
             <legend>
-                <img src="icon/profile.png">
+                <i class="fas fa-ban" style="font-size: 25px; color: #A22C29;"></i>
                 <span style="margin-left: .5rem;" class="text-light">
                     Manage Moderators </span>
             </legend>
-            <div class="text-dark col-lg-11">
+            <div class="col-lg-11">
                 <div class="col-lg-12">
                     <div class="bs-ccomponent">
                         <input class="form-control" type="text" placeholder="Search">
