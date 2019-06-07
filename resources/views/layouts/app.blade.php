@@ -27,15 +27,42 @@
       <nav id="header-bar" class="navbar navbar-expand-lg navbar-dark">
         <a class="navbar-brand" href="{{ url('/') }}">LCQ</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarColor01">
-          <button id="filterBy" type="button" class="btn btn-default dropdown-toggle text-dark" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-left: 100px; color: #ffffff;">
-            <span id="search_concept">Filter by</span>
-            <span class="caret"></span>
+            <span class="navbar-toggler-icon"></span>
           </button>
-          <input id="search-input" class="form-control mr-sm-3 " type="text" placeholder="Search" style="width: 448px;">
-          <button id="search-button" class="btn my-2 my-sm-0 text-light" type="submit" style="margin-left: -15px; background: #000000;">Search</button>
+        <div class="collapse navbar-collapse" id="navbarColor01">
+          <form action="{{route('search')}}" method="POST">
+            {{csrf_field()}}
+            <div class="dropdown">
+              <button id="filterBy" type="button" class="btn btn-default dropdown-toggle text-dark" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-left: 100px; color: #ffffff;">
+                <span id="search_concept">Filter by</span>
+                <span class="caret"></span>
+              </button>
+              <div class="dropdown-content">
+                @php
+                  $dir = explode("/",\Request::url());
+                  $curr = end($dir);
+                  $before = prev($dir);
+                @endphp
+                @if ($curr != 'followed')
+                  @if ($curr != 'series' && $curr != 'film' && $curr != 'animation')
+                    <a href="/questions/category/all/followed">Followed</a>
+                  @else
+                    <a href="{{\Request::url()}}/followed">Followed</a>
+                  @endif
+                @else
+                  @if ($before != 'series' && $before != 'film' && $before != 'animation')
+                    <a href="/questions/category/all">Followed</a>
+                  @else
+                    <a href=<?= substr(\Request::url(),0,-9) ?>>Followed</a>
+                  @endif
+                @endif
+                <a href="#">Filter 2</a>
+                <a href="#">Filter 3</a>
+              </div>
+            </div>
+            <input id="search-input" class="form-control mr-sm-3 " type="text" name="text" placeholder="Search" style="width: 448px;">
+            <button id="search-button" class="btn my-2 my-sm-0 text-light" type="submit" style="margin-left: -15px; background: #000000;"><i class="fa fa-search"></i></button>
+          </form>
         </div>
         @if (Auth::check())
         <?php echo '<a id="username-header" href="/users/' . Auth::user()->username . '">' ?> {{ Auth::user()->username }}</a>

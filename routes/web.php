@@ -35,7 +35,8 @@ Route::get('questions/category/{name}/ask', 'QuestionController@ask');
 Route::post('createQuestion', 'QuestionController@createQuestion')->name('createQuestion');
 Route::get('questions', 'QuestionController@list');
 Route::get('questions/{id}', 'QuestionController@show');
-Route::get('questions/category/{name}', 'QuestionController@listCategoryQuestions');
+Route::get('questions/category/{category_name}/{followed?}', 'QuestionController@listCategoryQuestions');
+Route::post('questions/search', 'QuestionController@listQuestionsBySearch')->name('search');
 
 //Answers
 Route::post('createAnswer/{question_id}', 'AnswerController@create')->name('createAnswer');

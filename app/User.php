@@ -52,6 +52,14 @@ class User extends Authenticatable
     }
 
     /**
+     * The questions this user followed.
+     */
+    public function followed()
+    {
+        return $this->belongsToMany('App\Question', 'follow', 'user_id', 'question_id');
+    }
+
+    /**
     * The favourite media of this user
     */
     public function favourite()
