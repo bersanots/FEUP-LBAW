@@ -6,7 +6,11 @@
                 <div class="question_info" style="padding: 1em; font-size: 0.75em; width: 100%; display: grid; grid-template-column: auto auto auto auto; columns: 3; margin: 0em 0em 1em 0em;">
                     <div class="question_user" style="font-style: italic; text-align: left; grid-area: auto / 1 / auto / 1;">
                         by
-                        <a href="/users/{{ $question->user->username }}" class="comment-user">{{ $question->user->username }}</a>
+                        @if (isset($question->user))
+                            <a href="/users/{{ $question->user->username }}" class="comment-user">{{ $question->user->username }}</a>
+                        @else
+                            <a href="/users/{{ $question->question_author }}" class="comment-user">{{ $question->question_author }}</a>
+                        @endif
                         <span class="question_date">{{ \Carbon\Carbon::parse($question->creation_date)->diffForHumans() }}</span>
                     </div>
                     <div class="question_score" style="grid-column: 2; text-align: right;">

@@ -1,6 +1,6 @@
 <article class="question" data-id="{{ $question->question_id }}">
   <div id="question-column" class="container">
-    <div class="question_content" style="background-color: #f8f8f8; color: #333333;">
+    <div class="question_content" style="background-color: #f8f8f8; color: #333333; margin-top: 2em;">
       <div class="question" style="padding:1em">
         <h2 style="background-color: #f8f8f8; border-bottom-style: solid; border-bottom-color: #a22c29; margin: 0em; padding-left: 0.5em;">
           <a href="/questions/{{ $question->question_id }}">{{ $question->title }}</a>

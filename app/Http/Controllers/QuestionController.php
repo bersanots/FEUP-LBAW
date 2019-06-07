@@ -62,13 +62,44 @@ class QuestionController extends Controller
      *
      * @return Response
      */
-    public function listCategoryQuestions($category)
+    public function listCategoryQuestions($category, $followed = null)
     {
       if (!Auth::check()) return redirect('/login');
 
       $this->authorize('list', Question::class);
 
-      $questions = Question::where('category', $category)->orderBy('creation_date', 'DESC')->get();
+      if($followed) {
+        if($category == "all")
+          $questions = Auth::user()->followed()->orderBy('creation_date', 'DESC')->get();
+        else
+          $questions = Auth::user()->followed()->where('category', $category)->orderBy('creation_date', 'DESC')->get();
+      } else {
+        if($category == "all")
+          $questions = Question::orderBy('creation_date', 'DESC')->get();
+        else
+          $questions = Question::where('category', $category)->orderBy('creation_date', 'DESC')->get();
+      }
+
+      return view('pages.questions', ['questions' => $questions]);
+    }
+
+    /**
+     * Shows all questions that match the search.
+     *
+     * @return Response
+     */
+    public function listQuestionsBySearch(Request $request)
+    {
+      if (!Auth::check()) return redirect('/login');
+
+      $this->authorize('list', Question::class);
+
+      $questions = DB::select("SELECT DISTINCT question.question_id, question.title, question.description, question.creation_date, question.score, 
+      username AS question_author, ts_rank_cd((setweight(to_tsvector('english', question.title || ' ' || question.description), 'A') || 
+      setweight(to_tsvector('english', answer.description), 'B')), plainto_tsquery(:search)) AS rank FROM question, users, answer 
+      WHERE question.author = users.user_id AND question.question_id = answer.question_id 
+      AND plainto_tsquery(:search) @@ (setweight(to_tsvector('english', question.title || ' ' || question.description), 'A') || 
+      setweight(to_tsvector('english', answer.description), 'B')) ORDER BY rank DESC;", ['search' => $request->input('text')]);
 
       return view('pages.questions', ['questions' => $questions]);
     }

@@ -33,4 +33,12 @@ class Question extends Model
   public function comments() {
     return $this->hasMany('App\CommentQuestion', 'question_id');
   }
+
+  /**
+   * The users that follow this question
+   */
+  public function followed()
+  {
+    return $this->belongsToMany('App\User', 'follow', 'question_id', 'user_id');
+  }
 }
