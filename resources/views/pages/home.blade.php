@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
-@section('title', 'LCQ')
+@section('title', 'Homepage')
 
 @section('content')
 <div id="logo" class="img-container" style="position: relative;">
-    <img src="img/LCQ.jpg" alt="Welcome to LCQ" style="width: 100%; height: auto;">
+    <img src="img/LCQ.png" alt="Welcome to LCQ" style="width: 100%; height: auto;">
 </div>
 <div class="collapse navbar-collapse" id="navbarColor02">
 </div>
@@ -16,7 +16,7 @@
                     <div class="card mb-3 text-light bg-primary border-primary zoom" style="transition: transform 500ms;">
                         <a href="questions/category/series">
                             <h3 class="card-header" style="background-color: #A22C29; color: white;">Series</h3>
-                            <img style="width: 100%; height: 200px; object-fit: cover; border: solid #a22c29;" src="img/Series.jpeg" alt="Card image">
+                            <img style="width: 100%; height: 200px; object-fit: cover; border: solid #a22c29;" src="img/Series.jpeg" alt="Series">
                         </a>
                         <ul class="list-group list-group-flush">
                         </ul>
@@ -28,7 +28,7 @@
                     <div class="card mb-3 text-light bg-primary border-primary zoom" style="transition: transform 500ms;">
                         <a href="questions/category/film">
                             <h3 class="card-header" style="background-color: #A22C29; color: white;">Films</h3>
-                            <img style="width: 100%; height: 200px; object-fit: cover; border: solid #a22c29;" src="img/Films.jpeg" alt="Card image">
+                            <img style="width: 100%; height: 200px; object-fit: cover; border: solid #a22c29;" src="img/Films.jpeg" alt="Films">
                         </a>
                         <ul class="list-group list-group-flush">
                         </ul>
@@ -40,7 +40,7 @@
                     <div class="card mb-3 text-light bg-primary border-primary zoom" style="transition: transform 500ms;">
                         <a href="questions/category/animation">
                             <h3 class="card-header" style="background-color: #A22C29; color: white;">Animations</h3>
-                            <img style="width: 100%; height: 200px; object-fit: cover; border: solid #a22c29;" src="img/Animation.jpg" alt="Card image">
+                            <img style="width: 100%; height: 200px; object-fit: cover; border: solid #a22c29;" src="img/Animation.jpg" alt="Animations">
                             <ul class="list-group list-group-flush">
                             </ul>
                         </a>

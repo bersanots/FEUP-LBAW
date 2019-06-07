@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
-@section('title', 'LCQ')
+@section('title', 'Edit Profile')
 
 @section('content')
 
 <div class="container">
     <legend style="padding: 10px; margin-left: 0; border-bottom: solid 0.2em #a22c29;">
-        <img src="icon/profile.png">
+        <img src="icon/profile.png" alt="Profile picture">
         <span style="margin-left: .5rem;" class="text-light">
             Editing <b>{{ $user->username }}</b>'s' Profile </span>
     </legend>
