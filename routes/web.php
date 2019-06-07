@@ -31,7 +31,7 @@ Route::post('/contact', function (Request $request) {
 });
 
 // Questions
-Route::get('ask', 'QuestionController@ask');
+Route::get('questions/category/{name}/ask', 'QuestionController@ask');
 Route::post('createQuestion', 'QuestionController@createQuestion')->name('createQuestion');
 Route::get('questions', 'QuestionController@list');
 Route::get('questions/{id}', 'QuestionController@show');

@@ -12,7 +12,7 @@
           <div class="question" style="padding:1em">
             <h2 style="background-color: #f8f8f8; margin: 0em; padding-left: 0.5em;">
               Can't find the answer you're looking for?&nbsp; &nbsp;
-              <a class="button" href="/ask">Ask a Question</a>
+              <a class="button" href="{{ url()->current()}}/ask">Ask a Question</a>
             </h2>
           </div>
           <div class="question-body" style="background-color: #f5f5f5;">
