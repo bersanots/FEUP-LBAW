@@ -26,6 +26,15 @@ footer#footer>div * {
     font-size: 1.5rem;
 }
 
+#categories-list {
+    display: flex;
+    justify-content: space-between;
+}
+
+#categories-list .question-categories {
+    margin: 0em 10em;
+}
+
 
 /* main>header {
   display: grid;
