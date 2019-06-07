@@ -1,3 +1,9 @@
+<div id="categories-list">
+  <a class="question-categories" href="/questions/category/series"><img src="../img/retro-tv.png"></a>
+  <a class="question-categories" href="/questions/category/film"> <img src="../img/film_roll.png"></a>
+  <a class="question-categories" href="/questions/category/animation"><img src="../img/mickey.png"></a>
+</div>
+
 <article class="question" data-id="{{ $question->question_id }}">
   <div id="question-column" class="container">
     <div class="question_content" style="background-color: #f8f8f8; color: #333333; margin-top: 2em;">

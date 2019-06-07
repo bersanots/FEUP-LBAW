@@ -25,11 +25,11 @@
   <main>
     <header>
       <nav id="header-bar" class="navbar navbar-expand-lg navbar-dark">
-        <a class="navbar-brand" href="{{ url('/') }}">LCQ</a>
+        <a class="navbar-brand" id="app-name" href="{{ url('/') }}">LCQ</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-        <div class="collapse navbar-collapse" id="navbarColor01">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="searchArea">
           <form action="{{route('search')}}" method="POST">
             {{csrf_field()}}
             <div class="dropdown">
@@ -39,22 +39,22 @@
               </button>
               <div class="dropdown-content">
                 @php
-                  $dir = explode("/",\Request::url());
-                  $curr = end($dir);
-                  $before = prev($dir);
+                $dir = explode("/",\Request::url());
+                $curr = end($dir);
+                $before = prev($dir);
                 @endphp
                 @if ($curr != 'followed')
-                  @if ($curr != 'series' && $curr != 'film' && $curr != 'animation')
-                    <a href="/questions/category/all/followed">Followed</a>
-                  @else
-                    <a href="{{\Request::url()}}/followed">Followed</a>
-                  @endif
+                @if ($curr != 'series' && $curr != 'film' && $curr != 'animation')
+                <a href="/questions/category/all/followed">Followed</a>
                 @else
-                  @if ($before != 'series' && $before != 'film' && $before != 'animation')
-                    <a href="/questions/category/all">Followed</a>
-                  @else
-                    <a href=<?= substr(\Request::url(),0,-9) ?>>Followed</a>
-                  @endif
+                <a href="{{\Request::url()}}/followed">Followed</a>
+                @endif
+                @else
+                @if ($before != 'series' && $before != 'film' && $before != 'animation')
+                <a href="/questions/category/all">Followed</a>
+                @else
+                <a href=<?= substr(\Request::url(), 0, -9) ?>>Followed</a>
+                @endif
                 @endif
                 <a href="#">Filter 2</a>
                 <a href="#">Filter 3</a>
@@ -77,24 +77,12 @@
       @yield('content')
     </section>
   </main>
-  <footer id="footer">
+  <footer id="footer" style="align-content: center;">
     <div class="col-lg-12" style="border-top-color: #A22C29; border-top-style: solid; border-top-width: 0.1em; margin-top: 1em;">
-      <table class="list-unstyled" cellpadding="7">
-        <tr>
-          <td class="float-lg-right">
-            <a href="#top" class="font-weight-bold text-light">Back to top</a>
-          </td>
-          <td>
-            <a href="{{ url('faq') }}" class="font-weight-bold text-light">FAQ</a>
-          </td>
-          <td>
-            <a href="{{ url('about') }}" class="font-weight-bold text-light">About</a>
-          </td>
-          <td>
-            <a href="{{ url('contact') }}" class="font-weight-bold text-light">Contact</a>
-          </td>
-        </tr>
-      </table>
+      <a href="#top" class="font-weight-bold text-light">Back to top</a>
+      <a href="{{ url('faq') }}" class="font-weight-bold text-light">FAQ</a>
+      <a href="{{ url('about') }}" class="font-weight-bold text-light">About</a>
+      <a href="{{ url('contact') }}" class="font-weight-bold text-light">Contact</a>
     </div>
   </footer>
 </body>

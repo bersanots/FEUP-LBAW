@@ -3,6 +3,38 @@ body {
     color: #f8f8f8;
 }
 
+a#app-name {
+    font-size: 3em;
+}
+
+footer#footer>div {
+    display: flex;
+    align-items: center;
+    border-bottom: 0.1em solid #eeeeee;
+    font-size: 1.5em;
+}
+
+#searchArea>form {
+    margin-bottom: 0em;
+}
+
+footer#footer>div * {
+    margin-right: 2em;
+}
+
+#searchArea * {
+    font-size: 1.5rem;
+}
+
+#categories-list {
+    display: flex;
+    justify-content: space-between;
+}
+
+#categories-list .question-categories {
+    margin: 0em 15%;
+}
+
 
 /* main>header {
   display: grid;
@@ -204,6 +236,10 @@ HERE
     font-size: 3em;
     color: #f8f8f8;
     margin-right: 2em;
+}
+
+#logout-header {
+    margin-bottom: 0em;
 }
 
 a.button {
