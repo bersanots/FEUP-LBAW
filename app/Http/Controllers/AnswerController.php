@@ -20,50 +20,54 @@ class AnswerController extends Controller
    */
   public function create(Request $request, $question_id)
   {
-    $answer = new Answer();
+    $answer = new Answer;
     $answer->question_id = $question_id;
 
     $this->authorize('create', $answer);
 
-    $answer->description = $request->input('description');
-    $answer->author = Auth::user()->id;
+    $answer->description = $request->body;
+    $answer->author = Auth::user()->user_id;
+    $answer->save();
+
+    $redirect = "questions/" . $question_id;
+
+    return redirect($redirect);
+  }
+
+  /**
+   * Updates the state of an individual answer.
+   *
+   * @param  int  $id
+   * @param  Request request containing the new state
+   * @return Response
+   */
+  public function update(Request $request, $id)
+  {
+    $answer = Answer::find($id);
+
+    $this->authorize('update', $answer);
+
     $answer->save();
 
     return $answer;
   }
 
-    /**
-     * Updates the state of an individual answer.
-     *
-     * @param  int  $id
-     * @param  Request request containing the new state
-     * @return Response
-     */
-    public function update(Request $request, $id)
-    {
-      $answer = Answer::find($id);
+  /**
+   * Deletes an individual answer.
+   *
+   * @param  int  $id
+   * @return Response
+   */
+  public function delete(Request $request, $id)
+  {
+    $answer = Answer::find($id);
 
-      $this->authorize('update', $answer);
+    $question_id = $answer->question_id;
 
-      $answer->save();
+    $this->authorize('delete', $answer);
+    $answer->delete();
 
-      return $answer;
-    }
-
-    /**
-     * Deletes an individual answer.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function delete(Request $request, $id)
-    {
-      $answer = Answer::find($id);
-
-      $this->authorize('delete', $answer);
-      $answer->delete();
-
-      return $answer;
-    }
-
+    $redirect = "questions/" . $question_id;
+    return redirect($redirect);
+  }
 }

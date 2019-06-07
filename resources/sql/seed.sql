@@ -159,7 +159,7 @@ CREATE TABLE comment_answer (
     ca_id SERIAL PRIMARY KEY,
     description TEXT NOT NULL,
     creation_date TIMESTAMP DEFAULT now(),
-    answer_id INTEGER NOT NULL REFERENCES answer(answer_id), 
+    answer_id INTEGER NOT NULL REFERENCES answer(answer_id) ON DELETE CASCADE, 
     author INTEGER NOT NULL REFERENCES users(user_id)
 );
 
@@ -173,7 +173,7 @@ CREATE TABLE vote_q (
 
 CREATE TABLE vote_a (
     user_id INTEGER NOT NULL REFERENCES users(user_id),
-    answer_id INTEGER NOT NULL REFERENCES answer(answer_id),
+    answer_id INTEGER NOT NULL REFERENCES answer(answer_id) ON DELETE CASCADE,
     value INTEGER NOT NULL CONSTRAINT value_ck CHECK ((value = 1 ) OR (value = -1)),
     date TIMESTAMP DEFAULT now(),
     PRIMARY KEY (user_id, answer_id)
@@ -245,7 +245,7 @@ CREATE TABLE notif_new_msg (
 CREATE TABLE notif_new_ans (
     nna_id INTEGER NOT NULL REFERENCES notification(notification_id),
     date TIMESTAMP DEFAULT now(),
-    answer_id INTEGER NOT NULL REFERENCES answer(answer_id),
+    answer_id INTEGER NOT NULL REFERENCES answer(answer_id) ON DELETE CASCADE,
     PRIMARY KEY (nna_id)
 );
 

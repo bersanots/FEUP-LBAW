@@ -40,13 +40,14 @@
       @each('partials.answer', $question->answers()->orderBy('creation_date', 'ASC')->get(), 'answer')
       <div class="new_answer text-dark" style="padding: 0.5em; border-left-style: solid; border-left-color: #a22c29; margin-top: 1em; background-color: #f8f8f8;">
         <form action="{{ route('createAnswer', ['question_id' => $question->question_id])}}" method="POST">
+        {{ csrf_field() }}
           <div class="answer_info">
-            <div class="question_user" style="font-style: italic; text-align: left; grid-area: auto / 1 / auto / 1;">
+            <div class="answer_user" style="font-style: italic; text-align: left; grid-area: auto / 1 / auto / 1;">
               <h3> Write your own answer </h3>
             </div>
           </div>
           <div class="answer_body">
-            <textarea class="answer-form" placeholder="Your answer..." id="inputDefault" maxlength="1023"></textarea>
+            <textarea class="answer-form" placeholder="Your answer..." id="write_answer" name="body" maxlength="1023"></textarea>
           </div>
           <button type="submit" class="btn btn-primary">Send</button>
         </form>
