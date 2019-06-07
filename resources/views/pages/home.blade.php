@@ -5,7 +5,6 @@
 @section('content')
 <div id="logo" class="img-container" style="position: relative;">
     <img src="img/LCQ.jpg" alt="Welcome to LCQ" style="width: 100%; height: auto;">
-    <div id="logo-text">Welcome to the place that will broaden your knowledge of The Seventh Art&nbsp;</div>
 </div>
 <div class="collapse navbar-collapse" id="navbarColor02">
 </div>
