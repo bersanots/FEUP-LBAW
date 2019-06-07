@@ -94,6 +94,9 @@ class QuestionController extends Controller
 
       $this->authorize('list', Question::class);
 
+      if(!$request->text)
+        return QuestionController::list();
+
       $questions = DB::select("SELECT DISTINCT question.question_id, question.title, question.description, question.creation_date, question.score, 
       username AS question_author, ts_rank_cd((setweight(to_tsvector('english', question.title || ' ' || question.description), 'A') || 
       setweight(to_tsvector('english', answer.description), 'B')), plainto_tsquery(:search)) AS rank FROM question, users, answer 

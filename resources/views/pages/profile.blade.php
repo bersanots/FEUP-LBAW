@@ -30,8 +30,8 @@
                                     </div>
                                     @if(Auth::user()->user_id == $user->user_id)
                                     <a class="button" href="{{Auth::user()->username}}/edit">Edit Profile</a>
-                                    <a class="button" href="">Moderator</a>
-                                    <a class="button" href="">Admin</a>
+                                    <a class="button" href="{{Auth::user()->username}}/moderator">Moderator</a>
+                                    <a class="button" href="{{Auth::user()->username}}/administrator">Administrator</a>
                                     @endif
                                 </fieldset>
                             </div>

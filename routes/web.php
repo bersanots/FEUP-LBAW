@@ -50,13 +50,6 @@ Route::delete('commentQuestion/{id}', 'CommentQuestionController@delete')->name(
 Route::post('createCommentAnswer/{answer_id}', 'CommentAnswerController@create')->name('createCommentAnswer');
 Route::delete('commentAnswer/{id}', 'CommentAnswerController@delete')->name('deleteCommentAnswer');
 
-// API
-/*Route::put('api/questions', 'QuestionController@create');
-Route::delete('api/questions/{question_id}', 'QuestionController@delete');
-Route::put('api/questions/{question_id}/', 'AnswerController@create');
-Route::post('api/answer/{id}', 'AnswerController@update');
-Route::delete('api/answer/{id}', 'AnswerController@delete');*/
-
 // Authentication
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login');
@@ -70,11 +63,14 @@ Route::get('users/{username}/edit', 'ProfileController@viewEditProfile');
 Route::patch('users/{username}/edit/personal', 'ProfileController@editPersonalDetails')->name('editPersonal');
 Route::patch('users/{username}/edit/account', 'ProfileController@editAccountDetails')->name('editAccount');
 
+//Moderator
+Route::get('users/{username}/moderator', 'ProfileController@viewModeration')->name('moderator');
+
+//Administrator
+Route::get('users/{username}/administrator', 'ProfileController@viewAdministration')->name('administrator');
+
 //AJAX
 Route::post('questions/vote/question', 'AjaxController@questionVote');
 Route::post('questions/getVoteValue', 'AjaxController@getVoteValue');
 Route::post('questions/favourite', 'AjaxController@favourite');
 Route::post('questions/vote/answer', 'AjaxController@answerVote');
-
-//test
-Route::view('test', 'pages/test');

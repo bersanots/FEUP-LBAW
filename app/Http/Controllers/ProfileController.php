@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
-use App\Question;
+use App\Report;
+use App\Tag;
 use App\User;
 
 class ProfileController extends Controller
@@ -48,8 +49,18 @@ class ProfileController extends Controller
 
 public function viewModeration($username)
 {
+  if (!Auth::check()) return redirect('/login');
   $user = User::where('username', $username) -> first();
-  return view('pages.moderation',  ['user' => $user]);
+  $tags = Tag::orderBy('name')->get();
+  return view('pages.moderator',  ['tags' => $tags]);
+}
+
+public function viewAdministration($username)
+{
+  if (!Auth::check()) return redirect('/login');
+  $user = User::where('username', $username) -> first();
+  $reports = Report::orderBy('date', 'DESC')->get();
+  return view('pages.administrator',  ['reports' => $reports]);
 }
 
 
