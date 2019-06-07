@@ -4,7 +4,7 @@
 
 @section('content')
 
-<div class="container bs-docs-section">
+<div class="container bs-docs-section" style="padding-bottom: -30px; ">
     <div class="about-item">
         <h2>Welcome to Lights, Camera, Question</h2>
         <p>LCQ is a question and answer site for Movie and Television enthusiasts.</p>

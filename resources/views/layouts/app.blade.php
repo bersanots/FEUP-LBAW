@@ -33,7 +33,7 @@
           <form action="{{route('search')}}" method="POST">
             {{csrf_field()}}
             <div class="dropdown">
-              <button id="filterBy" type="button" class="btn btn-default dropdown-toggle text-dark" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <button id="filterBy" type="button" class="btn btn-default dropdown-toggle text-dark" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-left: 100px; color: #ffffff;">
                 <span id="search_concept">Filter by</span>
                 <span class="caret"></span>
               </button>
@@ -56,10 +56,12 @@
                     <a href=<?= substr(\Request::url(),0,-9) ?>>Followed</a>
                   @endif
                 @endif
+                <a href="#">Filter 2</a>
+                <a href="#">Filter 3</a>
               </div>
             </div>
-            <input id="search-input" class="form-control mr-sm-3 " type="text" name="text" placeholder="Search">
-            <button id="search-button" class="btn my-2 my-sm-0 text-light" type="submit"><i class="fa fa-search"></i></button>
+            <input id="search-input" class="form-control mr-sm-3 " type="text" name="text" placeholder="Search" style="width: 448px;">
+            <button id="search-button" class="btn my-2 my-sm-0 text-light" type="submit" style="margin-left: -15px; background: #000000;"><i class="fa fa-search"></i></button>
           </form>
         </div>
         @if (Auth::check())
@@ -76,10 +78,10 @@
     </section>
   </main>
   <footer id="footer">
-    <div class="col-lg-12"">
+    <div class="col-lg-12" style="border-top-color: #A22C29; border-top-style: solid; border-top-width: 0.1em; margin-top: 1em;">
       <table class="list-unstyled" cellpadding="7">
         <tr>
-          <td>
+          <td class="float-lg-right">
             <a href="#top" class="font-weight-bold text-light">Back to top</a>
           </td>
           <td>

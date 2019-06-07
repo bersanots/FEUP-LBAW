@@ -1,4 +1,4 @@
-<li class="comment">
+<li class="comment" style="border-top-style: dashed; list-style-type: none; border-color: #a22c29;">
     <div class="comment-text">
         <span class="comment-body">{{ $comment_a->description }}</span>
         -

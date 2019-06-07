@@ -12,7 +12,7 @@
     </div>
   </div>
   <div class="answer_body">
-    <p> {{ $answer->description }} </p>
+    <p style="padding-left: 1em;"> {{ $answer->description }} </p>
   </div>
   @if($answer->question()->get()[0]->best != $answer->answer_id)
   <form action="{{ route('deleteAnswer', ['answer_id' => $answer->answer_id])}}" method="POST">
@@ -25,7 +25,7 @@
     @each('partials.commentAnswer', $answer->comments()->orderBy('creation_date', 'ASC')->get(), 'comment_a')
     <div>
       <form action="{{ route('createCommentAnswer', ['answer_id' => $answer->answer_id])}}" method="POST">
-        <input class="form-control mr-sm-3 " type="text" placeholder="Comment">
+        <input class="form-control mr-sm-3 " type="text" placeholder="Comment" style="margin-left: 1em; width:10em">
         <button type="submit" class="btn btn-primary">Send</button>
       </form>
     </div>
